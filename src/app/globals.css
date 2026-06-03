@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* ──────────────────────────────────────────────────────────────────
+   Dr. Gissele Donovan — Brand Tokens
+   See CLAUDE.md for the brand direction this implements.
+   ────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* Brand colors */
+  --color-burgundy: #8A1538;
+  --color-ivory: #F8F4EE;
+  --color-black: #0B0B0B;
+  --color-gold: #C6A15B;
+  --color-beige: #D8CBBE;
+  --color-gray-soft: #EAE7E2;
+
+  /* Editorial motion curve */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@theme inline {
+  /* Type families
+     Serif: Fraunces is the launch fallback; replace with Canela / GT Sectra
+     via next/font/local when licenses are acquired.
+     Display: Cinzel — wide-tracked all-caps roman for cinematic headlines.
+     Script: Dancing Script — used sparingly for a single feminine accent word. */
+  --font-serif: var(--font-serif), 'Canela', 'GT Sectra', Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-sans), 'Inter Tight', system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-display), 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --font-script: var(--font-script), 'Dancing Script', 'Snell Roundhand', cursive;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  background-color: var(--color-ivory);
+  color: var(--color-black);
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-burgundy);
+  color: var(--color-ivory);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.05;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Eyebrow with hairline rules on both sides — borrowed from v3 hero treatment.
+   Use .eyebrow.rules for the cinematic editorial label. */
+.eyebrow.rules {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.eyebrow.rules::before,
+.eyebrow.rules::after {
+  content: "";
+  display: block;
+  width: 1.75rem;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+.eyebrow.rules.left::after,
+.eyebrow.rules.right::before {
+  display: none;
+}
+
+.cta-line {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding-bottom: 0.375rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+.cta-line::before {
+  content: "";
+  display: inline-block;
+  width: 2rem;
+  height: 1px;
+  background-color: currentColor;
+  transition: width 600ms var(--ease-editorial);
+}
+
+.cta-line:hover::before {
+  width: 3.5rem;
+}
+
+.hairline {
+  height: 1px;
+  background: currentColor;
+  opacity: 0.2;
+}
