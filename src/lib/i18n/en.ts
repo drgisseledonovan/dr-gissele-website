@@ -9,7 +9,7 @@ import type { Dictionary } from "./types";
 
 export const en: Dictionary = {
   meta: {
-    title: "Dr. Gissele Donovan · Rebuild the mind. Reclaim the woman.",
+    title: "Dr. Gissele Donovan · Transforming minds. Elevating destinies.",
     titleTemplate: "%s · Dr. Gissele Donovan",
     description:
       "Colombian-born transformational leader, neuroscience-trained mentor, and founder of the Unsinkable Minds Movement. A premium movement for those rebuilding the mind, the body, and the spirit.",
@@ -301,7 +301,7 @@ export const en: Dictionary = {
     emailPlaceholder: "your email",
     submit: "Subscribe",
     submitting: "Sending…",
-    sentMessage: "Welcome. Watch your inbox for the first letter.",
+    sentMessage: "Received. Watch your inbox for the first letter.",
     errorMessage: "Something didn't go through. Try again.",
     quiet: "No noise · No funnels · Just signal",
     emailLabel: "Email",

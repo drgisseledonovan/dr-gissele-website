@@ -9,7 +9,7 @@ import type { Dictionary } from "./types";
 
 export const es: Dictionary = {
   meta: {
-    title: "Dr. Gissele Donovan · Reconstruye la mente. Reclama la mujer.",
+    title: "Dr. Gissele Donovan · Transforma la mente. Eleva el destino.",
     titleTemplate: "%s · Dr. Gissele Donovan",
     description:
       "Líder transformacional colombiana, mentora formada en neurociencia y fundadora del Movimiento Unsinkable Minds. Un movimiento premium para quienes reconstruyen la mente, el cuerpo y el espíritu.",
@@ -305,7 +305,7 @@ export const es: Dictionary = {
     submit: "Suscribirme",
     submitting: "Enviando…",
     sentMessage:
-      "Bienvenida. Mira tu bandeja de entrada para la primera carta.",
+      "Recibido. Revisa tu bandeja de entrada para la primera carta.",
     errorMessage: "Algo no se envió. Intenta de nuevo.",
     quiet: "Sin ruido · Sin embudos · Solo señal",
     emailLabel: "Correo",
@@ -502,11 +502,11 @@ export const es: Dictionary = {
         titleLead: "El Movimiento",
         titleScript: "Unsinkable Minds.",
         body:
-          "La puerta de menor fricción, y a menudo la más duradera. La carta se envía trimestralmente a una lista privada de lectoras, académicas y buscadoras del trabajo.",
+          "La puerta de menor fricción, y a menudo la más duradera. La carta se envía trimestralmente a una lista privada de lectores, académicos y buscadores del trabajo.",
         cta1: "Suscríbete a la Carta",
         cta2: "Dentro del Movimiento",
         quote:
-          "“No estamos construyendo una marca.\nNos estamos construyendo unas a otras.”",
+          "“No estamos construyendo una marca.\nNos estamos construyendo unos a otros.”",
         author: "Dr. Gissele Donovan",
       },
       closing: {
@@ -677,7 +677,7 @@ export const es: Dictionary = {
       titleLead: "Escritos del",
       titleScript: "despertar.",
       lede:
-        "Una correspondencia privada sobre neurociencia, liderazgo, y la arquitectura interior de la transformación. Los nuevos ensayos se escriben trimestralmente y se envían primero a las lectoras de la carta.",
+        "Una correspondencia privada sobre neurociencia, liderazgo, y la arquitectura interior de la transformación. Los nuevos ensayos se escriben trimestralmente y se envían primero a los lectores de la carta.",
       latestEyebrow: "MÁS RECIENTE",
       archiveEyebrow: "ARCHIVO",
       readEssay: "Lee el Ensayo",
