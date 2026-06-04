@@ -60,8 +60,26 @@ export const metadata: Metadata = {
     locale: "es_ES",
     alternateLocale: ["en_US"],
     siteName: SITE.name,
+    /* Editorial 1200×630 brand preview · the gold ceremonial seal
+       centered on ivory with the Dr. Gissele Donovan wordmark and
+       Neurociencia · Liderazgo · Transformación tagline beneath.
+       This is what renders inside WhatsApp / iMessage / Twitter /
+       LinkedIn / Facebook link previews. Lives at /public/og-image.jpg. */
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: `${SITE.name} · Neurociencia · Liderazgo · Transformación`,
+      },
+    ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE.name,
+    description: rootDict.meta.ogDescription,
+    images: ["/og-image.jpg"],
+  },
   alternates: {
     canonical: SITE.url,
     languages: {
