@@ -6,9 +6,12 @@ import { motion } from "motion/react";
 import { LOGO_SIGNATURE } from "@/lib/media";
 import type { Dictionary } from "@/lib/i18n";
 
-// TODO: replace with the real ConvertKit / Kit form action.
+/* Kit (ConvertKit) form endpoint for the closing "Archivos de
+   Transformación" newsletter capture. Same Form ID as the hero
+   RENACER capture so every subscriber goes into the same Kit list,
+   gets the RENACER PDF, and enters the nurture automation. */
 const CONVERTKIT_ACTION =
-  "https://app.kit.com/forms/PLACEHOLDER_FORM_ID/subscriptions";
+  "https://app.kit.com/forms/672196ab87/subscriptions";
 
 type NewsletterProps = {
   dict: Dictionary["newsletter"];

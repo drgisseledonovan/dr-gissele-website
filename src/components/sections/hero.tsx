@@ -43,10 +43,12 @@ function MobileStickyRenacerBar({
   );
 }
 
-/* TODO: replace with the real ConvertKit / Kit form action for the
-   RENACER lead magnet sequence. */
+/* Kit (ConvertKit) form endpoint for the RENACER lead magnet.
+   Form ID 672196ab87 lives at dr-gissele-donovan.kit.com.
+   Submissions trigger the Incentive Email (auto-confirm enabled)
+   which delivers RENACER-Guia-Editorial.pdf instantly. */
 const RENACER_FORM_ACTION =
-  "https://app.kit.com/forms/PLACEHOLDER_RENACER_FORM_ID/subscriptions";
+  "https://app.kit.com/forms/672196ab87/subscriptions";
 
 /* ─── HERO PORTRAIT ─────────────────────────────────────────────────
    Image, crop, and alt all defined in src/lib/media.ts.
