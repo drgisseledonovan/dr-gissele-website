@@ -89,6 +89,9 @@ export const es: Dictionary = {
       "Tu copia está en camino. Revisa tu correo. Y prepara tu corazón.",
     renacerError: "Algo salió mal. Intenta de nuevo.",
     renacerTrust: "Una guía editorial  ·  Sin spam  ·  Solo Renacer.",
+    renacerStickyLabel: "RENACER™  ·  Guía Editorial Gratuita",
+    renacerStickyCTA: "Descargar Gratis",
+    mobilePortraitCaption: "Dra. Gissele en escena · 2025",
   },
 
   pillars: {

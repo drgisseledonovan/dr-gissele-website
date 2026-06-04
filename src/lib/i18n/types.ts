@@ -99,6 +99,9 @@ export type Dictionary = {
     renacerSent: string;
     renacerError: string;
     renacerTrust: string;
+    renacerStickyLabel: string;
+    renacerStickyCTA: string;
+    mobilePortraitCaption: string;
   };
   pillars: {
     items: ReadonlyArray<{ n: string; title: string; line: string }>;

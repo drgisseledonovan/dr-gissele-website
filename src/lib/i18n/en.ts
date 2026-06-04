@@ -89,6 +89,9 @@ export const en: Dictionary = {
       "Your copy is on its way. Check your inbox. And prepare your heart.",
     renacerError: "Something went wrong. Please try again.",
     renacerTrust: "An editorial guide  ·  No spam  ·  Only awakening.",
+    renacerStickyLabel: "RENACER™  ·  Free Editorial Guide",
+    renacerStickyCTA: "Download Free",
+    mobilePortraitCaption: "Dr. Gissele on stage · 2025",
   },
 
   pillars: {

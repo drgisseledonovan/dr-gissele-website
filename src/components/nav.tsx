@@ -30,6 +30,14 @@ export function Nav({ locale, dict }: NavProps) {
     ? pathname.replace(`/${locale}`, `/${other}`) || `/${other}`
     : `/${other}`;
 
+  /* Only the homepage hero renders the mobile sticky RENACER bar,
+     so the nav only needs the 36px top offset on the homepage. On
+     all other pages the nav anchors flush to the top as before. */
+  const isHome =
+    pathname === `/${locale}` ||
+    pathname === `/${locale}/` ||
+    pathname === "/";
+
   const NAV_LINKS = [
     { href: localePath(locale, "/about"), label: dict.about },
     { href: localePath(locale, "/unsinkable-minds"), label: dict.unsinkableMinds },
@@ -55,7 +63,10 @@ export function Nav({ locale, dict }: NavProps) {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,border-color,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        /* Homepage on mobile: leave 36px above the nav for the sticky
+           RENACER bar. Everywhere else: flush to the top. Desktop is
+           always flush. */
+        className={`fixed ${isHome ? "top-9" : "top-0"} lg:top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,border-color,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           scrolled
             ? "bg-ivory/85 backdrop-blur-md border-b border-black/10 py-3"
             : "bg-transparent py-6"

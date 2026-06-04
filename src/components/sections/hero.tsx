@@ -7,6 +7,42 @@ import { HERO_PORTRAIT, LOGO_MONOGRAM_GOLD } from "@/lib/media";
 import { MonogramSeal } from "@/components/monogram-seal";
 import { type Dictionary, type Locale } from "@/lib/i18n";
 
+/* ─── Mobile sticky RENACER CTA banner ────────────────────────────────
+   Inspired by Jamie Kern Lima's "Access Now" bar. Lives only on mobile
+   (lg:hidden). Sits at the very top of the page above the nav and
+   stays visible while scrolling. Burgundy backdrop with gold pill so
+   it reads as luxury, not aggressive. Anchors to #newsletter so a tap
+   takes the visitor straight to the editorial RENACER signup. */
+function MobileStickyRenacerBar({
+  label,
+  cta,
+}: {
+  label: string;
+  cta: string;
+}) {
+  return (
+    <a
+      href="#newsletter"
+      className="lg:hidden fixed top-0 inset-x-0 z-[60] bg-burgundy text-ivory shadow-[0_2px_18px_rgba(11,11,11,0.18)] flex items-center justify-between gap-3 px-4 py-2.5"
+      aria-label={`${label} — ${cta}`}
+    >
+      <span
+        className="eyebrow text-gold flex-1 truncate"
+        style={{ fontSize: "9px", letterSpacing: "0.24em" }}
+      >
+        {label}
+      </span>
+      <span
+        className="inline-flex items-center gap-1.5 bg-gold text-burgundy px-3.5 py-1.5 rounded-full eyebrow font-medium shrink-0"
+        style={{ fontSize: "10px", letterSpacing: "0.18em" }}
+      >
+        {cta}
+        <span aria-hidden>→</span>
+      </span>
+    </a>
+  );
+}
+
 /* TODO: replace with the real ConvertKit / Kit form action for the
    RENACER lead magnet sequence. */
 const RENACER_FORM_ACTION =
@@ -51,9 +87,17 @@ export function Hero({ dict }: HeroProps) {
   }
 
   return (
-    <section className="relative w-full bg-ivory text-black overflow-x-clip grid grid-cols-1 lg:grid-cols-[58%_42%] pt-[88px] lg:pt-[96px] min-h-screen">
+    <section className="relative w-full bg-ivory text-black overflow-x-clip grid grid-cols-1 lg:grid-cols-[58%_42%] pt-[124px] lg:pt-[96px] min-h-screen">
+      {/* Sticky mobile RENACER CTA bar · top of viewport, above the nav.
+          On desktop this is hidden and the existing nav/right-column
+          flow is preserved exactly as before. */}
+      <MobileStickyRenacerBar
+        label={dict.renacerStickyLabel}
+        cta={dict.renacerStickyCTA}
+      />
+
       {/* ─── Left: editorial copy ────────────────────────────────── */}
-      <div className="relative flex flex-col justify-center min-w-0 px-6 sm:px-10 lg:px-14 xl:px-20 py-16 lg:py-24">
+      <div className="relative flex flex-col justify-center min-w-0 px-6 sm:px-10 lg:px-14 xl:px-20 py-10 lg:py-24">
         {/* Luxury brand seal — crowned GD monogram + gold hairline */}
         <motion.div
           initial={{ opacity: 0, y: 6 }}
@@ -124,8 +168,84 @@ export function Hero({ dict }: HeroProps) {
           </span>
         </h1>
 
+        {/* ─── Mobile-only cinematic portrait ──────────────────────
+            On mobile Dr. Gissele wanted the visual hook to land
+            immediately, the way Mario Alonso Puig and Codie Sanchez
+            anchor their pages with a dominant photo. This block is
+            hidden on lg+ where the side portrait already plays that
+            role. Frame: gold inset · soft burgundy glow · gradient
+            base for legibility · cinematic caption. */}
+        <motion.div
+          className="lg:hidden mt-10 -mx-6 sm:-mx-10"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <div className="relative w-full aspect-[4/5] sm:aspect-[16/10] overflow-hidden bg-beige/40">
+            <Image
+              src={HERO_PORTRAIT.src}
+              alt={HERO_PORTRAIT.alt}
+              fill
+              priority
+              sizes="100vw"
+              style={{ objectPosition: HERO_PORTRAIT.objectPosition ?? "50% 30%" }}
+              className="object-cover [filter:contrast(1.05)_saturate(0.96)_brightness(1.01)]"
+            />
+            {/* Cinematic gradient base · keeps the caption readable */}
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(11,11,11,0) 55%, rgba(11,11,11,0.55) 100%)",
+              }}
+            />
+            {/* Gold inset border · the brand frame */}
+            <div
+              aria-hidden
+              className="absolute inset-3 border border-gold/55 pointer-events-none"
+            />
+            {/* Editorial caption · bottom-right, ivory italic */}
+            <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between text-ivory/90 pointer-events-none">
+              <span className="font-serif italic text-[13px] leading-tight">
+                {dict.mobilePortraitCaption}
+              </span>
+              <span
+                className="eyebrow text-gold"
+                style={{ fontSize: "9px", letterSpacing: "0.32em" }}
+              >
+                {dict.captionLocation}
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ─── Mobile-only BIG primary CTA ──────────────────────────
+            Right after the photo. Filled gold pill so it's impossible
+            to miss · the Jamie Kern Lima "Access Now" energy in
+            Dr. Gissele's brand language. Anchors to the RENACER form
+            beneath so a tap scrolls the visitor straight into the
+            capture flow. */}
+        <motion.a
+          href="#newsletter"
+          className="lg:hidden group/cta mt-8 relative inline-flex items-center justify-center gap-3 w-full bg-burgundy text-ivory hover:bg-black transition-colors duration-500 py-5 px-6 eyebrow"
+          style={{ letterSpacing: "0.22em", fontSize: "12px" }}
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 1.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span aria-hidden className="block w-6 h-px bg-gold" />
+          <span className="relative z-10">{dict.renacerStickyCTA}  ·  RENACER™</span>
+          <span
+            aria-hidden
+            className="inline-block transition-transform duration-500 ease-out group-hover/cta:translate-x-1.5"
+          >
+            →
+          </span>
+        </motion.a>
+
         <motion.p
-          className="mt-12 max-w-lg text-[15.5px] sm:text-[16px] leading-[1.85] text-black/65 font-light"
+          className="mt-12 max-w-lg text-[15.5px] sm:text-[16px] leading-[1.7] lg:leading-[1.85] text-black/65 font-light line-clamp-4 lg:line-clamp-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.6 }}
