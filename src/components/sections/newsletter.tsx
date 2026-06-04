@@ -6,12 +6,10 @@ import { motion } from "motion/react";
 import { LOGO_SIGNATURE } from "@/lib/media";
 import type { Dictionary } from "@/lib/i18n";
 
-/* Kit (ConvertKit) form endpoint for the closing "Archivos de
-   Transformación" newsletter capture. Same Form ID as the hero
-   RENACER capture so every subscriber goes into the same Kit list,
-   gets the RENACER PDF, and enters the nurture automation. */
-const CONVERTKIT_ACTION =
-  "https://app.kit.com/forms/672196ab87/subscriptions";
+/* Submissions go through our server-side proxy at /api/subscribe,
+   which then POSTs to Kit (Form ID 672196ab87). Server-side gives
+   us real error reporting instead of opaque no-cors responses. */
+const CONVERTKIT_ACTION = "/api/subscribe";
 
 type NewsletterProps = {
   dict: Dictionary["newsletter"];
@@ -28,14 +26,13 @@ export function Newsletter({ dict }: NewsletterProps) {
     if (!email) return;
     setState("sending");
     try {
-      const form = new FormData();
-      form.set("email_address", email);
       const res = await fetch(CONVERTKIT_ACTION, {
         method: "POST",
-        body: form,
-        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
-      if (res.type === "opaque" || res.ok) {
+      const data = await res.json().catch(() => ({ ok: false }));
+      if (res.ok && data.ok) {
         setState("sent");
         setEmail("");
         return;

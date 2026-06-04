@@ -67,12 +67,12 @@ function MobileStickyRenacerBar({
   );
 }
 
-/* Kit (ConvertKit) form endpoint for the RENACER lead magnet.
-   Form ID 672196ab87 lives at dr-gissele-donovan.kit.com.
-   Submissions trigger the Incentive Email (auto-confirm enabled)
-   which delivers RENACER-Guia-Editorial.pdf instantly. */
-const RENACER_FORM_ACTION =
-  "https://app.kit.com/forms/672196ab87/subscriptions";
+/* Submissions go through our server-side proxy at /api/subscribe,
+   which then POSTs to Kit (Form ID 672196ab87, auto-confirm on).
+   The proxy gives us real error codes instead of the silent
+   "opaque" responses you get when fetching Kit directly from the
+   browser with no-cors. */
+const RENACER_FORM_ACTION = "/api/subscribe";
 
 /* ─── HERO PORTRAIT ─────────────────────────────────────────────────
    Image, crop, and alt all defined in src/lib/media.ts.
@@ -94,14 +94,13 @@ export function Hero({ dict }: HeroProps) {
     if (!email) return;
     setState("sending");
     try {
-      const form = new FormData();
-      form.set("email_address", email);
       const res = await fetch(RENACER_FORM_ACTION, {
         method: "POST",
-        body: form,
-        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
       });
-      if (res.type === "opaque" || res.ok) {
+      const data = await res.json().catch(() => ({ ok: false }));
+      if (res.ok && data.ok) {
         setState("sent");
         setEmail("");
         return;
