@@ -10,9 +10,13 @@ import { type Dictionary, type Locale } from "@/lib/i18n";
 /* ─── Mobile sticky RENACER CTA banner ────────────────────────────────
    Inspired by Jamie Kern Lima's "Access Now" bar. Lives only on mobile
    (lg:hidden). Sits at the very top of the page above the nav and
-   stays visible while scrolling. Burgundy backdrop with gold pill so
-   it reads as luxury, not aggressive. Anchors to #newsletter so a tap
-   takes the visitor straight to the editorial RENACER signup. */
+   stays visible while scrolling. The whole bar is the tap target.
+
+   Loud + luxury at the same time: burgundy backdrop, two-line copy
+   (gold eyebrow + ivory serif italic sub-line), and a bright gold pill
+   button with a soft pulse so the eye lands on it the moment the page
+   loads. Anchors to #newsletter so a tap scrolls straight to the
+   editorial RENACER capture. */
 function MobileStickyRenacerBar({
   label,
   cta,
@@ -23,22 +27,42 @@ function MobileStickyRenacerBar({
   return (
     <a
       href="#newsletter"
-      className="lg:hidden fixed top-0 inset-x-0 z-[60] bg-burgundy text-ivory shadow-[0_2px_18px_rgba(11,11,11,0.18)] flex items-center justify-between gap-3 px-4 py-2.5"
+      className="lg:hidden fixed top-0 inset-x-0 z-[60] bg-burgundy text-ivory shadow-[0_4px_24px_rgba(11,11,11,0.28)] flex items-center justify-between gap-3 pl-5 pr-3 py-3"
       aria-label={`${label} — ${cta}`}
     >
-      <span
-        className="eyebrow text-gold flex-1 truncate"
-        style={{ fontSize: "9px", letterSpacing: "0.24em" }}
-      >
-        {label}
-      </span>
-      <span
-        className="inline-flex items-center gap-1.5 bg-gold text-burgundy px-3.5 py-1.5 rounded-full eyebrow font-medium shrink-0"
-        style={{ fontSize: "10px", letterSpacing: "0.18em" }}
+      <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+        <span
+          className="eyebrow text-gold truncate"
+          style={{ fontSize: "9px", letterSpacing: "0.28em" }}
+        >
+          {label}
+        </span>
+        <span
+          className="font-serif italic text-ivory text-[13px] leading-tight truncate"
+          style={{ fontFamily: "var(--font-serif)" }}
+        >
+          Descarga tu guía editorial.
+        </span>
+      </div>
+
+      <motion.span
+        className="inline-flex items-center gap-1.5 bg-gold text-burgundy px-4 py-2.5 rounded-full font-medium shrink-0 shadow-[0_3px_12px_rgba(198,161,91,0.45)]"
+        style={{
+          fontSize: "11px",
+          letterSpacing: "0.2em",
+          textTransform: "uppercase",
+          fontWeight: 600,
+        }}
+        animate={{ scale: [1, 1.05, 1] }}
+        transition={{
+          duration: 2.4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       >
         {cta}
-        <span aria-hidden>→</span>
-      </span>
+        <span aria-hidden className="text-[13px]">→</span>
+      </motion.span>
     </a>
   );
 }
@@ -89,7 +113,7 @@ export function Hero({ dict }: HeroProps) {
   }
 
   return (
-    <section className="relative w-full bg-ivory text-black overflow-x-clip grid grid-cols-1 lg:grid-cols-[58%_42%] pt-[124px] lg:pt-[96px] min-h-screen">
+    <section className="relative w-full bg-ivory text-black overflow-x-clip grid grid-cols-1 lg:grid-cols-[58%_42%] pt-[152px] lg:pt-[96px] min-h-screen">
       {/* Sticky mobile RENACER CTA bar · top of viewport, above the nav.
           On desktop this is hidden and the existing nav/right-column
           flow is preserved exactly as before. */}
