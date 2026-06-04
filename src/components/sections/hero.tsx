@@ -7,17 +7,18 @@ import { HERO_PORTRAIT, LOGO_MONOGRAM_GOLD } from "@/lib/media";
 import { MonogramSeal } from "@/components/monogram-seal";
 import { type Dictionary, type Locale } from "@/lib/i18n";
 
-/* ─── Mobile sticky RENACER CTA banner ────────────────────────────────
-   Inspired by Jamie Kern Lima's "Access Now" bar. Lives only on mobile
-   (lg:hidden). Sits at the very top of the page above the nav and
-   stays visible while scrolling. The whole bar is the tap target.
+/* ─── Sticky RENACER CTA banner ────────────────────────────────────────
+   Visible at every breakpoint (mobile AND desktop). Sits at the very
+   top of the page above the nav and stays put while the visitor
+   scrolls. The whole bar is the tap target.
 
    Loud + luxury at the same time: burgundy backdrop, two-line copy
    (gold eyebrow + ivory serif italic sub-line), and a bright gold pill
    button with a soft pulse so the eye lands on it the moment the page
    loads. Anchors to #newsletter so a tap scrolls straight to the
-   editorial RENACER capture. */
-function MobileStickyRenacerBar({
+   editorial RENACER capture. Padding and type sizes scale up at
+   lg+ so the bar feels balanced on wide screens. */
+function StickyRenacerBar({
   label,
   cta,
 }: {
@@ -27,10 +28,10 @@ function MobileStickyRenacerBar({
   return (
     <a
       href="#newsletter"
-      className="lg:hidden fixed top-0 inset-x-0 z-[60] bg-burgundy text-ivory shadow-[0_4px_24px_rgba(11,11,11,0.28)] flex items-center justify-between gap-3 pl-5 pr-3 py-3"
+      className="fixed top-0 inset-x-0 z-[60] bg-burgundy text-ivory shadow-[0_4px_24px_rgba(11,11,11,0.28)] flex items-center justify-between gap-3 lg:gap-6 pl-5 lg:pl-12 pr-3 lg:pr-10 py-3 lg:py-3.5"
       aria-label={`${label} — ${cta}`}
     >
-      <div className="flex flex-col gap-0.5 flex-1 min-w-0">
+      <div className="flex flex-col lg:flex-row lg:items-baseline lg:gap-5 gap-0.5 flex-1 min-w-0">
         <span
           className="eyebrow text-gold truncate"
           style={{ fontSize: "9px", letterSpacing: "0.28em" }}
@@ -38,7 +39,7 @@ function MobileStickyRenacerBar({
           {label}
         </span>
         <span
-          className="font-serif italic text-ivory text-[13px] leading-tight truncate"
+          className="font-serif italic text-ivory text-[13px] lg:text-[15px] leading-tight truncate"
           style={{ fontFamily: "var(--font-serif)" }}
         >
           Descarga tu guía editorial.
@@ -46,7 +47,7 @@ function MobileStickyRenacerBar({
       </div>
 
       <motion.span
-        className="inline-flex items-center gap-1.5 bg-gold text-burgundy px-4 py-2.5 rounded-full font-medium shrink-0 shadow-[0_3px_12px_rgba(198,161,91,0.45)]"
+        className="inline-flex items-center gap-1.5 lg:gap-2 bg-gold text-burgundy px-4 lg:px-6 py-2.5 lg:py-3 rounded-full font-medium shrink-0 shadow-[0_3px_12px_rgba(198,161,91,0.45)]"
         style={{
           fontSize: "11px",
           letterSpacing: "0.2em",
@@ -61,18 +62,21 @@ function MobileStickyRenacerBar({
         }}
       >
         {cta}
-        <span aria-hidden className="text-[13px]">→</span>
+        <span aria-hidden className="text-[13px] lg:text-[15px]">→</span>
       </motion.span>
     </a>
   );
 }
 
-/* Submissions go through our server-side proxy at /api/subscribe,
-   which then POSTs to Kit (Form ID 672196ab87, auto-confirm on).
-   The proxy gives us real error codes instead of the silent
-   "opaque" responses you get when fetching Kit directly from the
-   browser with no-cors. */
-const RENACER_FORM_ACTION = "/api/subscribe";
+/* Kit (ConvertKit) form endpoint for the RENACER lead magnet.
+   Form ID 672196ab87. Submissions go via a hidden-iframe POST
+   (see onSubmitRenacer below) which is the most reliable way to
+   submit to Kit: it mimics a real browser form submission with all
+   the headers Kit expects, but the response renders in a hidden
+   iframe so the visitor stays on our page. Auto-confirm is enabled
+   in Kit, so the Incentive Email goes out instantly. */
+const RENACER_FORM_ACTION =
+  "https://app.kit.com/forms/672196ab87/subscriptions";
 
 /* ─── HERO PORTRAIT ─────────────────────────────────────────────────
    Image, crop, and alt all defined in src/lib/media.ts.
@@ -93,30 +97,58 @@ export function Hero({ dict }: HeroProps) {
     e.preventDefault();
     if (!email) return;
     setState("sending");
+
+    /* Hidden-iframe form post · the most reliable way to submit to a
+       third-party endpoint like Kit. Builds a real <form> in the DOM,
+       targets a hidden <iframe>, and submits. Kit sees a normal
+       browser form submission with all the expected headers, and the
+       response renders inside the iframe so the visitor never leaves
+       the page. We surface success optimistically; Kit's own
+       Incentive Email is what actually delivers RENACER. */
     try {
-      const res = await fetch(RENACER_FORM_ACTION, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json().catch(() => ({ ok: false }));
-      if (res.ok && data.ok) {
-        setState("sent");
-        setEmail("");
-        return;
-      }
-      setState("error");
+      const iframeName = `kit-frame-${Date.now()}`;
+      const iframe = document.createElement("iframe");
+      iframe.name = iframeName;
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+
+      const f = document.createElement("form");
+      f.action = RENACER_FORM_ACTION;
+      f.method = "POST";
+      f.target = iframeName;
+      f.style.display = "none";
+
+      const i = document.createElement("input");
+      i.type = "hidden";
+      i.name = "email_address";
+      i.value = email;
+      f.appendChild(i);
+
+      document.body.appendChild(f);
+      f.submit();
+
+      setState("sent");
+      setEmail("");
+
+      // Tidy up after Kit's response has had a chance to land.
+      setTimeout(() => {
+        f.remove();
+      }, 1500);
+      setTimeout(() => {
+        iframe.remove();
+      }, 10000);
     } catch {
       setState("error");
     }
   }
 
   return (
-    <section className="relative w-full bg-ivory text-black overflow-x-clip grid grid-cols-1 lg:grid-cols-[58%_42%] pt-[152px] lg:pt-[96px] min-h-screen">
-      {/* Sticky mobile RENACER CTA bar · top of viewport, above the nav.
-          On desktop this is hidden and the existing nav/right-column
-          flow is preserved exactly as before. */}
-      <MobileStickyRenacerBar
+    <section className="relative w-full bg-ivory text-black overflow-x-clip grid grid-cols-1 lg:grid-cols-[58%_42%] pt-[152px] lg:pt-[160px] min-h-screen">
+      {/* Sticky RENACER CTA bar · top of viewport, above the nav.
+          Visible on every breakpoint so the lead-magnet invitation is
+          always one tap away, just like Jamie Kern Lima's "Access Now"
+          banner that lives on every page. */}
+      <StickyRenacerBar
         label={dict.renacerStickyLabel}
         cta={dict.renacerStickyCTA}
       />

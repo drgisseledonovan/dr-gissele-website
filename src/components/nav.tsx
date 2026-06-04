@@ -63,10 +63,11 @@ export function Nav({ locale, dict }: NavProps) {
   return (
     <>
       <header
-        /* Homepage on mobile: leave 64px above the nav for the sticky
-           RENACER bar (Jamie Kern Lima style · loud and editorial).
-           Everywhere else: flush to the top. Desktop is always flush. */
-        className={`fixed ${isHome ? "top-[64px]" : "top-0"} lg:top-0 left-0 right-0 z-50 transition-[background-color,backdrop-filter,border-color,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        /* Homepage on ANY breakpoint: leave room above the nav for the
+           sticky RENACER bar (Jamie Kern Lima style · loud and
+           editorial). Mobile bar is ~64px, desktop bar is ~68px.
+           Other pages: nav flush to the top as before. */
+        className={`fixed ${isHome ? "top-[64px] lg:top-[68px]" : "top-0"} left-0 right-0 z-50 transition-[background-color,backdrop-filter,border-color,padding] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           scrolled
             ? "bg-ivory/85 backdrop-blur-md border-b border-black/10 py-3"
             : "bg-transparent py-6"

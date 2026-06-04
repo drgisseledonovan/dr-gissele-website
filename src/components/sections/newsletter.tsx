@@ -6,10 +6,12 @@ import { motion } from "motion/react";
 import { LOGO_SIGNATURE } from "@/lib/media";
 import type { Dictionary } from "@/lib/i18n";
 
-/* Submissions go through our server-side proxy at /api/subscribe,
-   which then POSTs to Kit (Form ID 672196ab87). Server-side gives
-   us real error reporting instead of opaque no-cors responses. */
-const CONVERTKIT_ACTION = "/api/subscribe";
+/* Kit form endpoint for the closing Newsletter capture. Same Form
+   ID as the hero so every subscriber lands in the same Kit list,
+   gets RENACER instantly, and enters the nurture sequence.
+   Submitted via a hidden-iframe form post (see onSubmit below). */
+const CONVERTKIT_ACTION =
+  "https://app.kit.com/forms/672196ab87/subscriptions";
 
 type NewsletterProps = {
   dict: Dictionary["newsletter"];
@@ -25,19 +27,37 @@ export function Newsletter({ dict }: NewsletterProps) {
     e.preventDefault();
     if (!email) return;
     setState("sending");
+
+    /* Hidden-iframe form post to Kit · same technique as the hero
+       capture. Real browser form submission, response lands inside
+       a hidden iframe so the visitor stays on the page. */
     try {
-      const res = await fetch(CONVERTKIT_ACTION, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
-      });
-      const data = await res.json().catch(() => ({ ok: false }));
-      if (res.ok && data.ok) {
-        setState("sent");
-        setEmail("");
-        return;
-      }
-      setState("error");
+      const iframeName = `kit-frame-${Date.now()}`;
+      const iframe = document.createElement("iframe");
+      iframe.name = iframeName;
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+
+      const f = document.createElement("form");
+      f.action = CONVERTKIT_ACTION;
+      f.method = "POST";
+      f.target = iframeName;
+      f.style.display = "none";
+
+      const i = document.createElement("input");
+      i.type = "hidden";
+      i.name = "email_address";
+      i.value = email;
+      f.appendChild(i);
+
+      document.body.appendChild(f);
+      f.submit();
+
+      setState("sent");
+      setEmail("");
+
+      setTimeout(() => f.remove(), 1500);
+      setTimeout(() => iframe.remove(), 10000);
     } catch {
       setState("error");
     }
