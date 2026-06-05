@@ -1,86 +1,64 @@
 import { NextResponse } from "next/server";
 
 /* ─── /api/subscribe ──────────────────────────────────────────────────
-   Server-side proxy to Kit. Tries Kit's v4 API first (the modern one,
-   matches Dr. Gissele's API key format), falls back to v3 if v4
-   rejects. Returns whichever succeeds. Detailed error info on failure
-   so we can diagnose quickly from the browser's Network tab.
+   Server-side proxy to Kit's v4 Forms API · the supported, modern
+   integration path. Dr. Gissele's V4 personal-use API key authorizes
+   the subscribe call.
 
-   v4 (new):
+   Endpoint:
      POST https://api.kit.com/v4/forms/{form_id}/subscribers
-     Header: X-Kit-Api-Key: {key}
-     Body:   { "email_address": "..." }
+   Auth headers tried (Kit accepts at least one):
+     Authorization: Bearer kit_xxx
+     X-Kit-Api-Key:  kit_xxx
+   Body:
+     { "email_address": "..." }
+   Success:
+     201 Created with { "subscriber": {...} }
 
-   v3 (legacy):
-     POST https://api.convertkit.com/v3/forms/{form_id}/subscribe
-     Body: { "api_key": "{key}", "email": "..." }
+   The form's Auto-confirm setting in Kit is ON, so the Incentive
+   Email (with the RENACER PDF link) goes out to the subscriber
+   immediately.
 
-   Both endpoints honor the form's Incentive Email + Auto-confirm
-   settings, so the RENACER PDF goes out to the subscriber instantly.
+   API key lives in the env var KIT_API_KEY when available, falling
+   back to the in-repo value for the private repo's convenience.
    ─────────────────────────────────────────────────────────────────── */
 
 const KIT_API_KEY =
-  process.env.KIT_API_KEY || "GHQwLXqJZt-h1cLYVbikbQ";
+  process.env.KIT_API_KEY || "kit_330ba495baf2303d1e31f07832d51467";
 const KIT_FORM_ID = "672196ab87";
+const KIT_ENDPOINT = `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`;
 
 export const runtime = "edge";
 
 type AttemptResult = {
-  endpoint: string;
+  auth: string;
   status: number;
   body: unknown;
 };
 
-async function tryV4(email: string): Promise<AttemptResult> {
-  const url = `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`;
-  const res = await fetch(url, {
+async function attempt(
+  authLabel: string,
+  headers: Record<string, string>,
+  email: string
+): Promise<AttemptResult> {
+  const res = await fetch(KIT_ENDPOINT, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-Kit-Api-Key": KIT_API_KEY,
       Accept: "application/json",
+      ...headers,
     },
     body: JSON.stringify({ email_address: email }),
   });
   const body = await res.json().catch(() => null);
-  return { endpoint: "v4", status: res.status, body };
+  return { auth: authLabel, status: res.status, body };
 }
 
-async function tryV4Bearer(email: string): Promise<AttemptResult> {
-  const url = `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${KIT_API_KEY}`,
-      Accept: "application/json",
-    },
-    body: JSON.stringify({ email_address: email }),
-  });
-  const body = await res.json().catch(() => null);
-  return { endpoint: "v4-bearer", status: res.status, body };
-}
-
-async function tryV3(email: string): Promise<AttemptResult> {
-  const url = `https://api.convertkit.com/v3/forms/${KIT_FORM_ID}/subscribe`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-    body: JSON.stringify({ api_key: KIT_API_KEY, email }),
-  });
-  const body = await res.json().catch(() => null);
-  return { endpoint: "v3", status: res.status, body };
-}
-
-function looksLikeSuccess(r: AttemptResult): boolean {
+function isSuccess(r: AttemptResult): boolean {
   if (r.status < 200 || r.status >= 300) return false;
   if (!r.body || typeof r.body !== "object") return false;
   const b = r.body as Record<string, unknown>;
-  // v3 returns { subscription: {...} }; v4 returns { subscriber: {...} }
-  return Boolean(b.subscription || b.subscriber);
+  return Boolean(b.subscriber);
 }
 
 export async function POST(request: Request) {
@@ -98,46 +76,40 @@ export async function POST(request: Request) {
 
     const attempts: AttemptResult[] = [];
 
-    // Try v4 with X-Kit-Api-Key header first (matches modern key format)
-    const v4 = await tryV4(email).catch((e) => ({
-      endpoint: "v4",
+    // Bearer is the documented OAuth-style auth for Kit v4 personal keys
+    const bearer = await attempt(
+      "bearer",
+      { Authorization: `Bearer ${KIT_API_KEY}` },
+      email
+    ).catch((e) => ({ auth: "bearer", status: 0, body: { error: String(e) } }));
+    attempts.push(bearer);
+    if (isSuccess(bearer)) return NextResponse.json({ ok: true });
+
+    // Fallback: X-Kit-Api-Key header
+    const xKey = await attempt(
+      "x-kit-api-key",
+      { "X-Kit-Api-Key": KIT_API_KEY },
+      email
+    ).catch((e) => ({
+      auth: "x-kit-api-key",
       status: 0,
       body: { error: String(e) },
     }));
-    attempts.push(v4);
-    if (looksLikeSuccess(v4)) {
-      return NextResponse.json({ ok: true, endpoint: v4.endpoint });
-    }
+    attempts.push(xKey);
+    if (isSuccess(xKey)) return NextResponse.json({ ok: true });
 
-    // Try v4 with Bearer auth as backup
-    const v4b = await tryV4Bearer(email).catch((e) => ({
-      endpoint: "v4-bearer",
-      status: 0,
-      body: { error: String(e) },
-    }));
-    attempts.push(v4b);
-    if (looksLikeSuccess(v4b)) {
-      return NextResponse.json({ ok: true, endpoint: v4b.endpoint });
-    }
+    // Final fallback: HTTP Basic Auth (key as username, empty password)
+    const basicToken = btoa(`${KIT_API_KEY}:`);
+    const basic = await attempt(
+      "basic",
+      { Authorization: `Basic ${basicToken}` },
+      email
+    ).catch((e) => ({ auth: "basic", status: 0, body: { error: String(e) } }));
+    attempts.push(basic);
+    if (isSuccess(basic)) return NextResponse.json({ ok: true });
 
-    // Fall back to v3 with api_key in body
-    const v3 = await tryV3(email).catch((e) => ({
-      endpoint: "v3",
-      status: 0,
-      body: { error: String(e) },
-    }));
-    attempts.push(v3);
-    if (looksLikeSuccess(v3)) {
-      return NextResponse.json({ ok: true, endpoint: v3.endpoint });
-    }
-
-    // Every approach failed · return full diagnostic detail
     return NextResponse.json(
-      {
-        ok: false,
-        error: "kit_rejected",
-        attempts,
-      },
+      { ok: false, error: "kit_rejected", attempts },
       { status: 502 }
     );
   } catch (err) {
