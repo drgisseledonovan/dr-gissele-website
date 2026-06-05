@@ -85,8 +85,10 @@ export async function POST(request: Request) {
   }
 }
 
-/* GET diagnostic kept for future investigation. Visit
-   /api/subscribe?test=1 to see what Kit thinks of the current setup. */
+/* GET diagnostic · try several Kit v4 endpoint shapes to find which
+   one actually accepts a form subscription, since /v4/forms/{id}/
+   subscribers returns 404 even with the correct numeric form ID and
+   working X-Kit-Api-Key auth. */
 export async function GET(request: Request) {
   const url = new URL(request.url);
   if (url.searchParams.get("test") !== "1") {
@@ -97,22 +99,82 @@ export async function GET(request: Request) {
   }
 
   const testEmail = `amigo+test${Date.now()}@drgisseledonovan.com`;
-  const kitRes = await fetch(KIT_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      "X-Kit-Api-Key": KIT_API_KEY,
+
+  type Probe = {
+    label: string;
+    method: string;
+    url: string;
+    body: unknown;
+  };
+
+  const probes: Probe[] = [
+    {
+      label: "POST /v4/forms/{numericId}/subscribers",
+      method: "POST",
+      url: `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`,
+      body: { email_address: testEmail },
     },
-    body: JSON.stringify({ email_address: testEmail }),
-  });
-  const body = await kitRes.json().catch(() => null);
+    {
+      label: "POST /v4/forms/{uid}/subscribers",
+      method: "POST",
+      url: `https://api.kit.com/v4/forms/672196ab87/subscribers`,
+      body: { email_address: testEmail },
+    },
+    {
+      label: "POST /v4/forms/{numericId}/subscribe (singular)",
+      method: "POST",
+      url: `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribe`,
+      body: { email_address: testEmail },
+    },
+    {
+      label: "POST /v4/subscribers (general create)",
+      method: "POST",
+      url: `https://api.kit.com/v4/subscribers`,
+      body: { email_address: testEmail },
+    },
+    {
+      label: "POST /v4/subscribers (with form_id in body)",
+      method: "POST",
+      url: `https://api.kit.com/v4/subscribers`,
+      body: { email_address: testEmail, form_id: KIT_FORM_ID },
+    },
+  ];
+
+  const results: Array<{
+    label: string;
+    status: number;
+    body: unknown;
+  }> = [];
+
+  for (const probe of probes) {
+    try {
+      const r = await fetch(probe.url, {
+        method: probe.method,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "X-Kit-Api-Key": KIT_API_KEY,
+        },
+        body: JSON.stringify(probe.body),
+      });
+      const respBody = await r.json().catch(() => null);
+      results.push({
+        label: probe.label,
+        status: r.status,
+        body: respBody,
+      });
+    } catch (e) {
+      results.push({
+        label: probe.label,
+        status: 0,
+        body: { error: e instanceof Error ? e.message : String(e) },
+      });
+    }
+  }
 
   return NextResponse.json({
     note: "diagnostic only — visit ?test=1",
-    endpoint: KIT_ENDPOINT,
     testEmail,
-    status: kitRes.status,
-    body,
+    results,
   });
 }
