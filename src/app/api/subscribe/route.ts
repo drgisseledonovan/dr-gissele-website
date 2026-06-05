@@ -61,6 +61,64 @@ function isSuccess(r: AttemptResult): boolean {
   return Boolean(b.subscriber);
 }
 
+/* GET handler · diagnostic only. Visiting /api/subscribe?test=1 runs
+   the same multi-auth subscribe against Kit with a deterministic
+   test email, and returns the full attempts array as JSON. Lets
+   Amigo inspect what Kit is actually rejecting without needing the
+   browser DevTools dance. */
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  if (url.searchParams.get("test") !== "1") {
+    return NextResponse.json({ ok: false, error: "method_not_allowed" }, {
+      status: 405,
+    });
+  }
+
+  // First, fetch the list of forms so we can see what Kit thinks the
+  // form IDs are for this account. Useful if the public form UID
+  // (672196ab87) isn't what the v4 API expects.
+  const formsRes = await fetch("https://api.kit.com/v4/forms", {
+    headers: {
+      Authorization: `Bearer ${KIT_API_KEY}`,
+      Accept: "application/json",
+    },
+  }).catch((e) => null as unknown);
+
+  let formsListing: unknown = null;
+  if (formsRes && typeof formsRes === "object" && "json" in formsRes) {
+    formsListing = await (formsRes as Response).json().catch(() => null);
+  }
+
+  const testEmail = `amigo+test${Date.now()}@drgisseledonovan.com`;
+  const attempts: AttemptResult[] = [];
+
+  const bearer = await attempt(
+    "bearer",
+    { Authorization: `Bearer ${KIT_API_KEY}` },
+    testEmail
+  ).catch((e) => ({ auth: "bearer", status: 0, body: { error: String(e) } }));
+  attempts.push(bearer);
+
+  const xKey = await attempt(
+    "x-kit-api-key",
+    { "X-Kit-Api-Key": KIT_API_KEY },
+    testEmail
+  ).catch((e) => ({
+    auth: "x-kit-api-key",
+    status: 0,
+    body: { error: String(e) },
+  }));
+  attempts.push(xKey);
+
+  return NextResponse.json({
+    ok: false,
+    note: "diagnostic only — visit ?test=1",
+    formEndpoint: KIT_ENDPOINT,
+    formsListing,
+    attempts,
+  });
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json().catch(() => null);
