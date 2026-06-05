@@ -74,15 +74,16 @@ export async function GET(request: Request) {
     });
   }
 
-  // First, fetch the list of forms so we can see what Kit thinks the
-  // form IDs are for this account. Useful if the public form UID
-  // (672196ab87) isn't what the v4 API expects.
+  // First diagnostic round told us: Kit v4 rejects Bearer auth
+  // (401 invalid token) but accepts X-Kit-Api-Key (returned a clean
+  // 404 Not Found for the public UID). So fetch the forms listing
+  // with X-Kit-Api-Key to learn the v4 internal numeric form IDs.
   const formsRes = await fetch("https://api.kit.com/v4/forms", {
     headers: {
-      Authorization: `Bearer ${KIT_API_KEY}`,
+      "X-Kit-Api-Key": KIT_API_KEY,
       Accept: "application/json",
     },
-  }).catch((e) => null as unknown);
+  }).catch(() => null as unknown);
 
   let formsListing: unknown = null;
   if (formsRes && typeof formsRes === "object" && "json" in formsRes) {
