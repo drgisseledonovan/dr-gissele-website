@@ -1,23 +1,30 @@
 import { NextResponse } from "next/server";
 
 /* ─── /api/subscribe ──────────────────────────────────────────────────
-   Server-side proxy to Kit (ConvertKit). The browser used to POST
-   directly to Kit's form endpoint with mode: "no-cors", which works
-   for native HTML forms but silently swallows every error for fetch
-   calls. Moving the submission server-side gives us real HTTP
-   status codes, real error bodies, and lets us return a clean JSON
-   response back to the React form.
+   Server-side proxy to Kit's v3 Forms API. This is the documented,
+   supported way to add a subscriber from an external website.
 
-   Form ID: 672196ab87
-   Endpoint: https://app.kit.com/forms/{id}/subscriptions
-   Auto-confirm is enabled in Kit so the subscriber gets the RENACER
-   Incentive Email immediately on subscribe.
+   Why this exists, and why it replaced the earlier iframe approach:
+   the legacy /forms/{id}/subscriptions endpoint that the iframe form
+   POST hit silently accepted submissions from external origins, but
+   stopped reliably routing them through to Kit after their rebrand.
+   The v3 API endpoint takes a documented JSON payload, returns clean
+   error codes, and runs server-side so there are no CORS or referrer
+   surprises.
+
+   Endpoint: POST https://api.convertkit.com/v3/forms/{form_id}/subscribe
+   Body:     { "api_key": "...", "email": "..." }
+
+   Kit auto-confirm is enabled on this form, so the Incentive Email
+   (with the RENACER PDF link) is sent to the subscriber immediately.
    ─────────────────────────────────────────────────────────────────── */
 
+const KIT_API_KEY =
+  process.env.KIT_API_KEY || "GHQwLXqJZt-h1cLYVbikbQ";
 const KIT_FORM_ID = "672196ab87";
-const KIT_ENDPOINT = `https://app.kit.com/forms/${KIT_FORM_ID}/subscriptions`;
+const KIT_ENDPOINT = `https://api.convertkit.com/v3/forms/${KIT_FORM_ID}/subscribe`;
 
-export const runtime = "edge"; // fast, free, Vercel-native
+export const runtime = "edge";
 
 export async function POST(request: Request) {
   try {
@@ -32,33 +39,41 @@ export async function POST(request: Request) {
       );
     }
 
-    // Kit's form endpoint accepts url-encoded form data
-    const form = new URLSearchParams();
-    form.set("email_address", email);
-
     const kitRes = await fetch(KIT_ENDPOINT, {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: form.toString(),
+      body: JSON.stringify({
+        api_key: KIT_API_KEY,
+        email,
+      }),
     });
 
-    /* Kit returns 200 with HTML on success (their thank-you page),
-       or a redirect (3xx). Both indicate the email was accepted.
-       4xx/5xx mean the submission failed. */
-    if (kitRes.status >= 200 && kitRes.status < 400) {
+    const data = (await kitRes.json().catch(() => null)) as
+      | { subscription?: { id?: number; subscriber?: { id?: number } } }
+      | { error?: string; message?: string }
+      | null;
+
+    /* Kit returns 200 with a `subscription` object when the subscriber
+       is added (or already exists). Auto-confirm in the form settings
+       ensures the Incentive Email goes out instantly. */
+    if (
+      kitRes.ok &&
+      data &&
+      "subscription" in data &&
+      data.subscription
+    ) {
       return NextResponse.json({ ok: true });
     }
 
-    const detail = await kitRes.text().catch(() => "");
     return NextResponse.json(
       {
         ok: false,
         error: "kit_rejected",
         status: kitRes.status,
-        detail: detail.slice(0, 500),
+        detail: data ?? null,
       },
       { status: 502 }
     );

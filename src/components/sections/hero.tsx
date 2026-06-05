@@ -68,15 +68,11 @@ function StickyRenacerBar({
   );
 }
 
-/* Kit (ConvertKit) form endpoint for the RENACER lead magnet.
-   Form ID 672196ab87. Submissions go via a hidden-iframe POST
-   (see onSubmitRenacer below) which is the most reliable way to
-   submit to Kit: it mimics a real browser form submission with all
-   the headers Kit expects, but the response renders in a hidden
-   iframe so the visitor stays on our page. Auto-confirm is enabled
-   in Kit, so the Incentive Email goes out instantly. */
-const RENACER_FORM_ACTION =
-  "https://app.kit.com/forms/672196ab87/subscriptions";
+/* Submissions go through our server-side /api/subscribe route,
+   which calls Kit's documented v3 Forms API. Auto-confirm is
+   enabled on Form ID 672196ab87 so the Incentive Email (with the
+   RENACER PDF link) is delivered to the subscriber immediately. */
+const RENACER_FORM_ACTION = "/api/subscribe";
 
 /* ─── HERO PORTRAIT ─────────────────────────────────────────────────
    Image, crop, and alt all defined in src/lib/media.ts.
@@ -97,46 +93,19 @@ export function Hero({ dict }: HeroProps) {
     e.preventDefault();
     if (!email) return;
     setState("sending");
-
-    /* Hidden-iframe form post · the most reliable way to submit to a
-       third-party endpoint like Kit. Builds a real <form> in the DOM,
-       targets a hidden <iframe>, and submits. Kit sees a normal
-       browser form submission with all the expected headers, and the
-       response renders inside the iframe so the visitor never leaves
-       the page. We surface success optimistically; Kit's own
-       Incentive Email is what actually delivers RENACER. */
     try {
-      const iframeName = `kit-frame-${Date.now()}`;
-      const iframe = document.createElement("iframe");
-      iframe.name = iframeName;
-      iframe.style.display = "none";
-      document.body.appendChild(iframe);
-
-      const f = document.createElement("form");
-      f.action = RENACER_FORM_ACTION;
-      f.method = "POST";
-      f.target = iframeName;
-      f.style.display = "none";
-
-      const i = document.createElement("input");
-      i.type = "hidden";
-      i.name = "email_address";
-      i.value = email;
-      f.appendChild(i);
-
-      document.body.appendChild(f);
-      f.submit();
-
-      setState("sent");
-      setEmail("");
-
-      // Tidy up after Kit's response has had a chance to land.
-      setTimeout(() => {
-        f.remove();
-      }, 1500);
-      setTimeout(() => {
-        iframe.remove();
-      }, 10000);
+      const res = await fetch(RENACER_FORM_ACTION, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      const data = await res.json().catch(() => ({ ok: false }));
+      if (res.ok && data.ok) {
+        setState("sent");
+        setEmail("");
+        return;
+      }
+      setState("error");
     } catch {
       setState("error");
     }
