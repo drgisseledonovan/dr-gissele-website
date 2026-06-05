@@ -1,130 +1,42 @@
 import { NextResponse } from "next/server";
 
 /* ─── /api/subscribe ──────────────────────────────────────────────────
-   Server-side proxy to Kit's v4 Forms API · the supported, modern
-   integration path. Dr. Gissele's V4 personal-use API key authorizes
-   the subscribe call.
+   Server-side proxy to Kit's v4 Forms API. Subscribes the visitor to
+   the RENACER GUIDE form; the form's Auto-confirm setting in Kit is
+   ON, so the Incentive Email (with the RENACER PDF link) is sent to
+   the subscriber immediately.
 
-   Endpoint:
-     POST https://api.kit.com/v4/forms/{form_id}/subscribers
-   Auth headers tried (Kit accepts at least one):
-     Authorization: Bearer kit_xxx
-     X-Kit-Api-Key:  kit_xxx
-   Body:
-     { "email_address": "..." }
-   Success:
-     201 Created with { "subscriber": {...} }
+   Discovery notes (the path that worked):
+   1. v3 Legacy API was deprecated — endpoints silently rejected
+      Dr. Gissele's v3 key.
+   2. v4 Bearer auth returns 401 "The access token is invalid" for
+      personal-use API keys — Bearer is reserved for OAuth tokens.
+   3. v4 X-Kit-Api-Key header is the correct auth scheme.
+   4. The "form ID" in v4 is NOT the public UID (672196ab87) used in
+      the embed code; v4 uses the internal numeric ID. Hitting
+      GET /v4/forms with X-Kit-Api-Key revealed the right one:
+      id 9523787, name "RENACER GUIDE form", uid 672196ab87.
 
-   The form's Auto-confirm setting in Kit is ON, so the Incentive
-   Email (with the RENACER PDF link) goes out to the subscriber
-   immediately.
-
-   API key lives in the env var KIT_API_KEY when available, falling
-   back to the in-repo value for the private repo's convenience.
+   Endpoint: POST https://api.kit.com/v4/forms/9523787/subscribers
+   Auth:     X-Kit-Api-Key: kit_xxx
+   Body:     { "email_address": "..." }
+   Success:  201 Created with { "subscriber": {...} }
    ─────────────────────────────────────────────────────────────────── */
 
 const KIT_API_KEY =
   process.env.KIT_API_KEY || "kit_330ba495baf2303d1e31f07832d51467";
-const KIT_FORM_ID = "672196ab87";
+const KIT_FORM_ID = 9523787;
 const KIT_ENDPOINT = `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`;
 
 export const runtime = "edge";
 
-type AttemptResult = {
-  auth: string;
-  status: number;
-  body: unknown;
-};
-
-async function attempt(
-  authLabel: string,
-  headers: Record<string, string>,
-  email: string
-): Promise<AttemptResult> {
-  const res = await fetch(KIT_ENDPOINT, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      ...headers,
-    },
-    body: JSON.stringify({ email_address: email }),
-  });
-  const body = await res.json().catch(() => null);
-  return { auth: authLabel, status: res.status, body };
-}
-
-function isSuccess(r: AttemptResult): boolean {
-  if (r.status < 200 || r.status >= 300) return false;
-  if (!r.body || typeof r.body !== "object") return false;
-  const b = r.body as Record<string, unknown>;
-  return Boolean(b.subscriber);
-}
-
-/* GET handler · diagnostic only. Visiting /api/subscribe?test=1 runs
-   the same multi-auth subscribe against Kit with a deterministic
-   test email, and returns the full attempts array as JSON. Lets
-   Amigo inspect what Kit is actually rejecting without needing the
-   browser DevTools dance. */
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  if (url.searchParams.get("test") !== "1") {
-    return NextResponse.json({ ok: false, error: "method_not_allowed" }, {
-      status: 405,
-    });
-  }
-
-  // First diagnostic round told us: Kit v4 rejects Bearer auth
-  // (401 invalid token) but accepts X-Kit-Api-Key (returned a clean
-  // 404 Not Found for the public UID). So fetch the forms listing
-  // with X-Kit-Api-Key to learn the v4 internal numeric form IDs.
-  const formsRes = await fetch("https://api.kit.com/v4/forms", {
-    headers: {
-      "X-Kit-Api-Key": KIT_API_KEY,
-      Accept: "application/json",
-    },
-  }).catch(() => null as unknown);
-
-  let formsListing: unknown = null;
-  if (formsRes && typeof formsRes === "object" && "json" in formsRes) {
-    formsListing = await (formsRes as Response).json().catch(() => null);
-  }
-
-  const testEmail = `amigo+test${Date.now()}@drgisseledonovan.com`;
-  const attempts: AttemptResult[] = [];
-
-  const bearer = await attempt(
-    "bearer",
-    { Authorization: `Bearer ${KIT_API_KEY}` },
-    testEmail
-  ).catch((e) => ({ auth: "bearer", status: 0, body: { error: String(e) } }));
-  attempts.push(bearer);
-
-  const xKey = await attempt(
-    "x-kit-api-key",
-    { "X-Kit-Api-Key": KIT_API_KEY },
-    testEmail
-  ).catch((e) => ({
-    auth: "x-kit-api-key",
-    status: 0,
-    body: { error: String(e) },
-  }));
-  attempts.push(xKey);
-
-  return NextResponse.json({
-    ok: false,
-    note: "diagnostic only — visit ?test=1",
-    formEndpoint: KIT_ENDPOINT,
-    formsListing,
-    attempts,
-  });
-}
-
 export async function POST(request: Request) {
   try {
-    const body = await request.json().catch(() => null);
+    const payload = await request.json().catch(() => null);
     const email =
-      typeof body?.email === "string" ? body.email.trim().toLowerCase() : "";
+      typeof payload?.email === "string"
+        ? payload.email.trim().toLowerCase()
+        : "";
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
@@ -133,42 +45,32 @@ export async function POST(request: Request) {
       );
     }
 
-    const attempts: AttemptResult[] = [];
+    const kitRes = await fetch(KIT_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-Kit-Api-Key": KIT_API_KEY,
+      },
+      body: JSON.stringify({ email_address: email }),
+    });
 
-    // Bearer is the documented OAuth-style auth for Kit v4 personal keys
-    const bearer = await attempt(
-      "bearer",
-      { Authorization: `Bearer ${KIT_API_KEY}` },
-      email
-    ).catch((e) => ({ auth: "bearer", status: 0, body: { error: String(e) } }));
-    attempts.push(bearer);
-    if (isSuccess(bearer)) return NextResponse.json({ ok: true });
+    const data = (await kitRes.json().catch(() => null)) as {
+      subscriber?: { id?: number };
+      errors?: string[];
+    } | null;
 
-    // Fallback: X-Kit-Api-Key header
-    const xKey = await attempt(
-      "x-kit-api-key",
-      { "X-Kit-Api-Key": KIT_API_KEY },
-      email
-    ).catch((e) => ({
-      auth: "x-kit-api-key",
-      status: 0,
-      body: { error: String(e) },
-    }));
-    attempts.push(xKey);
-    if (isSuccess(xKey)) return NextResponse.json({ ok: true });
-
-    // Final fallback: HTTP Basic Auth (key as username, empty password)
-    const basicToken = btoa(`${KIT_API_KEY}:`);
-    const basic = await attempt(
-      "basic",
-      { Authorization: `Basic ${basicToken}` },
-      email
-    ).catch((e) => ({ auth: "basic", status: 0, body: { error: String(e) } }));
-    attempts.push(basic);
-    if (isSuccess(basic)) return NextResponse.json({ ok: true });
+    if (kitRes.ok && data?.subscriber) {
+      return NextResponse.json({ ok: true });
+    }
 
     return NextResponse.json(
-      { ok: false, error: "kit_rejected", attempts },
+      {
+        ok: false,
+        error: "kit_rejected",
+        status: kitRes.status,
+        detail: data,
+      },
       { status: 502 }
     );
   } catch (err) {
@@ -181,4 +83,36 @@ export async function POST(request: Request) {
       { status: 500 }
     );
   }
+}
+
+/* GET diagnostic kept for future investigation. Visit
+   /api/subscribe?test=1 to see what Kit thinks of the current setup. */
+export async function GET(request: Request) {
+  const url = new URL(request.url);
+  if (url.searchParams.get("test") !== "1") {
+    return NextResponse.json(
+      { ok: false, error: "method_not_allowed" },
+      { status: 405 }
+    );
+  }
+
+  const testEmail = `amigo+test${Date.now()}@drgisseledonovan.com`;
+  const kitRes = await fetch(KIT_ENDPOINT, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      "X-Kit-Api-Key": KIT_API_KEY,
+    },
+    body: JSON.stringify({ email_address: testEmail }),
+  });
+  const body = await kitRes.json().catch(() => null);
+
+  return NextResponse.json({
+    note: "diagnostic only — visit ?test=1",
+    endpoint: KIT_ENDPOINT,
+    testEmail,
+    status: kitRes.status,
+    body,
+  });
 }
