@@ -1,32 +1,40 @@
 import { NextResponse } from "next/server";
 
 /* ─── /api/subscribe ──────────────────────────────────────────────────
-   Server-side proxy to Kit's v4 Forms API. Subscribes the visitor to
-   the RENACER GUIDE form; the form's Auto-confirm setting in Kit is
-   ON, so the Incentive Email (with the RENACER PDF link) is sent to
-   the subscriber immediately.
+   Server-side proxy that adds a visitor to the RENACER GUIDE form in
+   Kit. Subscribing the visitor to that specific form is what triggers
+   Kit's Incentive Email (with the RENACER PDF) for delivery.
 
-   Discovery notes (the path that worked):
-   1. v3 Legacy API was deprecated — endpoints silently rejected
-      Dr. Gissele's v3 key.
-   2. v4 Bearer auth returns 401 "The access token is invalid" for
-      personal-use API keys — Bearer is reserved for OAuth tokens.
-   3. v4 X-Kit-Api-Key header is the correct auth scheme.
-   4. The "form ID" in v4 is NOT the public UID (672196ab87) used in
-      the embed code; v4 uses the internal numeric ID. Hitting
-      GET /v4/forms with X-Kit-Api-Key revealed the right one:
-      id 9523787, name "RENACER GUIDE form", uid 672196ab87.
+   Kit v4 API requires two calls:
+     1. POST /v4/subscribers · creates the subscriber globally
+        (idempotent — returns the existing record if the email is
+        already on file).
+     2. POST /v4/forms/{form_id}/subscribers · adds the subscriber to
+        the RENACER form, which fires the form's auto-confirm and
+        Incentive Email.
 
-   Endpoint: POST https://api.kit.com/v4/forms/9523787/subscribers
-   Auth:     X-Kit-Api-Key: kit_xxx
-   Body:     { "email_address": "..." }
-   Success:  201 Created with { "subscriber": {...} }
+   If step 2 is called for an email that doesn't yet exist as a
+   subscriber, Kit returns 404. That's why both calls are needed.
+
+   This was confirmed through three rounds of API probing on
+   2026-06-06. The working body shape for both endpoints is just
+   `{ "email_address": "..." }`. Auth is `X-Kit-Api-Key` header.
+   Bearer auth is rejected with "The access token is invalid" by
+   Kit's v4 API for personal-use API keys.
    ─────────────────────────────────────────────────────────────────── */
 
 const KIT_API_KEY =
   process.env.KIT_API_KEY || "kit_330ba495baf2303d1e31f07832d51467";
-const KIT_FORM_ID = 9523787;
-const KIT_ENDPOINT = `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`;
+const KIT_FORM_ID = 9523787; // internal numeric ID for "RENACER GUIDE form"
+
+const SUBSCRIBERS_ENDPOINT = "https://api.kit.com/v4/subscribers";
+const FORM_SUBSCRIBE_ENDPOINT = `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`;
+
+const KIT_HEADERS = {
+  "Content-Type": "application/json",
+  Accept: "application/json",
+  "X-Kit-Api-Key": KIT_API_KEY,
+};
 
 export const runtime = "edge";
 
@@ -45,31 +53,37 @@ export async function POST(request: Request) {
       );
     }
 
-    const kitRes = await fetch(KIT_ENDPOINT, {
+    // Step 1 · ensure the subscriber exists in Kit globally.
+    // Idempotent: returns the existing subscriber if already present.
+    await fetch(SUBSCRIBERS_ENDPOINT, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "X-Kit-Api-Key": KIT_API_KEY,
-      },
+      headers: KIT_HEADERS,
+      body: JSON.stringify({ email_address: email }),
+    }).catch(() => null);
+
+    // Step 2 · add the subscriber to the RENACER form. This is what
+    // triggers Kit's Incentive Email containing the RENACER PDF.
+    const formRes = await fetch(FORM_SUBSCRIBE_ENDPOINT, {
+      method: "POST",
+      headers: KIT_HEADERS,
       body: JSON.stringify({ email_address: email }),
     });
 
-    const data = (await kitRes.json().catch(() => null)) as {
-      subscriber?: { id?: number };
+    const formData = (await formRes.json().catch(() => null)) as {
+      subscriber?: { id?: number; added_at?: string };
       errors?: string[];
     } | null;
 
-    if (kitRes.ok && data?.subscriber) {
+    if (formRes.ok && formData?.subscriber?.id) {
       return NextResponse.json({ ok: true });
     }
 
     return NextResponse.json(
       {
         ok: false,
-        error: "kit_rejected",
-        status: kitRes.status,
-        detail: data,
+        error: "form_subscribe_failed",
+        status: formRes.status,
+        detail: formData,
       },
       { status: 502 }
     );
@@ -85,10 +99,9 @@ export async function POST(request: Request) {
   }
 }
 
-/* GET diagnostic · try several Kit v4 endpoint shapes to find which
-   one actually accepts a form subscription, since /v4/forms/{id}/
-   subscribers returns 404 even with the correct numeric form ID and
-   working X-Kit-Api-Key auth. */
+/* GET diagnostic kept minimal: hits the live flow with a test
+   email and returns the result so we can verify the route is
+   healthy at any time. Visit /api/subscribe?test=1. */
 export async function GET(request: Request) {
   const url = new URL(request.url);
   if (url.searchParams.get("test") !== "1") {
@@ -100,129 +113,24 @@ export async function GET(request: Request) {
 
   const testEmail = `amigo+test${Date.now()}@drgisseledonovan.com`;
 
-  type Probe = {
-    label: string;
-    method: string;
-    url: string;
-    body: unknown;
-  };
+  const createRes = await fetch(SUBSCRIBERS_ENDPOINT, {
+    method: "POST",
+    headers: KIT_HEADERS,
+    body: JSON.stringify({ email_address: testEmail }),
+  });
+  const createBody = await createRes.json().catch(() => null);
 
-  /* Round 3 · The endpoint /v4/forms/{id}/subscribers DOES exist and
-     accepts our form ID. It rejected our { subscriber_id } body with
-     422 "either subscriber id or email_address required". So the
-     field name we used isn't what Kit expects. Try every plausible
-     shape until one returns 200/201. */
-
-  // Pre-step · create a subscriber so we have an id we can reference.
-  let createdSubscriberId: number | null = null;
-  try {
-    const r = await fetch("https://api.kit.com/v4/subscribers", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "X-Kit-Api-Key": KIT_API_KEY,
-      },
-      body: JSON.stringify({ email_address: testEmail }),
-    });
-    const j = (await r.json().catch(() => null)) as {
-      subscriber?: { id?: number };
-    } | null;
-    if (j?.subscriber?.id) {
-      createdSubscriberId = j.subscriber.id;
-    }
-  } catch {
-    // ignore
-  }
-
-  const formUrl = `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`;
-  const probes: Probe[] = [
-    {
-      label: "POST forms/{id}/subscribers · { email_address }",
-      method: "POST",
-      url: formUrl,
-      body: { email_address: testEmail },
-    },
-    {
-      label: "POST forms/{id}/subscribers · { subscriber_id: number }",
-      method: "POST",
-      url: formUrl,
-      body: { subscriber_id: createdSubscriberId },
-    },
-    {
-      label: "POST forms/{id}/subscribers · { subscriber_id: string }",
-      method: "POST",
-      url: formUrl,
-      body: { subscriber_id: String(createdSubscriberId ?? "") },
-    },
-    {
-      label: "POST forms/{id}/subscribers · { id }",
-      method: "POST",
-      url: formUrl,
-      body: { id: createdSubscriberId },
-    },
-    {
-      label: "POST forms/{id}/subscribers · { subscriber: { id } }",
-      method: "POST",
-      url: formUrl,
-      body: { subscriber: { id: createdSubscriberId } },
-    },
-    {
-      label: "POST forms/{id}/subscribers · { subscriber: { email_address } }",
-      method: "POST",
-      url: formUrl,
-      body: { subscriber: { email_address: testEmail } },
-    },
-    {
-      label: "POST forms/{id}/subscribers · { subscriber_ids: [id] }",
-      method: "POST",
-      url: formUrl,
-      body: { subscriber_ids: [createdSubscriberId] },
-    },
-    {
-      label: "POST forms/{id}/subscribers · { email_addresses: [email] }",
-      method: "POST",
-      url: formUrl,
-      body: { email_addresses: [testEmail] },
-    },
-  ];
-
-  const results: Array<{
-    label: string;
-    status: number;
-    body: unknown;
-  }> = [];
-
-  for (const probe of probes) {
-    try {
-      const r = await fetch(probe.url, {
-        method: probe.method,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "X-Kit-Api-Key": KIT_API_KEY,
-        },
-        body: JSON.stringify(probe.body),
-      });
-      const respBody = await r.json().catch(() => null);
-      results.push({
-        label: probe.label,
-        status: r.status,
-        body: respBody,
-      });
-    } catch (e) {
-      results.push({
-        label: probe.label,
-        status: 0,
-        body: { error: e instanceof Error ? e.message : String(e) },
-      });
-    }
-  }
+  const formRes = await fetch(FORM_SUBSCRIBE_ENDPOINT, {
+    method: "POST",
+    headers: KIT_HEADERS,
+    body: JSON.stringify({ email_address: testEmail }),
+  });
+  const formBody = await formRes.json().catch(() => null);
 
   return NextResponse.json({
     note: "diagnostic only — visit ?test=1",
     testEmail,
-    createdSubscriberId,
-    results,
+    step1_create: { status: createRes.status, body: createBody },
+    step2_form: { status: formRes.status, body: formBody },
   });
 }
