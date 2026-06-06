@@ -107,38 +107,56 @@ export async function GET(request: Request) {
     body: unknown;
   };
 
+  /* Round 2 of diagnostics. Already confirmed:
+     - POST /v4/subscribers creates the subscriber (status 201)
+     - POST /v4/forms/{id}/subscribers with email body returns 404
+     The form's Incentive Email only fires for subscribers added
+     to the form, so we still need the right "add subscriber to
+     form" call. Probably wants the existing subscriber_id, not
+     the email. This round tries both shapes after the create. */
   const probes: Probe[] = [
     {
-      label: "POST /v4/forms/{numericId}/subscribers",
+      label: "POST /v4/forms/{numericId}/subscribers with subscriber_id",
       method: "POST",
       url: `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`,
+      body: { subscriber_id: "PLACEHOLDER_FILLED_AT_RUNTIME" },
+    },
+    {
+      label: "POST app.convertkit.com legacy public subscribe (uid)",
+      method: "POST",
+      url: `https://app.convertkit.com/forms/672196ab87/subscriptions`,
       body: { email_address: testEmail },
     },
     {
-      label: "POST /v4/forms/{uid}/subscribers",
+      label: "POST dr-gissele-donovan.kit.com/{uid}/subscribe (hosted)",
       method: "POST",
-      url: `https://api.kit.com/v4/forms/672196ab87/subscribers`,
+      url: `https://dr-gissele-donovan.kit.com/672196ab87/subscribe`,
       body: { email_address: testEmail },
-    },
-    {
-      label: "POST /v4/forms/{numericId}/subscribe (singular)",
-      method: "POST",
-      url: `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribe`,
-      body: { email_address: testEmail },
-    },
-    {
-      label: "POST /v4/subscribers (general create)",
-      method: "POST",
-      url: `https://api.kit.com/v4/subscribers`,
-      body: { email_address: testEmail },
-    },
-    {
-      label: "POST /v4/subscribers (with form_id in body)",
-      method: "POST",
-      url: `https://api.kit.com/v4/subscribers`,
-      body: { email_address: testEmail, form_id: KIT_FORM_ID },
     },
   ];
+
+  // Pre-step · create a subscriber so we have an id for probe 1
+  let createdSubscriberId: number | null = null;
+  try {
+    const r = await fetch("https://api.kit.com/v4/subscribers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "X-Kit-Api-Key": KIT_API_KEY,
+      },
+      body: JSON.stringify({ email_address: testEmail }),
+    });
+    const j = (await r.json().catch(() => null)) as {
+      subscriber?: { id?: number };
+    } | null;
+    if (j?.subscriber?.id) {
+      createdSubscriberId = j.subscriber.id;
+      probes[0].body = { subscriber_id: createdSubscriberId };
+    }
+  } catch {
+    // ignore
+  }
 
   const results: Array<{
     label: string;
@@ -175,6 +193,7 @@ export async function GET(request: Request) {
   return NextResponse.json({
     note: "diagnostic only — visit ?test=1",
     testEmail,
+    createdSubscriberId,
     results,
   });
 }
