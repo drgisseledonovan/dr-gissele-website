@@ -107,35 +107,13 @@ export async function GET(request: Request) {
     body: unknown;
   };
 
-  /* Round 2 of diagnostics. Already confirmed:
-     - POST /v4/subscribers creates the subscriber (status 201)
-     - POST /v4/forms/{id}/subscribers with email body returns 404
-     The form's Incentive Email only fires for subscribers added
-     to the form, so we still need the right "add subscriber to
-     form" call. Probably wants the existing subscriber_id, not
-     the email. This round tries both shapes after the create. */
-  const probes: Probe[] = [
-    {
-      label: "POST /v4/forms/{numericId}/subscribers with subscriber_id",
-      method: "POST",
-      url: `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`,
-      body: { subscriber_id: "PLACEHOLDER_FILLED_AT_RUNTIME" },
-    },
-    {
-      label: "POST app.convertkit.com legacy public subscribe (uid)",
-      method: "POST",
-      url: `https://app.convertkit.com/forms/672196ab87/subscriptions`,
-      body: { email_address: testEmail },
-    },
-    {
-      label: "POST dr-gissele-donovan.kit.com/{uid}/subscribe (hosted)",
-      method: "POST",
-      url: `https://dr-gissele-donovan.kit.com/672196ab87/subscribe`,
-      body: { email_address: testEmail },
-    },
-  ];
+  /* Round 3 · The endpoint /v4/forms/{id}/subscribers DOES exist and
+     accepts our form ID. It rejected our { subscriber_id } body with
+     422 "either subscriber id or email_address required". So the
+     field name we used isn't what Kit expects. Try every plausible
+     shape until one returns 200/201. */
 
-  // Pre-step · create a subscriber so we have an id for probe 1
+  // Pre-step · create a subscriber so we have an id we can reference.
   let createdSubscriberId: number | null = null;
   try {
     const r = await fetch("https://api.kit.com/v4/subscribers", {
@@ -152,11 +130,62 @@ export async function GET(request: Request) {
     } | null;
     if (j?.subscriber?.id) {
       createdSubscriberId = j.subscriber.id;
-      probes[0].body = { subscriber_id: createdSubscriberId };
     }
   } catch {
     // ignore
   }
+
+  const formUrl = `https://api.kit.com/v4/forms/${KIT_FORM_ID}/subscribers`;
+  const probes: Probe[] = [
+    {
+      label: "POST forms/{id}/subscribers · { email_address }",
+      method: "POST",
+      url: formUrl,
+      body: { email_address: testEmail },
+    },
+    {
+      label: "POST forms/{id}/subscribers · { subscriber_id: number }",
+      method: "POST",
+      url: formUrl,
+      body: { subscriber_id: createdSubscriberId },
+    },
+    {
+      label: "POST forms/{id}/subscribers · { subscriber_id: string }",
+      method: "POST",
+      url: formUrl,
+      body: { subscriber_id: String(createdSubscriberId ?? "") },
+    },
+    {
+      label: "POST forms/{id}/subscribers · { id }",
+      method: "POST",
+      url: formUrl,
+      body: { id: createdSubscriberId },
+    },
+    {
+      label: "POST forms/{id}/subscribers · { subscriber: { id } }",
+      method: "POST",
+      url: formUrl,
+      body: { subscriber: { id: createdSubscriberId } },
+    },
+    {
+      label: "POST forms/{id}/subscribers · { subscriber: { email_address } }",
+      method: "POST",
+      url: formUrl,
+      body: { subscriber: { email_address: testEmail } },
+    },
+    {
+      label: "POST forms/{id}/subscribers · { subscriber_ids: [id] }",
+      method: "POST",
+      url: formUrl,
+      body: { subscriber_ids: [createdSubscriberId] },
+    },
+    {
+      label: "POST forms/{id}/subscribers · { email_addresses: [email] }",
+      method: "POST",
+      url: formUrl,
+      body: { email_addresses: [testEmail] },
+    },
+  ];
 
   const results: Array<{
     label: string;
