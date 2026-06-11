@@ -11,11 +11,14 @@ type Params = Promise<{ locale: string }>;
 
 /* ─── Skool checkout URLs ──────────────────────────────────────────
    The two tiers live in Dr. Gissele's Skool community "Unsinkable
-   Minds". Skool's checkout flow runs on the community's /about page
-   where the plans are presented and the visitor picks Standard
-   (Despierta) or Premium (Expansión) with monthly/annual billing toggle.
+   Minds". Skool's checkout flow runs on the community's /plans page
+   where the three tiers (Standard free, Premium Despierta, VIP
+   Expansión) are presented side-by-side with the JOIN buttons.
+   Sending visitors directly to /plans skips the community discovery
+   step and lands them on the conversion screen with monthly/annual
+   billing toggle ready.
    ──────────────────────────────────────────────────────────────── */
-const SKOOL_COMMUNITY = "https://www.skool.com/unsinkableminds";
+const SKOOL_PLANS = "https://www.skool.com/unsinkableminds/plans";
 
 export async function generateMetadata({
   params,
@@ -61,24 +64,26 @@ const MODULES = [
   { n: "XII", title: "Magnificando tu Potencial",           tagline: "Plan de 30 días. Integración total." },
 ];
 
+/* Tier benefits · Synced with the final architecture set up in Skool
+   (June 2026). Keep these in sync with the Skool checkmarks on
+   skool.com/unsinkableminds/plans so the sales page and the Skool
+   checkout tell the same story. */
 const DESPIERTA_BENEFITS = [
-  "Acceso al curso completo Despierta Tu Poder · 12 módulos",
-  "Workbook editorial · 36 páginas para acompañar cada módulo",
-  "Comunidad Unsinkable Minds activa",
-  "Plan de estudio auto-paced (a tu ritmo, con drip release de 3 días entre módulos)",
-  "App móvil para acceso 24/7",
+  "DESPIERTA · Acceso completo a los 12 módulos",
+  "Acceso al programa desde la app móvil de Skool",
+  "Workbook PDF · Guía editorial luxury descargable",
+  "Acceso a todos los eventos en línea y presenciales",
+  "Biblioteca de Códigos Exclusivos · Recursos descargables",
+  "Certificado al completar Despierta Tu Poder",
 ];
 
 const EXPANSION_BENEFITS = [
-  "Todo lo de Despierta +",
-  "Canal privado Expansión · solo miembros premium",
-  "Sesión grupal mensual EN VIVO con Dra. Gissele",
-  "Q&A directo con Dra. Gissele cada mes",
-  "Acceso a TODOS los canales: Perlas de Sabiduría · Hackea tu Mente · Bóveda de Recursos",
-  "Calendario completo de eventos en vivo",
-  "Vision Board anual digital",
-  "Acceso prioritario y gratis a futuros cursos",
-  "Networking con miembros premium en sesiones cerradas",
+  "EXPANSIÓN · Todo de Despierta + privilegios VIP",
+  "Mastermind + Q&A en vivo mensual con Dra. Gissele",
+  "Acceso PRIMORDIAL a eventos presenciales y en línea",
+  "Camiseta + Gorra Unsinkable Minds (solo plan anual)",
+  "Libro firmado de Dra. Gissele (solo plan anual)",
+  "1 llamada estratégica 1:1 al ingresar",
 ];
 
 const FAQ = [
@@ -566,7 +571,7 @@ export default async function DespiertaPage({ params }: { params: Params }) {
                     Despierta
                   </h3>
                   <p className="mt-2 text-black/60 italic">
-                    Acceso al curso + comunidad básica.
+                    El programa completo. 12 módulos. App. Eventos.
                   </p>
                 </div>
 
@@ -605,7 +610,7 @@ export default async function DespiertaPage({ params }: { params: Params }) {
                 </ul>
 
                 <a
-                  href={SKOOL_COMMUNITY}
+                  href={SKOOL_PLANS}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group block w-full text-center border border-burgundy text-burgundy hover:bg-burgundy hover:text-ivory transition-colors duration-500 py-5 eyebrow"
@@ -653,7 +658,7 @@ export default async function DespiertaPage({ params }: { params: Params }) {
                     Expansión
                   </h3>
                   <p className="mt-2 text-ivory/70 italic">
-                    Todo + sesiones en vivo + Inner Circle.
+                    Todo + masterclasses en vivo + acceso VIP.
                   </p>
                 </div>
 
@@ -692,7 +697,7 @@ export default async function DespiertaPage({ params }: { params: Params }) {
                 </ul>
 
                 <a
-                  href={SKOOL_COMMUNITY}
+                  href={SKOOL_PLANS}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group block w-full text-center bg-gold text-burgundy hover:bg-ivory transition-colors duration-500 py-5 eyebrow"
@@ -892,7 +897,7 @@ export default async function DespiertaPage({ params }: { params: Params }) {
           <Reveal delay={0.15}>
             <div className="mt-14 flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
               <a
-                href={SKOOL_COMMUNITY}
+                href={SKOOL_PLANS}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 group inline-flex items-center justify-center gap-3 border border-ivory text-ivory hover:bg-ivory hover:text-burgundy transition-colors duration-500 py-5 px-6 eyebrow"
@@ -907,7 +912,7 @@ export default async function DespiertaPage({ params }: { params: Params }) {
                 </span>
               </a>
               <a
-                href={SKOOL_COMMUNITY}
+                href={SKOOL_PLANS}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 group inline-flex items-center justify-center gap-3 bg-gold text-burgundy hover:bg-ivory transition-colors duration-500 py-5 px-6 eyebrow"
