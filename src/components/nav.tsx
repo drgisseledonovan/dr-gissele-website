@@ -38,12 +38,19 @@ export function Nav({ locale, dict }: NavProps) {
     pathname === `/${locale}/` ||
     pathname === "/";
 
+  /* Nav simplified per Dr. Gissele's direction (see CLAUDE.md):
+     since Despierta Tu Poder is the only program currently being
+     offered, the "Programas" overview tab + "Aplicar →" button were
+     both redundant with the new /despierta sales page. When she
+     launches additional programs (mentorship 1:1, masterclasses)
+     we rebuild /programs as an overview hub. Reflexiones stays
+     because it serves a DIFFERENT purpose (SEO + authority via
+     essays), not selling. */
   const NAV_LINKS = [
     { href: localePath(locale, "/about"), label: dict.about },
     { href: localePath(locale, "/unsinkable-minds"), label: dict.unsinkableMinds },
     { href: localePath(locale, "/speaking"), label: dict.speaking },
     { href: localePath(locale, "/despierta"), label: "Despierta" },
-    { href: localePath(locale, "/programs"), label: dict.programs },
     { href: localePath(locale, "/insights"), label: dict.insights },
   ];
 
@@ -108,12 +115,6 @@ export function Nav({ locale, dict }: NavProps) {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href={localePath(locale, "/despierta")}
-              className="eyebrow !text-[10.5px] text-burgundy"
-            >
-              {dict.apply}
-            </Link>
 
             {/* Language switcher */}
             <Link
@@ -221,13 +222,6 @@ export function Nav({ locale, dict }: NavProps) {
             </nav>
 
             <div className="px-6 pb-10 flex flex-col gap-4">
-              <Link
-                href={localePath(locale, "/despierta")}
-                onClick={() => setOpen(false)}
-                className="block w-full text-center bg-burgundy text-ivory py-5 tracking-[0.22em] uppercase text-xs"
-              >
-                {dict.apply.replace("→", "").trim()}
-              </Link>
               <p className="eyebrow text-center opacity-50">{dict.tagline}</p>
             </div>
           </motion.div>
