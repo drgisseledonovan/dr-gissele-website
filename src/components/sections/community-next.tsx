@@ -1,19 +1,21 @@
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { CTA } from "@/components/cta";
-import { LINKS } from "@/lib/site";
 import { COMMUNITY_GROUP } from "@/lib/media";
-import type { Dictionary } from "@/lib/i18n";
+import { localePath, type Dictionary, type Locale } from "@/lib/i18n";
 
 /* Community / Join the Next — the emotional invitation.
    Full-bleed cohort group photo, dark cinematic overlay,
-   centered editorial copy + primary CTA wired to Stan Store. */
+   centered editorial copy + primary CTA pointing to the /despierta
+   sales page (the in-room Experience lives on Skool, but visitors
+   pass through the editorial sales page first for the full pitch). */
 
 type CommunityNextProps = {
+  locale: Locale;
   dict: Dictionary["communityNext"];
 };
 
-export function CommunityNext({ dict }: CommunityNextProps) {
+export function CommunityNext({ locale, dict }: CommunityNextProps) {
   return (
     <section className="relative bg-black text-ivory overflow-hidden">
       {/* Full-bleed photograph */}
@@ -90,7 +92,7 @@ export function CommunityNext({ dict }: CommunityNextProps) {
             <Reveal delay={0.15}>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
                 <CTA
-                  href={LINKS.mentorshipApplication}
+                  href={localePath(locale, "/despierta")}
                   className="inline-block border border-gold/80 text-gold hover:bg-gold hover:text-black transition-colors duration-500 px-10 sm:px-14 py-5 eyebrow"
                 >
                   {dict.cta}

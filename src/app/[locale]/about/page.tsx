@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { CTA } from "@/components/cta";
 import {
-  LINKS,
   SITE,
   ACADEMIC_CREDENTIALS,
   TRAINING_LINEAGE,
@@ -101,7 +100,7 @@ export default async function AboutPage({ params }: { params: Params }) {
                     {t.cta1}
                   </CTA>
                   <CTA
-                    href={LINKS.mentorshipApplication}
+                    href={localePath(locale, "/despierta")}
                     className="cta-line text-black/70 hover:text-black"
                   >
                     {t.cta2}
@@ -328,7 +327,7 @@ export default async function AboutPage({ params }: { params: Params }) {
                 {t.closing.cta1}
               </CTA>
               <CTA
-                href={LINKS.mentorshipApplication}
+                href={localePath(locale, "/despierta")}
                 className="cta-line text-black/70 hover:text-black"
               >
                 {t.closing.cta2}

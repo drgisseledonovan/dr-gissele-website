@@ -1,15 +1,15 @@
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { CTA } from "@/components/cta";
-import { LINKS } from "@/lib/site";
 import { MOVEMENT_MENTORSHIP, COHORT_GALLERY } from "@/lib/media";
-import type { Dictionary } from "@/lib/i18n";
+import { localePath, type Dictionary, type Locale } from "@/lib/i18n";
 
 type DespiertaProps = {
+  locale: Locale;
   dict: Dictionary["despierta"];
 };
 
-export function Despierta({ dict }: DespiertaProps) {
+export function Despierta({ locale, dict }: DespiertaProps) {
   return (
     <section className="bg-beige py-20 lg:py-32 overflow-x-clip">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
@@ -68,7 +68,7 @@ export function Despierta({ dict }: DespiertaProps) {
 
             <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
               <CTA
-                href={LINKS.mentorshipApplication}
+                href={localePath(locale, "/despierta")}
                 className="cta-line text-burgundy"
               >
                 {dict.cta}

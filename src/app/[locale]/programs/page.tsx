@@ -243,7 +243,7 @@ export default async function ProgramsPage({ params }: { params: Params }) {
                   </dl>
                   <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
                     <CTA
-                      href={LINKS.mentorshipApplication}
+                      href={localePath(locale, "/despierta")}
                       className="cta-line text-burgundy"
                     >
                       {t.mentorship.cohortCta}

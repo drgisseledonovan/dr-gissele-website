@@ -616,22 +616,8 @@ export const en: Dictionary = {
           },
         ],
       },
-      chapterIVConvening: {
-        numeral: "IV",
-        eyebrow: "The Convening",
-        titleSerif: "Despierta",
-        titleScript: "Tu Poder.",
-        body:
-          "The flagship Experience and the in-room expression of the movement. A high-touch program of three transformations: paradigm, power, mastery. For those called to become the most powerful version of themselves.",
-        spirit:
-          "Spirit-led. Faith-grounded. God leads those willing to be led.",
-        cta: "Apply for the Next Experience",
-        note: "Application only.",
-        photoCaption: "Inner Circle · in the room",
-        photoRight: "Limited Seats",
-      },
       chapterVRoad: {
-        numeral: "V",
+        numeral: "IV",
         eyebrow: "On the Road",
         photoCaption: "The movement, in the rooms it was made for.",
         photoRight: "Live · 2026",
@@ -639,6 +625,18 @@ export const en: Dictionary = {
       closingQuote: {
         quote: "We are not building a brand.\nWe are building each other.",
         author: "Dr. Gissele Donovan",
+      },
+      joinMovement: {
+        eyebrow: "Join the Movement",
+        titleSerif: "The doors of the",
+        titleScript: "movement are open.",
+        body:
+          "The free Unsinkable Minds community is the public home of the movement. A space where those who refuse to sink walk alongside each other, share codes, and rise into their next level together.",
+        note: "Free entry. Spirit of honor. A shared commitment to your own transformation and the transformation of others.",
+        cta: "Enter the Movement",
+        tag: "FREE · IN COMMUNITY",
+        whatsappEyebrow: "A closer invitation",
+        whatsappCta: "Join the Exclusive Community Channel",
       },
     },
 

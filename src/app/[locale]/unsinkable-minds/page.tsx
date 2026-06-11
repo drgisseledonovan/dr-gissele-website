@@ -3,8 +3,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { CTA } from "@/components/cta";
-import { LINKS, SITE } from "@/lib/site";
-import { MOVEMENT_MENTORSHIP, SPEAKING_PRIMARY } from "@/lib/media";
+import { MOVEMENT_COMMUNITY, MOVEMENT_SOCIAL, SITE } from "@/lib/site";
+import { SPEAKING_PRIMARY } from "@/lib/media";
 import { Newsletter } from "@/components/sections/newsletter";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 
@@ -234,92 +234,10 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
         </div>
       </section>
 
-      {/* IV · Convening */}
-      <section className="bg-beige py-20 lg:py-32 overflow-x-clip">
-        <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-16 items-center">
-            <Reveal className="lg:col-span-7">
-              <div className="flex items-center gap-4 mb-8">
-                <span
-                  className="text-gold tracking-[0.22em] text-[13px]"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
-                  {t.chapterIVConvening.numeral}
-                </span>
-                <span aria-hidden className="block w-10 h-px bg-gold/60" />
-                <span className="eyebrow text-burgundy">{t.chapterIVConvening.eyebrow}</span>
-              </div>
-
-              <h2
-                className="text-[clamp(36px,5vw,68px)] leading-[1.04] tracking-[-0.018em] mb-2 font-light"
-                style={{ fontFamily: "var(--font-serif)" }}
-              >
-                {t.chapterIVConvening.titleSerif}
-              </h2>
-              <h2
-                className="text-[clamp(40px,6vw,80px)] leading-[1] text-burgundy mb-10"
-                style={{ fontFamily: "var(--font-script)" }}
-              >
-                {t.chapterIVConvening.titleScript}
-              </h2>
-
-              <p className="text-lg leading-[1.85] text-black/75 font-light max-w-xl mb-6">
-                {t.chapterIVConvening.body}
-              </p>
-
-              <p className="font-serif italic text-black/60 text-base lg:text-lg max-w-xl mb-10">
-                {t.chapterIVConvening.spirit}
-              </p>
-
-              <div className="flex flex-wrap items-center gap-x-10 gap-y-3">
-                <CTA href={LINKS.mentorshipApplication} className="cta-line text-burgundy">
-                  {t.chapterIVConvening.cta}
-                </CTA>
-                <span className="eyebrow text-black/45">{t.chapterIVConvening.note}</span>
-              </div>
-            </Reveal>
-
-            <Reveal delay={0.1} className="lg:col-span-5">
-              <figure className="relative aspect-[4/5] w-full overflow-hidden">
-                <Image
-                  src={MOVEMENT_MENTORSHIP.src}
-                  alt={MOVEMENT_MENTORSHIP.alt}
-                  fill
-                  sizes="(min-width: 1024px) 500px, 100vw"
-                  style={{
-                    objectPosition:
-                      MOVEMENT_MENTORSHIP.objectPosition ?? "50% 40%",
-                  }}
-                  className="object-cover [filter:contrast(1.04)_saturate(0.98)]"
-                />
-                <div
-                  aria-hidden
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(180deg, rgba(11,11,11,0) 50%, rgba(11,11,11,0.45) 100%)",
-                  }}
-                />
-                <div aria-hidden className="absolute inset-3 border border-ivory/35 pointer-events-none" />
-                <div aria-hidden className="absolute -inset-px border border-black/10 pointer-events-none" />
-                <figcaption className="absolute bottom-5 left-5 right-5 flex justify-between items-end text-ivory/90">
-                  <span className="font-serif italic text-[13px] leading-tight">
-                    {t.chapterIVConvening.photoCaption}
-                  </span>
-                  <span
-                    className="eyebrow text-ivory/65"
-                    style={{ fontSize: "9px", letterSpacing: "0.32em" }}
-                  >
-                    {t.chapterIVConvening.photoRight}
-                  </span>
-                </figcaption>
-              </figure>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* V · On the Road */}
+      {/* IV · On the Road
+          (Despierta Tu Poder section removed per Dr. Gissele's
+          direction · this page is about the MOVEMENT only. Product
+          lives on /despierta.) */}
       <section className="bg-ivory pb-20 lg:pb-32 pt-20 lg:pt-32">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
@@ -386,6 +304,89 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
               {t.closingQuote.quote}
             </blockquote>
             <div className="mt-8 eyebrow text-black/55">{t.closingQuote.author}</div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Join the Movement — invitation into the free Skool
+          community. The public-facing home of Unsinkable Minds. */}
+      <section className="bg-black text-ivory py-24 lg:py-36 relative overflow-hidden">
+        {/* Subtle gold corner ornaments */}
+        <span
+          aria-hidden
+          className="absolute top-10 left-10 hidden md:block w-16 h-px bg-gold/50"
+        />
+        <span
+          aria-hidden
+          className="absolute top-10 left-10 hidden md:block w-px h-16 bg-gold/50"
+        />
+        <span
+          aria-hidden
+          className="absolute bottom-10 right-10 hidden md:block w-16 h-px bg-gold/50"
+        />
+        <span
+          aria-hidden
+          className="absolute bottom-10 right-10 hidden md:block w-px h-16 bg-gold/50"
+        />
+
+        <div className="mx-auto max-w-3xl px-6 lg:px-12 text-center">
+          <Reveal>
+            <div className="flex items-center justify-center gap-3 text-gold mb-8">
+              <span className="block w-10 h-px bg-current" />
+              <span className="block w-1.5 h-1.5 rounded-full bg-current" />
+              <span className="block w-10 h-px bg-current" />
+            </div>
+            <span className="eyebrow text-gold">
+              {t.joinMovement.eyebrow}
+            </span>
+            <h2
+              className="mt-6 text-[clamp(36px,5vw,68px)] font-light leading-[1.06] tracking-[-0.015em] mb-2"
+              style={{ fontFamily: "var(--font-serif)" }}
+            >
+              {t.joinMovement.titleSerif}
+            </h2>
+            <h2
+              className="text-[clamp(40px,6vw,82px)] leading-[1] text-gold mb-10"
+              style={{ fontFamily: "var(--font-script)" }}
+            >
+              {t.joinMovement.titleScript}
+            </h2>
+            <p className="text-lg lg:text-xl leading-[1.7] text-ivory/80 font-light max-w-xl mx-auto mb-6">
+              {t.joinMovement.body}
+            </p>
+            <p className="font-serif italic text-ivory/55 text-base lg:text-lg max-w-xl mx-auto mb-12">
+              {t.joinMovement.note}
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
+              <CTA
+                href={MOVEMENT_COMMUNITY}
+                className="inline-block border border-gold/80 text-gold hover:bg-gold hover:text-black transition-colors duration-500 px-10 sm:px-14 py-5 eyebrow"
+              >
+                {t.joinMovement.cta}
+              </CTA>
+              <span
+                className="eyebrow text-ivory/50"
+                style={{ letterSpacing: "0.32em" }}
+              >
+                {t.joinMovement.tag}
+              </span>
+            </div>
+
+            {/* Secondary entry · WhatsApp Channel, the low-friction
+                bridge for the Latin American audience. Lives in their
+                pocket; serves as a daily inspiration touchpoint. */}
+            <div className="mt-12 flex flex-col items-center gap-3">
+              <span aria-hidden className="block w-12 h-px bg-gold/35" />
+              <p className="eyebrow text-ivory/55">
+                {t.joinMovement.whatsappEyebrow}
+              </p>
+              <CTA
+                href={MOVEMENT_SOCIAL.whatsapp}
+                className="cta-line text-gold/90 hover:text-gold"
+              >
+                {t.joinMovement.whatsappCta}
+              </CTA>
+            </div>
           </Reveal>
         </div>
       </section>

@@ -645,22 +645,8 @@ export const es: Dictionary = {
           },
         ],
       },
-      chapterIVConvening: {
-        numeral: "IV",
-        eyebrow: "La Convocatoria",
-        titleSerif: "Despierta",
-        titleScript: "Tu Poder.",
-        body:
-          "La experiencia insignia y la expresión presencial del movimiento. Un programa de alto contacto de tres transformaciones: paradigma, poder, maestría. Para quienes son llamados a convertirse en la versión más poderosa de sí mismos.",
-        spirit:
-          "Guiado por el Espíritu. Anclado en la fe. Dios guía a quienes están dispuestos a ser guiados.",
-        cta: "Aplica para la Próxima Experiencia",
-        note: "Solo por aplicación.",
-        photoCaption: "Inner Circle · en la sala",
-        photoRight: "Cupos Limitados",
-      },
       chapterVRoad: {
-        numeral: "V",
+        numeral: "IV",
         eyebrow: "En el Camino",
         photoCaption: "El movimiento, en las salas para las que fue hecho.",
         photoRight: "En Vivo · 2026",
@@ -669,6 +655,18 @@ export const es: Dictionary = {
         quote:
           "No estamos construyendo una marca.\nNos estamos construyendo unas a otras.",
         author: "Dr. Gissele Donovan",
+      },
+      joinMovement: {
+        eyebrow: "Únete al Movimiento",
+        titleSerif: "Las puertas del",
+        titleScript: "movimiento están abiertas.",
+        body:
+          "La comunidad gratuita de Unsinkable Minds es la casa pública del movimiento. Un espacio donde las personas que se rehúsan a hundirse se acompañan, comparten códigos, y caminan juntas hacia su próximo nivel.",
+        note: "Entrada gratuita. Espíritu de honor. Compromiso con la transformación propia y la del otro.",
+        cta: "Entrar al Movimiento",
+        tag: "GRATIS · EN COMUNIDAD",
+        whatsappEyebrow: "Una invitación más cercana",
+        whatsappCta: "Sé parte del Canal Exclusivo de la Comunidad",
       },
     },
 

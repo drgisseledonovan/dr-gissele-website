@@ -389,18 +389,6 @@ export type Dictionary = {
         titleScript: string;
         items: ReadonlyArray<{ numeral: string; title: string; line: string }>;
       };
-      chapterIVConvening: {
-        numeral: string;
-        eyebrow: string;
-        titleSerif: string;
-        titleScript: string;
-        body: string;
-        spirit: string;
-        cta: string;
-        note: string;
-        photoCaption: string;
-        photoRight: string;
-      };
       chapterVRoad: {
         numeral: string;
         eyebrow: string;
@@ -408,6 +396,17 @@ export type Dictionary = {
         photoRight: string;
       };
       closingQuote: { quote: string; author: string };
+      joinMovement: {
+        eyebrow: string;
+        titleSerif: string;
+        titleScript: string;
+        body: string;
+        note: string;
+        cta: string;
+        tag: string;
+        whatsappEyebrow: string;
+        whatsappCta: string;
+      };
     };
     insights: {
       eyebrow: string;

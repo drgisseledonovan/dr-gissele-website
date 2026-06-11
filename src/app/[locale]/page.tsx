@@ -30,8 +30,8 @@ export default async function HomePage({ params }: { params: Params }) {
       <Introduction locale={locale} dict={dict.introduction} />
       <Movement locale={locale} dict={dict.movement} />
       <Podcast dict={dict.podcast} />
-      <Despierta dict={dict.despierta} />
-      <CommunityNext dict={dict.communityNext} />
+      <Despierta locale={locale} dict={dict.despierta} />
+      <CommunityNext locale={locale} dict={dict.communityNext} />
       <Speaking dict={dict.speakingHome} />
       <Library dict={dict.library} />
       <Recognition dict={dict.recognitionHome} honorTitles={dict.honors.titles} />

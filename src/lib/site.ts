@@ -135,13 +135,13 @@ export const STAN_STORE_URL = `https://stan.store/${STAN_HANDLE}`;
    ─────────────────────────────────────────────────────────── */
 
 export const LINKS = {
-  /** Mentorship / cohort application — Despierta Tu Poder. */
-  mentorshipApplication: `${STAN_STORE_URL}/p/despierta-application`,
-
   /** Discovery / consult booking — 1:1 mentorship intake. */
   booking: `${STAN_STORE_URL}/p/discovery-call`,
 
-  /** Storefront — full Stan Store / digital products library. */
+  /** Storefront — Stan Store, now exclusively for the digital
+      Library (ebooks) and the 1:1 mentorship intake. The Despierta
+      Tu Poder program lives on Skool — link via MOVEMENT_COMMUNITY
+      (free tier) or the /despierta sales page for the paid tiers. */
   stanStore: STAN_STORE_URL,
 
   /** Speaking inquiry — anchors visitor into /speaking. */
@@ -151,6 +151,12 @@ export const LINKS = {
       component; this link drops visitors at it). */
   newsletter: "/#newsletter",
 } as const;
+
+/** The free Skool community — the public-facing home of the
+    Unsinkable Minds Movement. Visitors join for free; the paid
+    tiers (Despierta Tu Poder, Expansión) live inside the same
+    Skool community as an upgrade path. */
+export const MOVEMENT_COMMUNITY = "https://www.skool.com/unsinkableminds";
 
 /* ─── DIGITAL PRODUCTS ───────────────────────────────────────
    Featured products shown on the /programs Digital Products
@@ -231,6 +237,11 @@ export const MOVEMENT_SOCIAL = {
   tiktok: "https://www.tiktok.com/@unsinkableminds",
   youtube: "https://www.youtube.com/@unsinkableminds",
   facebook: "https://www.facebook.com/unsinkableminds",
+  /** WhatsApp Channel — broadcast-only, the movement's voice
+      delivered to the pocket of Latin American audiences. The
+      third layer of the architecture: Skool free community +
+      WhatsApp Channel (broadcast) + Skool paid tiers. */
+  whatsapp: "https://whatsapp.com/channel/0029VbCVRaILSmbdGxhPee1g",
 } as const;
 
 export const MOVEMENT_HANDLE = "@unsinkableminds";

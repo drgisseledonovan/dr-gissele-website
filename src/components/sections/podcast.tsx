@@ -25,6 +25,7 @@ const MOVEMENT_PLATFORMS: ReadonlyArray<{
   { key: "tiktok", label: "TikTok" },
   { key: "youtube", label: "YouTube" },
   { key: "facebook", label: "Facebook" },
+  { key: "whatsapp", label: "WhatsApp" },
 ];
 
 export function Podcast({ dict }: PodcastProps) {
