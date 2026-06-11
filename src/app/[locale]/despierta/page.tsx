@@ -12,10 +12,10 @@ type Params = Promise<{ locale: string }>;
 /* ─── Skool checkout URLs ──────────────────────────────────────────
    The two tiers live in Dr. Gissele's Skool community "Unsinkable
    Minds". Skool's checkout flow runs on the community's /about page
-   where the plans are presented and the visitor picks Standard or
-   Premium with monthly/annual billing toggle.
+   where the plans are presented and the visitor picks Standard
+   (Despierta) or Premium (Expansión) with monthly/annual billing toggle.
    ──────────────────────────────────────────────────────────────── */
-const SKOOL_COMMUNITY = "https://www.skool.com/unsinkable-minds";
+const SKOOL_COMMUNITY = "https://www.skool.com/unsinkableminds";
 
 export async function generateMetadata({
   params,

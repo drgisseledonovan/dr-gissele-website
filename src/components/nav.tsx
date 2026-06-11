@@ -42,6 +42,7 @@ export function Nav({ locale, dict }: NavProps) {
     { href: localePath(locale, "/about"), label: dict.about },
     { href: localePath(locale, "/unsinkable-minds"), label: dict.unsinkableMinds },
     { href: localePath(locale, "/speaking"), label: dict.speaking },
+    { href: localePath(locale, "/despierta"), label: "Despierta" },
     { href: localePath(locale, "/programs"), label: dict.programs },
     { href: localePath(locale, "/insights"), label: dict.insights },
   ];
@@ -108,7 +109,7 @@ export function Nav({ locale, dict }: NavProps) {
               </Link>
             ))}
             <Link
-              href={localePath(locale, "/programs")}
+              href={localePath(locale, "/despierta")}
               className="eyebrow !text-[10.5px] text-burgundy"
             >
               {dict.apply}
@@ -221,7 +222,7 @@ export function Nav({ locale, dict }: NavProps) {
 
             <div className="px-6 pb-10 flex flex-col gap-4">
               <Link
-                href={localePath(locale, "/programs")}
+                href={localePath(locale, "/despierta")}
                 onClick={() => setOpen(false)}
                 className="block w-full text-center bg-burgundy text-ivory py-5 tracking-[0.22em] uppercase text-xs"
               >
