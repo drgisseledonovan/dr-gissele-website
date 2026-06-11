@@ -169,48 +169,35 @@ export default async function DespiertaPage({ params }: { params: Params }) {
               </p>
             </Reveal>
 
+            {/* Hero CTA · single editorial scroll anchor. Per
+                Dr. Gissele's brand-coherent strategy: ENDULZAR
+                PRIMERO, PRECIO DESPUÉS. The visitor falls in
+                love with the transformation across the page, then
+                discovers the price after the value has been
+                anchored. Mirrors Marie Forleo / Amy Porterfield
+                / Joe Dispenza sales page patterns. */}
             <Reveal delay={0.15}>
-              <div className="mt-12 flex flex-col sm:flex-row gap-4 max-w-xl">
+              <div className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-4">
                 <a
-                  href={SKOOL_COMMUNITY}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 group relative inline-flex items-center justify-center gap-3 bg-burgundy text-ivory hover:bg-black transition-colors duration-500 py-5 px-6 eyebrow"
+                  href="#pricing"
+                  className="group inline-flex items-center gap-4 bg-burgundy text-ivory hover:bg-black transition-colors duration-500 py-5 px-10 eyebrow"
                   style={{ letterSpacing: "0.22em", fontSize: "11px" }}
                 >
-                  <span>DESPIERTA · $59/MES</span>
+                  <span>VER EL PROGRAMA</span>
                   <span
                     aria-hidden
-                    className="inline-block transition-transform duration-500 group-hover:translate-x-1"
+                    className="inline-block transition-transform duration-500 group-hover:translate-y-0.5"
                   >
-                    →
+                    ↓
                   </span>
                 </a>
-                <a
-                  href={SKOOL_COMMUNITY}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 group relative inline-flex items-center justify-center gap-3 border-2 border-gold bg-gold/10 hover:bg-gold/20 text-black transition-colors duration-500 py-5 px-6 eyebrow"
-                  style={{ letterSpacing: "0.22em", fontSize: "11px" }}
+                <span
+                  className="eyebrow text-black/45"
+                  style={{ fontSize: "9.5px", letterSpacing: "0.32em" }}
                 >
-                  <span>EXPANSIÓN · $97/MES ⭐</span>
-                  <span
-                    aria-hidden
-                    className="inline-block transition-transform duration-500 group-hover:translate-x-1"
-                  >
-                    →
-                  </span>
-                </a>
+                  ACCESO INMEDIATO  ·  APP MÓVIL INCLUIDA
+                </span>
               </div>
-            </Reveal>
-
-            <Reveal delay={0.2}>
-              <p
-                className="eyebrow text-black/45 mt-8"
-                style={{ fontSize: "9.5px", letterSpacing: "0.32em" }}
-              >
-                ACCESO INMEDIATO  ·  CANCELA CUANDO QUIERAS  ·  APP MÓVIL INCLUIDA
-              </p>
             </Reveal>
           </div>
 

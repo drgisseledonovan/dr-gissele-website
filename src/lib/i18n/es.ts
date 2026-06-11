@@ -157,8 +157,8 @@ export const es: Dictionary = {
     spiritLine:
       "Guiado por el Espíritu. Anclado en la fe. Porque Dios guía a quienes están dispuestos a transformarse.",
     pillars: ["Paradigma", "Poder", "Maestría"],
-    cta: "Aplica para la Próxima Experiencia",
-    reviewedNote: "Cupos Limitados  ·  Solo por Aplicación.",
+    cta: "Conoce Despierta Tu Poder",
+    reviewedNote: "Acceso inmediato  ·  App móvil incluida",
     photoCaption: "Inner Circle · en la sala",
     photoCaptionRight: "Espacios Limitados",
     galleryEyebrow: "Momentos",
@@ -172,8 +172,8 @@ export const es: Dictionary = {
     titleScript: "lo que viene.",
     quote:
       "Todo comienza el día que decides convertirte en quien sabes que puedes ser.",
-    cta: "Quiero estar en la próxima",
-    note: "Aplicación privada • Espacios limitados",
+    cta: "Únete al Movimiento",
+    note: "Gratis · Comunidad oficial Unsinkable Minds",
     photoCaption: "Unsinkable Minds • Inner Circle",
   },
 
@@ -806,7 +806,7 @@ export const es: Dictionary = {
         },
         {
           title: "Tus Derechos",
-          body: "Puedes solicitar acceder, corregir o eliminar la información personal que tenemos sobre ti en cualquier momento. Para ejercer estos derechos, escribe a hello@drgisseledonovan.com.",
+          body: "Puedes solicitar acceder, corregir o eliminar la información personal que tenemos sobre ti en cualquier momento. Para ejercer estos derechos, escribe a contact@drgisseledonovan.com.",
         },
         {
           title: "Cambios a Esta Política",
@@ -814,7 +814,7 @@ export const es: Dictionary = {
         },
         {
           title: "Contacto",
-          body: "Las preguntas sobre esta política pueden enviarse a hello@drgisseledonovan.com.",
+          body: "Las preguntas sobre esta política pueden enviarse a contact@drgisseledonovan.com.",
         },
       ],
       returnHome: "Volver al Inicio",
@@ -861,7 +861,7 @@ export const es: Dictionary = {
         },
         {
           title: "Contacto",
-          body: "Las preguntas sobre estos términos pueden enviarse a hello@drgisseledonovan.com.",
+          body: "Las preguntas sobre estos términos pueden enviarse a contact@drgisseledonovan.com.",
         },
       ],
       returnHome: "Volver al Inicio",

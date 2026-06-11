@@ -72,7 +72,7 @@ export function Footer({ locale, dict }: FooterProps) {
           <FooterColumn title={dict.connectTitle}>
             <FooterLink href="https://instagram.com">{dict.links.instagram}</FooterLink>
             <FooterLink href="https://linkedin.com">{dict.links.linkedin}</FooterLink>
-            <FooterLink href="mailto:hello@drgisseledonovan.com">
+            <FooterLink href={`mailto:${SITE.email}`}>
               {dict.links.email}
             </FooterLink>
           </FooterColumn>

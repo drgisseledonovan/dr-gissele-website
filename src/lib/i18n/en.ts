@@ -154,8 +154,8 @@ export const en: Dictionary = {
     spiritLine:
       "Spirit-led. Faith-grounded. Because God guides those willing to transform.",
     pillars: ["Paradigm", "Power", "Mastery"],
-    cta: "Apply for the Next Experience",
-    reviewedNote: "Limited Spaces  ·  By Application Only.",
+    cta: "Discover Despierta Tu Poder",
+    reviewedNote: "Immediate access  ·  Mobile app included",
     photoCaption: "Inner Circle · in the room",
     photoCaptionRight: "Limited Spaces",
     galleryEyebrow: "Moments",
@@ -169,8 +169,8 @@ export const en: Dictionary = {
     titleScript: "what comes next.",
     quote:
       "It all begins the day you decide to become who you know you can be.",
-    cta: "I want to be in the next one",
-    note: "Private application • Limited spaces",
+    cta: "Join the Movement",
+    note: "Free · Official Unsinkable Minds community",
     photoCaption: "Unsinkable Minds • Inner Circle",
   },
 
@@ -776,7 +776,7 @@ export const en: Dictionary = {
         },
         {
           title: "Your Rights",
-          body: "You may request to access, correct, or delete personal information we hold about you at any time. To exercise these rights, email hello@drgisseledonovan.com.",
+          body: "You may request to access, correct, or delete personal information we hold about you at any time. To exercise these rights, email contact@drgisseledonovan.com.",
         },
         {
           title: "Changes to This Policy",
@@ -784,7 +784,7 @@ export const en: Dictionary = {
         },
         {
           title: "Contact",
-          body: "Questions about this policy may be sent to hello@drgisseledonovan.com.",
+          body: "Questions about this policy may be sent to contact@drgisseledonovan.com.",
         },
       ],
       returnHome: "Return Home",
@@ -831,7 +831,7 @@ export const en: Dictionary = {
         },
         {
           title: "Contact",
-          body: "Questions about these terms may be sent to hello@drgisseledonovan.com.",
+          body: "Questions about these terms may be sent to contact@drgisseledonovan.com.",
         },
       ],
       returnHome: "Return Home",

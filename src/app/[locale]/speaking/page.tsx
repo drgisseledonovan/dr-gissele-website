@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { CTA } from "@/components/cta";
 import {
@@ -12,7 +13,7 @@ import {
   type Credential,
 } from "@/lib/site";
 import { SPEAKING_PRIMARY, RECOGNITION_PRIMARY, LOGO_MONOGRAM_DARK } from "@/lib/media";
-import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
+import { getDictionary, isLocale, localePath, type Locale } from "@/lib/i18n";
 
 type Params = Promise<{ locale: string }>;
 
@@ -355,12 +356,16 @@ export default async function SpeakingPage({ params }: { params: Params }) {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-10">
-              <a
-                href={`mailto:${SITE.email}?subject=Speaking%20Inquiry`}
-                className="inline-block border border-gold/80 text-gold hover:bg-gold hover:text-black transition-colors duration-500 px-12 py-5 eyebrow"
+              {/* Primary inquiry CTA · sends visitor to the editorial
+                  /contact form so the request is captured reliably,
+                  not gambled on the visitor having a mail client
+                  configured. */}
+              <Link
+                href={localePath(locale, "/contact")}
+                className="inline-block bg-gold text-black hover:bg-gold/90 transition-colors duration-500 px-12 py-5 eyebrow font-medium"
               >
                 {t.inquireCta}
-              </a>
+              </Link>
               <a
                 href={`mailto:${SITE.email}`}
                 className="cta-line text-ivory/80 hover:text-gold"

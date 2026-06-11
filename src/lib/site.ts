@@ -16,7 +16,7 @@ export const SITE = {
   /** Editorial tagline. */
   tagline: "Transforming Minds · Elevating Destinies",
   /** Public contact email. */
-  email: "hello@drgisseledonovan.com",
+  email: "contact@drgisseledonovan.com",
   /** Press / media contact (can be the same as email). */
   pressEmail: "press@drgisseledonovan.com",
 } as const;
