@@ -46,7 +46,7 @@ export function Newsletter({ dict }: NewsletterProps) {
   return (
     <section
       id="newsletter"
-      className="relative bg-ivory text-black py-14 lg:py-20 overflow-hidden"
+      className="relative bg-ivory text-black py-10 lg:py-14 overflow-hidden"
     >
       <div
         aria-hidden
@@ -65,10 +65,9 @@ export function Newsletter({ dict }: NewsletterProps) {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           {/* Closing brand signature · the full gold script wordmark.
-              The cinematic name treatment that anchors the homepage
-              as a signed editorial piece. Sized to DOMINATE the
-              section as a real editorial autograph. */}
-          <div className="relative w-full max-w-[1100px] h-[280px] sm:h-[400px] lg:h-[480px] mx-auto mb-10">
+              Sized BIG (max 1100px) but with tight height so there's
+              no phantom whitespace inside the box. */}
+          <div className="relative w-full max-w-[1100px] aspect-[1536/1024] mx-auto -my-12 sm:-my-20 lg:-my-28">
             <Image
               src={LOGO_SIGNATURE.src}
               alt={LOGO_SIGNATURE.alt}
@@ -79,7 +78,7 @@ export function Newsletter({ dict }: NewsletterProps) {
             />
           </div>
 
-          <div className="eyebrow rules text-burgundy mb-10 inline-flex">
+          <div className="eyebrow rules text-burgundy mb-6 inline-flex">
             {dict.eyebrow}
           </div>
 
