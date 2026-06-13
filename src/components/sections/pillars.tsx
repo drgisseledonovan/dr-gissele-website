@@ -7,7 +7,7 @@ type PillarsProps = {
 
 export function Pillars({ dict }: PillarsProps) {
   return (
-    <section className="bg-ivory py-20 lg:py-28">
+    <section className="bg-ivory py-14 lg:py-20">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-12">
           {dict.items.map((p, i) => (

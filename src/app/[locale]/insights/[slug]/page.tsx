@@ -98,7 +98,7 @@ export default async function EssayPage({ params }: { params: Params }) {
       <JsonLd data={articleLd} />
 
       {/* Masthead */}
-      <section className="relative bg-ivory pt-[140px] lg:pt-[180px] pb-16 lg:pb-20 overflow-x-clip">
+      <section className="relative bg-ivory pt-[110px] lg:pt-[130px] pb-16 lg:pb-14 overflow-x-clip">
         <div className="mx-auto max-w-[820px] px-6 lg:px-12">
           <Reveal>
             <Link
@@ -156,7 +156,7 @@ export default async function EssayPage({ params }: { params: Params }) {
       </section>
 
       {/* Body or "in preparation" */}
-      <section className="bg-ivory pb-20 lg:pb-28">
+      <section className="bg-ivory pb-14 lg:pb-20">
         <div className="mx-auto max-w-[720px] px-6 lg:px-12">
           {!inPreparation ? (
             <article className="space-y-7 text-[17px] lg:text-[18px] leading-[1.85] text-black/80 font-light">
@@ -214,7 +214,7 @@ export default async function EssayPage({ params }: { params: Params }) {
 
       {/* Next */}
       {next && nextLocalized && (
-        <section className="bg-beige py-20 lg:py-24 border-t border-black/10">
+        <section className="bg-beige py-14 lg:py-16 border-t border-black/10">
           <div className="mx-auto max-w-[820px] px-6 lg:px-12">
             <Reveal>
               <Link
@@ -250,7 +250,7 @@ export default async function EssayPage({ params }: { params: Params }) {
       )}
 
       {/* Closing */}
-      <section className="bg-ivory py-20 lg:py-24 border-t border-black/10">
+      <section className="bg-ivory py-14 lg:py-16 border-t border-black/10">
         <div className="mx-auto max-w-3xl px-6 lg:px-12 text-center">
           <Reveal>
             <p

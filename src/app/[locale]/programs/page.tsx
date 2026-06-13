@@ -59,7 +59,7 @@ export default async function ProgramsPage({ params }: { params: Params }) {
   return (
     <>
       {/* Lede */}
-      <section className="relative bg-ivory pt-[140px] lg:pt-[180px] pb-24 lg:pb-32 overflow-x-clip">
+      <section className="relative bg-ivory pt-[110px] lg:pt-[130px] pb-16 lg:pb-24 overflow-x-clip">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
             <div className="eyebrow rules left text-burgundy mb-10">
@@ -143,7 +143,7 @@ export default async function ProgramsPage({ params }: { params: Params }) {
       </section>
 
       {/* I · Mentorship */}
-      <section id="mentorship" className="bg-ivory py-20 lg:py-28 scroll-mt-24">
+      <section id="mentorship" className="bg-ivory py-14 lg:py-20 scroll-mt-16">
         <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
           <Reveal>
             <div className="flex items-center gap-4 mb-12">
@@ -302,7 +302,7 @@ export default async function ProgramsPage({ params }: { params: Params }) {
       {/* II · Speaking */}
       <section
         id="speaking"
-        className="bg-beige py-20 lg:py-24 border-t border-black/10 scroll-mt-24"
+        className="bg-beige py-14 lg:py-16 border-t border-black/10 scroll-mt-16"
       >
         <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -339,7 +339,7 @@ export default async function ProgramsPage({ params }: { params: Params }) {
       {/* III · Digital Products */}
       <section
         id="digital"
-        className="bg-ivory py-20 lg:py-28 border-t border-black/10 scroll-mt-24"
+        className="bg-ivory py-14 lg:py-20 border-t border-black/10 scroll-mt-16"
       >
         <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
           <Reveal>
@@ -430,7 +430,7 @@ export default async function ProgramsPage({ params }: { params: Params }) {
       {/* IV · Community */}
       <section
         id="community"
-        className="bg-beige py-20 lg:py-28 border-t border-black/10 scroll-mt-24"
+        className="bg-beige py-14 lg:py-20 border-t border-black/10 scroll-mt-16"
       >
         <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-center">
@@ -498,7 +498,7 @@ export default async function ProgramsPage({ params }: { params: Params }) {
       {/* Closing inquire */}
       <section
         id="inquire"
-        className="relative bg-black text-ivory py-20 lg:py-28 overflow-hidden"
+        className="relative bg-black text-ivory py-14 lg:py-20 overflow-hidden"
       >
         <div
           aria-hidden

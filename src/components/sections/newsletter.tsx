@@ -46,7 +46,7 @@ export function Newsletter({ dict }: NewsletterProps) {
   return (
     <section
       id="newsletter"
-      className="relative bg-ivory text-black py-20 lg:py-28 overflow-hidden"
+      className="relative bg-ivory text-black py-14 lg:py-20 overflow-hidden"
     >
       <div
         aria-hidden

@@ -7,10 +7,10 @@ type WitnessProps = {
 
 export function Witness({ dict }: WitnessProps) {
   return (
-    <section className="bg-ivory py-20 lg:py-32">
+    <section className="bg-ivory py-14 lg:py-24">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <Reveal>
-          <div className="text-center mb-20 lg:mb-24">
+          <div className="text-center mb-14 lg:mb-16">
             <div className="eyebrow rules text-burgundy mb-8 inline-flex">
               {dict.eyebrow}
             </div>

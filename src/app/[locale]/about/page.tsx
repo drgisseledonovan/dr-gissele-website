@@ -64,7 +64,7 @@ export default async function AboutPage({ params }: { params: Params }) {
   return (
     <>
       {/* ─── Lede ──────────────────────────────────────────────── */}
-      <section className="relative bg-ivory pt-[140px] lg:pt-[180px] pb-24 lg:pb-32 overflow-x-clip">
+      <section className="relative bg-ivory pt-[110px] lg:pt-[130px] pb-16 lg:pb-24 overflow-x-clip">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-16 lg:gap-20 items-center">
             <div>
@@ -170,7 +170,7 @@ export default async function AboutPage({ params }: { params: Params }) {
       </Chapter>
 
       {/* Origin → Becoming editorial break: crown + Bible + reflection */}
-      <section className="bg-beige pb-20 lg:pb-28">
+      <section className="bg-beige pb-14 lg:pb-20">
         <div className="mx-auto max-w-[820px] px-6 lg:px-12">
           <Reveal>
             <figure className="relative">
@@ -215,7 +215,7 @@ export default async function AboutPage({ params }: { params: Params }) {
       </Chapter>
 
       {/* Doctoral break image */}
-      <section className="bg-ivory py-20 lg:py-28">
+      <section className="bg-ivory py-14 lg:py-20">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
             <figure className="relative aspect-[21/9] w-full overflow-hidden">
@@ -263,7 +263,7 @@ export default async function AboutPage({ params }: { params: Params }) {
       </section>
 
       {/* The Record */}
-      <section className="bg-ivory pb-20 lg:pb-28">
+      <section className="bg-ivory pb-14 lg:pb-20">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 lg:gap-20">
             <Reveal>
@@ -309,7 +309,7 @@ export default async function AboutPage({ params }: { params: Params }) {
       </section>
 
       {/* The Movement */}
-      <section className="bg-beige py-20 lg:py-28 overflow-x-clip">
+      <section className="bg-beige py-14 lg:py-20 overflow-x-clip">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 lg:gap-20">
             <Reveal>
@@ -346,7 +346,7 @@ export default async function AboutPage({ params }: { params: Params }) {
       </section>
 
       {/* Closing CTA */}
-      <section className="bg-ivory py-20 lg:py-28">
+      <section className="bg-ivory py-14 lg:py-20">
         <div className="mx-auto max-w-3xl px-6 lg:px-12 text-center">
           <Reveal>
             <div className="flex items-center justify-center gap-3 text-gold mb-10">
@@ -394,7 +394,7 @@ function Chapter({
 }) {
   const bg = tone === "warm" ? "bg-beige" : "bg-ivory border-t border-black/10";
   return (
-    <section className={`${bg} py-20 lg:py-28`}>
+    <section className={`${bg} py-14 lg:py-28`}>
       <div className="mx-auto max-w-[1100px] px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 lg:gap-20">
           <Reveal>

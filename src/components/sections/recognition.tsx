@@ -28,7 +28,7 @@ const HONOR_META = [
 
 export function Recognition({ dict, honorTitles }: RecognitionProps) {
   return (
-    <section className="relative bg-ivory py-24 lg:py-36 overflow-x-clip">
+    <section className="relative bg-ivory py-16 lg:py-36 overflow-x-clip">
       {/* Faint gold corner ornaments */}
       <div aria-hidden className="absolute top-10 left-10 hidden lg:block">
         <div className="flex items-center gap-3 text-gold/55">
@@ -45,7 +45,7 @@ export function Recognition({ dict, honorTitles }: RecognitionProps) {
 
       <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
         <Reveal>
-          <div className="text-center mb-20 lg:mb-24">
+          <div className="text-center mb-14 lg:mb-16">
             <div className="eyebrow rules text-burgundy mb-10 inline-flex">
               {dict.eyebrow}
             </div>
@@ -68,7 +68,7 @@ export function Recognition({ dict, honorTitles }: RecognitionProps) {
         </Reveal>
 
         <Reveal delay={0.1}>
-          <figure className="relative w-full aspect-[16/9] lg:aspect-[21/9] overflow-hidden mb-16 lg:mb-20">
+          <figure className="relative w-full aspect-[16/9] lg:aspect-[21/9] overflow-hidden mb-16 lg:mb-14">
             <Image
               src={RECOGNITION_PRIMARY.src}
               alt={RECOGNITION_PRIMARY.alt}
@@ -147,7 +147,7 @@ export function Recognition({ dict, honorTitles }: RecognitionProps) {
         </Reveal>
 
         <Reveal delay={0.15}>
-          <blockquote className="max-w-3xl mx-auto text-center mb-20 lg:mb-24">
+          <blockquote className="max-w-3xl mx-auto text-center mb-14 lg:mb-16">
             <span
               className="block text-burgundy text-4xl leading-none mb-4"
               style={{ fontFamily: "var(--font-serif)" }}
@@ -255,7 +255,7 @@ export function Recognition({ dict, honorTitles }: RecognitionProps) {
         </div>
 
         {/* ─── Momentos del Linaje · supporting gallery ───── */}
-        <div className="mt-28 lg:mt-32">
+        <div className="mt-18 lg:mt-20">
           <Reveal>
             <div className="text-center mb-14 lg:mb-16">
               <div className="eyebrow rules text-burgundy mb-6 inline-flex">
@@ -324,7 +324,7 @@ export function Recognition({ dict, honorTitles }: RecognitionProps) {
         </div>
 
         <Reveal delay={0.4}>
-          <div className="mt-24 flex flex-col items-center gap-3">
+          <div className="mt-16 flex flex-col items-center gap-3">
             <span className="block w-12 h-px bg-gold/60" />
             <span
               className="eyebrow text-black/40"

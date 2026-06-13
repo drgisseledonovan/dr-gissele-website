@@ -44,9 +44,9 @@ export default async function PrivacyPage({ params }: { params: Params }) {
   const t = dict.pages.privacy;
 
   return (
-    <article className="bg-ivory pt-[140px] lg:pt-[180px] pb-20 lg:pb-28">
+    <article className="bg-ivory pt-[110px] lg:pt-[130px] pb-14 lg:pb-20">
       <div className="mx-auto max-w-[760px] px-6 lg:px-12">
-        <header className="mb-16 lg:mb-20">
+        <header className="mb-16 lg:mb-14">
           <div className="eyebrow rules left text-burgundy mb-10">
             {t.eyebrow}
           </div>
@@ -79,7 +79,7 @@ export default async function PrivacyPage({ params }: { params: Params }) {
           ))}
         </div>
 
-        <footer className="mt-20 pt-10 border-t border-black/10">
+        <footer className="mt-14 pt-10 border-t border-black/10">
           <Link href={localePath(locale, "/")} className="cta-line text-burgundy">
             {t.returnHome}
           </Link>

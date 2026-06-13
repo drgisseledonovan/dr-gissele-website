@@ -59,7 +59,7 @@ export default async function InsightsPage({ params }: { params: Params }) {
   return (
     <>
       {/* Lede */}
-      <section className="relative bg-ivory pt-[140px] lg:pt-[180px] pb-24 lg:pb-32 overflow-x-clip">
+      <section className="relative bg-ivory pt-[110px] lg:pt-[130px] pb-16 lg:pb-24 overflow-x-clip">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
             <div className="eyebrow rules left text-burgundy mb-10">
@@ -91,7 +91,7 @@ export default async function InsightsPage({ params }: { params: Params }) {
 
       {/* Featured */}
       {featured && featuredLocalized && (
-        <section className="bg-ivory pb-24 lg:pb-32 border-t border-black/10 pt-20 lg:pt-24">
+        <section className="bg-ivory pb-16 lg:pb-24 border-t border-black/10 pt-14 lg:pt-16">
           <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
             <Reveal>
               <div className="flex items-center gap-4 mb-10">
@@ -151,7 +151,7 @@ export default async function InsightsPage({ params }: { params: Params }) {
 
       {/* Archive */}
       {archive.length > 0 && (
-        <section className="bg-ivory pb-20 lg:pb-28 border-t border-black/10 pt-20 lg:pt-24">
+        <section className="bg-ivory pb-14 lg:pb-20 border-t border-black/10 pt-14 lg:pt-16">
           <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
             <Reveal>
               <div className="flex items-center gap-4 mb-14">

@@ -11,7 +11,7 @@ type DespiertaProps = {
 
 export function Despierta({ locale, dict }: DespiertaProps) {
   return (
-    <section className="bg-beige py-20 lg:py-32 overflow-x-clip">
+    <section className="bg-beige py-14 lg:py-24 overflow-x-clip">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-16 items-center">
           {/* Copy column */}
@@ -124,7 +124,7 @@ export function Despierta({ locale, dict }: DespiertaProps) {
 
         {/* ─── Cohort gallery — horizontal scroll-snap carousel ─── */}
         <Reveal delay={0.2}>
-          <div className="mt-28 lg:mt-36">
+          <div className="mt-18 lg:mt-36">
             {/* Masthead */}
             <div className="flex items-end justify-between mb-10 lg:mb-14 px-0 lg:px-2">
               <div>

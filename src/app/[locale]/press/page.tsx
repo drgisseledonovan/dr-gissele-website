@@ -73,9 +73,9 @@ export default async function PressPage({ params }: { params: Params }) {
   return (
     <>
       {/* Lede */}
-      <section className="relative bg-ivory pt-[140px] lg:pt-[180px] pb-24 lg:pb-32 overflow-x-clip">
+      <section className="relative bg-ivory pt-[110px] lg:pt-[130px] pb-16 lg:pb-24 overflow-x-clip">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-16 lg:gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-16 lg:gap-16 items-center">
             <div>
               <Reveal>
                 <div className="eyebrow rules left text-burgundy mb-10">
@@ -150,7 +150,7 @@ export default async function PressPage({ params }: { params: Params }) {
       </section>
 
       {/* Biographies */}
-      <section className="bg-ivory py-20 lg:py-28 border-t border-black/10">
+      <section className="bg-ivory py-14 lg:py-20 border-t border-black/10">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-12">
           <Reveal>
             <div className="flex items-center gap-4 mb-16">
@@ -166,7 +166,7 @@ export default async function PressPage({ params }: { params: Params }) {
           </Reveal>
 
           <Reveal>
-            <article className="mb-16 lg:mb-20">
+            <article className="mb-16 lg:mb-14">
               <div className="flex items-baseline justify-between gap-4 mb-5">
                 <h3
                   className="text-[clamp(20px,2vw,26px)] font-light tracking-tight text-black"
@@ -187,10 +187,10 @@ export default async function PressPage({ params }: { params: Params }) {
             </article>
           </Reveal>
 
-          <div className="h-px w-full bg-black/10 mb-16 lg:mb-20" />
+          <div className="h-px w-full bg-black/10 mb-16 lg:mb-14" />
 
           <Reveal>
-            <article className="mb-16 lg:mb-20">
+            <article className="mb-16 lg:mb-14">
               <div className="flex items-baseline justify-between gap-4 mb-5">
                 <h3
                   className="text-[clamp(20px,2vw,26px)] font-light tracking-tight text-black"
@@ -211,7 +211,7 @@ export default async function PressPage({ params }: { params: Params }) {
             </article>
           </Reveal>
 
-          <div className="h-px w-full bg-black/10 mb-16 lg:mb-20" />
+          <div className="h-px w-full bg-black/10 mb-16 lg:mb-14" />
 
           <Reveal>
             <article>
@@ -240,7 +240,7 @@ export default async function PressPage({ params }: { params: Params }) {
       </section>
 
       {/* Recognitions */}
-      <section className="bg-beige py-20 lg:py-28">
+      <section className="bg-beige py-14 lg:py-20">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-12">
           <Reveal>
             <div className="flex items-center gap-4 mb-16">
@@ -291,7 +291,7 @@ export default async function PressPage({ params }: { params: Params }) {
       </section>
 
       {/* Press assets */}
-      <section id="assets" className="bg-ivory py-20 lg:py-28 border-t border-black/10 scroll-mt-24">
+      <section id="assets" className="bg-ivory py-14 lg:py-20 border-t border-black/10 scroll-mt-16">
         <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
           <Reveal>
             <div className="flex items-center gap-4 mb-16">
@@ -315,7 +315,7 @@ export default async function PressPage({ params }: { params: Params }) {
             </h3>
           </Reveal>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-20">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 mb-14">
             {photos.map((asset, i) => (
               <Reveal key={asset.href} delay={i * 0.05}>
                 <a href={asset.href} download className="group block">
@@ -406,7 +406,7 @@ export default async function PressPage({ params }: { params: Params }) {
       </section>
 
       {/* Press contact */}
-      <section className="relative bg-black text-ivory py-20 lg:py-32 overflow-hidden">
+      <section className="relative bg-black text-ivory py-14 lg:py-24 overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0"

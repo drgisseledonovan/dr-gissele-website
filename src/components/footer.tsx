@@ -12,9 +12,9 @@ type FooterProps = {
 export function Footer({ locale, dict }: FooterProps) {
   return (
     <footer className="bg-black text-ivory">
-      <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pt-20 lg:pt-24 pb-16">
+      <div className="mx-auto max-w-[1400px] px-6 lg:px-12 pt-14 lg:pt-16 pb-16">
         {/* Crowned monogram — gold against true black for luxury contrast */}
-        <div className="flex flex-col items-center text-center mb-20 lg:mb-24">
+        <div className="flex flex-col items-center text-center mb-14 lg:mb-16">
           <div className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px]">
             <Image
               src={LOGO_MONOGRAM_DARK.src}
@@ -47,7 +47,7 @@ export function Footer({ locale, dict }: FooterProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 mb-14">
           <FooterColumn title={dict.movementTitle}>
             <FooterLink href={localePath(locale, "/unsinkable-minds")}>
               {dict.links.unsinkableMinds}

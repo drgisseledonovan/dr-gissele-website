@@ -11,7 +11,7 @@ type SpeakingProps = {
 
 export function Speaking({ dict }: SpeakingProps) {
   return (
-    <section className="bg-ivory text-black py-20 lg:py-24">
+    <section className="bg-ivory text-black py-14 lg:py-16">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <Reveal>
           <div className="eyebrow rules left text-burgundy mb-10">
@@ -21,7 +21,7 @@ export function Speaking({ dict }: SpeakingProps) {
 
         <Reveal delay={0.1}>
           <h2
-            className="text-[clamp(38px,5.2vw,76px)] tracking-tight font-light text-black mb-20 max-w-3xl leading-[1.06]"
+            className="text-[clamp(38px,5.2vw,76px)] tracking-tight font-light text-black mb-14 max-w-3xl leading-[1.06]"
             style={{ fontFamily: "var(--font-serif)" }}
           >
             {dict.titleSerif}
@@ -96,7 +96,7 @@ export function Speaking({ dict }: SpeakingProps) {
 
         {/* ─── Stages carousel · editorial scroll-snap rail ───── */}
         <Reveal delay={0.18}>
-          <div className="mt-20 lg:mt-24 flex items-end justify-between gap-6 mb-8">
+          <div className="mt-14 lg:mt-16 flex items-end justify-between gap-6 mb-8">
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span aria-hidden className="block w-8 h-px bg-gold" />

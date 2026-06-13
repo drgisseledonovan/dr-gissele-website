@@ -46,7 +46,7 @@ export default async function ContactPage({ params }: { params: Params }) {
   return (
     <>
       {/* Lede */}
-      <section className="relative bg-ivory pt-[140px] lg:pt-[180px] pb-24 lg:pb-32 overflow-x-clip">
+      <section className="relative bg-ivory pt-[110px] lg:pt-[130px] pb-16 lg:pb-24 overflow-x-clip">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
             <div className="eyebrow rules left text-burgundy mb-10">
@@ -76,7 +76,7 @@ export default async function ContactPage({ params }: { params: Params }) {
       </section>
 
       {/* Inquiry routes */}
-      <section className="bg-ivory pb-20 lg:pb-28 border-t border-black/10 pt-20 lg:pt-24">
+      <section className="bg-ivory pb-14 lg:pb-20 border-t border-black/10 pt-14 lg:pt-16">
         <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-black/10">
             {t.routes.map((r, i) => {
@@ -119,7 +119,7 @@ export default async function ContactPage({ params }: { params: Params }) {
       </section>
 
       {/* Direct details */}
-      <section className="bg-beige py-20 lg:py-24">
+      <section className="bg-beige py-14 lg:py-16">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
             <Reveal>
@@ -173,7 +173,7 @@ export default async function ContactPage({ params }: { params: Params }) {
 
       {/* Optional form */}
       {hasForm && (
-        <section className="bg-ivory py-20 lg:py-28">
+        <section className="bg-ivory py-14 lg:py-20">
           <div className="mx-auto max-w-[820px] px-6 lg:px-12">
             <Reveal>
               <div className="text-center mb-14">
@@ -219,7 +219,7 @@ export default async function ContactPage({ params }: { params: Params }) {
       )}
 
       {/* Social */}
-      <section className="bg-ivory py-20 lg:py-24 border-t border-black/10">
+      <section className="bg-ivory py-14 lg:py-16 border-t border-black/10">
         <div className="mx-auto max-w-3xl px-6 lg:px-12 text-center">
           <Reveal>
             <div className="flex items-center justify-center gap-3 text-gold mb-10">

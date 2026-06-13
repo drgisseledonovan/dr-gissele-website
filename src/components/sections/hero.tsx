@@ -112,7 +112,7 @@ export function Hero({ dict }: HeroProps) {
   }
 
   return (
-    <section className="relative w-full bg-ivory text-black overflow-x-clip grid grid-cols-1 lg:grid-cols-[58%_42%] pt-[152px] lg:pt-[160px] min-h-screen">
+    <section className="relative w-full bg-ivory text-black overflow-x-clip grid grid-cols-1 lg:grid-cols-[58%_42%] pt-[120px] lg:pt-[124px] lg:min-h-[88vh]">
       {/* Sticky RENACER CTA bar · top of viewport, above the nav.
           Visible on every breakpoint so the lead-magnet invitation is
           always one tap away, just like Jamie Kern Lima's "Access Now"
@@ -123,7 +123,7 @@ export function Hero({ dict }: HeroProps) {
       />
 
       {/* ─── Left: editorial copy ────────────────────────────────── */}
-      <div className="relative flex flex-col justify-center min-w-0 px-6 sm:px-10 lg:px-14 xl:px-20 py-10 lg:py-24">
+      <div className="relative flex flex-col justify-center min-w-0 px-6 sm:px-10 lg:px-14 xl:px-20 py-8 lg:py-14">
         {/* Luxury brand seal — crowned GD monogram + gold hairline */}
         <motion.div
           initial={{ opacity: 0, y: 6 }}
@@ -436,7 +436,7 @@ export function Hero({ dict }: HeroProps) {
 
         {/* Credentials · authority strip · enters after RENACER block */}
         <motion.ul
-          className="mt-20 pt-8 border-t border-black/10 flex flex-col gap-3 text-black/70 max-w-md"
+          className="mt-14 pt-8 border-t border-black/10 flex flex-col gap-3 text-black/70 max-w-md"
           initial="hidden"
           animate="visible"
           variants={{
@@ -468,7 +468,7 @@ export function Hero({ dict }: HeroProps) {
 
       {/* ─── Right: portrait ────────────────────────────────────── */}
       <motion.div
-        className="relative hidden lg:flex items-center justify-center min-w-0 px-8 lg:px-12 xl:px-16 py-16 lg:py-24"
+        className="relative hidden lg:flex items-center justify-center min-w-0 px-8 lg:px-12 xl:px-16 py-10 lg:py-14"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.4, delay: 0.3 }}

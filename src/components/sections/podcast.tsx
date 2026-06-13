@@ -30,7 +30,7 @@ const MOVEMENT_PLATFORMS: ReadonlyArray<{
 
 export function Podcast({ dict }: PodcastProps) {
   return (
-    <section className="bg-ivory py-20 lg:py-28 border-t border-black/10 overflow-x-clip">
+    <section className="bg-ivory py-14 lg:py-20 border-t border-black/10 overflow-x-clip">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Photo — left on desktop */}

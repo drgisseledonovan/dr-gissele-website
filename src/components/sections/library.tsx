@@ -13,9 +13,9 @@ type LibraryProps = {
 
 export function Library({ dict }: LibraryProps) {
   return (
-    <section className="bg-ivory py-20 lg:py-28 border-t border-black/10">
+    <section className="bg-ivory py-14 lg:py-20 border-t border-black/10">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 lg:mb-20">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16 lg:mb-14">
           <Reveal>
             <div>
               <div className="eyebrow rules left text-burgundy mb-8">

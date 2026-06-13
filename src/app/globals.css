@@ -65,24 +65,17 @@ h1, h2, h3, h4 {
   font-weight: 500;
 }
 
-/* Eyebrow with hairline rules on both sides — borrowed from v3 hero treatment.
-   Use .eyebrow.rules for the cinematic editorial label. */
+/* Eyebrow rules · neutralized per Dr. Gissele's feedback (June 2026).
+   The horizontal hairline before/after every eyebrow was reading as
+   markdown-bullet formatting across the site. Class is kept so existing
+   `eyebrow rules left` usages don't break, but the decorative lines
+   no longer render. Eyebrows now read as clean tracked caps. */
 .eyebrow.rules {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
 }
 .eyebrow.rules::before,
 .eyebrow.rules::after {
-  content: "";
-  display: block;
-  width: 1.75rem;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.6;
-}
-.eyebrow.rules.left::after,
-.eyebrow.rules.right::before {
   display: none;
 }
 

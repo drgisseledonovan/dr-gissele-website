@@ -13,7 +13,7 @@ type MovementProps = {
 
 export function Movement({ locale, dict }: MovementProps) {
   return (
-    <section className="relative bg-beige text-black overflow-hidden py-20 lg:py-24">
+    <section className="relative bg-beige text-black overflow-hidden py-14 lg:py-16">
       {/* Faint neural-pathway line art behind everything */}
       <svg
         aria-hidden
@@ -88,7 +88,7 @@ export function Movement({ locale, dict }: MovementProps) {
 
         {/* ─── Founders: photo + attribution ────────────────────── */}
         <motion.div
-          className="mt-24 lg:mt-32 grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20 items-center max-w-[1100px] mx-auto"
+          className="mt-16 lg:mt-20 grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-12 lg:gap-20 items-center max-w-[1100px] mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

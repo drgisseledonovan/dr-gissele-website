@@ -48,7 +48,7 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
   return (
     <>
       {/* Lede */}
-      <section className="relative bg-ivory pt-[140px] lg:pt-[180px] pb-24 lg:pb-32 overflow-x-clip">
+      <section className="relative bg-ivory pt-[110px] lg:pt-[130px] pb-16 lg:pb-24 overflow-x-clip">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
             <div className="eyebrow rules left text-burgundy mb-10">
@@ -148,7 +148,7 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
       </section>
 
       {/* I · Origin */}
-      <section className="bg-ivory py-20 lg:py-32">
+      <section className="bg-ivory py-14 lg:py-24">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 lg:gap-20">
             <Reveal>
@@ -177,7 +177,7 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
       </section>
 
       {/* II · Declaration */}
-      <section className="bg-beige py-20 lg:py-32">
+      <section className="bg-beige py-14 lg:py-24">
         <div className="mx-auto max-w-[1100px] px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-16 lg:gap-20">
             <Reveal>
@@ -212,10 +212,10 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
       </section>
 
       {/* III · Pillars */}
-      <section className="bg-ivory py-20 lg:py-32 overflow-x-clip">
+      <section className="bg-ivory py-14 lg:py-24 overflow-x-clip">
         <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
           <Reveal>
-            <div className="text-center mb-20">
+            <div className="text-center mb-14">
               <div className="eyebrow rules text-burgundy mb-8 inline-flex">
                 {t.chapterIIIPillars.eyebrow}
               </div>
@@ -274,7 +274,7 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
           (Despierta Tu Poder section removed per Dr. Gissele's
           direction · this page is about the MOVEMENT only. Product
           lives on /despierta.) */}
-      <section className="bg-ivory pb-20 lg:pb-32 pt-20 lg:pt-32">
+      <section className="bg-ivory pb-14 lg:pb-24 pt-14 lg:pt-24">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
             <div className="flex items-center gap-4 mb-10">
@@ -325,7 +325,7 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
       </section>
 
       {/* Closing quote */}
-      <section className="bg-beige py-20 lg:py-28">
+      <section className="bg-beige py-14 lg:py-20">
         <div className="mx-auto max-w-3xl px-6 lg:px-12 text-center">
           <Reveal>
             <div className="flex items-center justify-center gap-3 text-gold mb-10">
@@ -346,7 +346,7 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
 
       {/* Join the Movement — invitation into the free Skool
           community. The public-facing home of Unsinkable Minds. */}
-      <section className="bg-black text-ivory py-24 lg:py-36 relative overflow-hidden">
+      <section className="bg-black text-ivory py-16 lg:py-36 relative overflow-hidden">
         {/* Subtle gold corner ornaments */}
         <span
           aria-hidden

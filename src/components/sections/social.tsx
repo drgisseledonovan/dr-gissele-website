@@ -21,7 +21,7 @@ const PLATFORMS: ReadonlyArray<{ key: keyof typeof SOCIAL; label: string }> = [
 
 export function Social({ dict }: SocialProps) {
   return (
-    <section className="bg-beige py-20 lg:py-28">
+    <section className="bg-beige py-14 lg:py-20">
       <div className="mx-auto max-w-[1240px] px-6 lg:px-12">
         <Reveal>
           <div className="text-center mb-12 lg:mb-14">

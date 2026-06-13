@@ -55,7 +55,7 @@ export default async function SpeakingPage({ params }: { params: Params }) {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-ivory pt-[140px] lg:pt-[180px] pb-24 lg:pb-32 overflow-x-clip">
+      <section className="relative bg-ivory pt-[110px] lg:pt-[130px] pb-16 lg:pb-24 overflow-x-clip">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
             <div className="eyebrow rules left text-burgundy mb-10">
@@ -99,7 +99,7 @@ export default async function SpeakingPage({ params }: { params: Params }) {
       </section>
 
       {/* Stage still */}
-      <section className="bg-ivory pb-20 lg:pb-28">
+      <section className="bg-ivory pb-14 lg:pb-20">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
             <figure className="relative aspect-[16/9] lg:aspect-[21/9] w-full overflow-hidden">
@@ -148,10 +148,10 @@ export default async function SpeakingPage({ params }: { params: Params }) {
       </section>
 
       {/* Topics */}
-      <section className="bg-ivory py-20 lg:py-28 border-t border-black/10">
+      <section className="bg-ivory py-14 lg:py-20 border-t border-black/10">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
           <Reveal>
-            <div className="text-center mb-20">
+            <div className="text-center mb-14">
               <div className="eyebrow rules text-burgundy mb-8 inline-flex">
                 {t.topicsEyebrow}
               </div>
@@ -194,9 +194,9 @@ export default async function SpeakingPage({ params }: { params: Params }) {
       </section>
 
       {/* Formats + Audiences */}
-      <section className="bg-beige py-20 lg:py-28 overflow-x-clip">
+      <section className="bg-beige py-14 lg:py-20 overflow-x-clip">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-16">
             <Reveal>
               <div>
                 <div className="eyebrow rules left text-burgundy mb-8">
@@ -257,9 +257,9 @@ export default async function SpeakingPage({ params }: { params: Params }) {
       </section>
 
       {/* Credentials */}
-      <section className="bg-ivory py-20 lg:py-28 border-t border-black/10">
+      <section className="bg-ivory py-14 lg:py-20 border-t border-black/10">
         <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-16 items-center">
             <Reveal>
               <figure className="relative aspect-[4/5] w-full overflow-hidden">
                 <Image
@@ -309,7 +309,7 @@ export default async function SpeakingPage({ params }: { params: Params }) {
       </section>
 
       {/* Inquire */}
-      <section id="inquire" className="relative bg-black text-ivory py-20 lg:py-32 overflow-hidden">
+      <section id="inquire" className="relative bg-black text-ivory py-14 lg:py-24 overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0"

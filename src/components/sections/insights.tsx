@@ -12,9 +12,9 @@ export function Insights({ locale, dict }: InsightsProps) {
   const essays = featuredEssays(3);
 
   return (
-    <section className="bg-ivory py-20 lg:py-28">
+    <section className="bg-ivory py-14 lg:py-20">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
-        <div className="flex items-end justify-between mb-20">
+        <div className="flex items-end justify-between mb-14">
           <Reveal>
             <div>
               <div className="eyebrow text-burgundy mb-6">{dict.eyebrow}</div>
