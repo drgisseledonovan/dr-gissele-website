@@ -57,7 +57,7 @@ export function Newsletter({ dict }: NewsletterProps) {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-12 text-center">
+      <div className="relative z-10 mx-auto max-w-5xl px-6 lg:px-12 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,14 +66,16 @@ export function Newsletter({ dict }: NewsletterProps) {
         >
           {/* Closing brand signature · the full gold script wordmark.
               The cinematic name treatment that anchors the homepage
-              as a signed editorial piece. */}
-          <div className="relative w-[420px] sm:w-[520px] max-w-full h-[160px] sm:h-[200px] mx-auto mb-10">
+              as a signed editorial piece. Sized to DOMINATE the
+              section as a real editorial autograph. */}
+          <div className="relative w-full max-w-[1100px] h-[280px] sm:h-[400px] lg:h-[480px] mx-auto mb-10">
             <Image
               src={LOGO_SIGNATURE.src}
               alt={LOGO_SIGNATURE.alt}
               fill
-              sizes="(min-width: 640px) 520px, 420px"
+              sizes="(min-width: 1024px) 1100px, (min-width: 640px) 800px, 100vw"
               className="object-contain"
+              priority
             />
           </div>
 
