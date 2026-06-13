@@ -10,7 +10,7 @@ import {
   STAN_STORE_URL,
   stanProductUrl,
 } from "@/lib/site";
-import { MOVEMENT_MENTORSHIP, LOGO_MONOGRAM_DARK } from "@/lib/media";
+import { MOVEMENT_MENTORSHIP, LOGO_MONOGRAM_GOLD } from "@/lib/media";
 import { Newsletter } from "@/components/sections/newsletter";
 import {
   getDictionary,
@@ -511,12 +511,12 @@ export default async function ProgramsPage({ params }: { params: Params }) {
         <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-12 text-center">
           <Reveal>
             <div className="flex justify-center mb-10">
-              <div className="relative w-[110px] h-[110px]">
+              <div className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px]">
                 <Image
-                  src={LOGO_MONOGRAM_DARK.src}
+                  src={LOGO_MONOGRAM_GOLD.src}
                   alt=""
                   fill
-                  sizes="110px"
+                  sizes="240px"
                   className="object-contain"
                 />
               </div>

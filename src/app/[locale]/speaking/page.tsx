@@ -12,7 +12,7 @@ import {
   CREDENTIALS,
   type Credential,
 } from "@/lib/site";
-import { SPEAKING_PRIMARY, RECOGNITION_PRIMARY, LOGO_MONOGRAM_DARK } from "@/lib/media";
+import { SPEAKING_PRIMARY, RECOGNITION_PRIMARY, LOGO_MONOGRAM_GOLD } from "@/lib/media";
 import { getDictionary, isLocale, localePath, type Locale } from "@/lib/i18n";
 
 type Params = Promise<{ locale: string }>;
@@ -322,12 +322,12 @@ export default async function SpeakingPage({ params }: { params: Params }) {
           {/* Crowned monogram ornament — luxury masthead */}
           <Reveal>
             <div className="flex justify-center mb-10">
-              <div className="relative w-[110px] h-[110px]">
+              <div className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px]">
                 <Image
-                  src={LOGO_MONOGRAM_DARK.src}
+                  src={LOGO_MONOGRAM_GOLD.src}
                   alt=""
                   fill
-                  sizes="110px"
+                  sizes="240px"
                   className="object-contain"
                 />
               </div>

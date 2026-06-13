@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { LOGO_MONOGRAM_DARK } from "@/lib/media";
+import { LOGO_MONOGRAM_GOLD } from "@/lib/media";
 import { SITE } from "@/lib/site";
 import { localePath, type Dictionary, type Locale } from "@/lib/i18n";
 
@@ -17,8 +17,8 @@ export function Footer({ locale, dict }: FooterProps) {
         <div className="flex flex-col items-center text-center mb-14 lg:mb-16">
           <div className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px]">
             <Image
-              src={LOGO_MONOGRAM_DARK.src}
-              alt={LOGO_MONOGRAM_DARK.alt}
+              src={LOGO_MONOGRAM_GOLD.src}
+              alt={LOGO_MONOGRAM_GOLD.alt}
               fill
               sizes="(min-width: 640px) 240px, 200px"
               className="object-contain"

@@ -67,12 +67,12 @@ export function Newsletter({ dict }: NewsletterProps) {
           {/* Closing brand signature · the full gold script wordmark.
               The cinematic name treatment that anchors the homepage
               as a signed editorial piece. */}
-          <div className="relative w-[260px] sm:w-[300px] h-[100px] sm:h-[110px] mx-auto mb-10">
+          <div className="relative w-[420px] sm:w-[520px] max-w-full h-[160px] sm:h-[200px] mx-auto mb-10">
             <Image
               src={LOGO_SIGNATURE.src}
               alt={LOGO_SIGNATURE.alt}
               fill
-              sizes="(min-width: 640px) 300px, 260px"
+              sizes="(min-width: 640px) 520px, 420px"
               className="object-contain"
             />
           </div>
