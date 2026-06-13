@@ -72,14 +72,14 @@ export const HERO_PORTRAIT_OPTIONS = {
     height: 4898,
     objectPosition: "50% 22%",
   },
-  /** Black blazer, contemplative pose — for the Introduction
-      section ("La obra interior"). */
+  /** Smiling with microphone — for the Introduction section
+      ("La obra interior"). Joyful, present, warm authority. */
   practice: {
-    src: "/media/portrait-practice.jpg",
-    alt: "Dr. Gissele Donovan — contemplative editorial portrait",
-    width: 3748,
-    height: 5622,
-    objectPosition: "50% 22%",
+    src: "/media/portrait-joy-smile.jpg",
+    alt: "Dr. Gissele Donovan — smiling with microphone, editorial portrait",
+    width: 4000,
+    height: 6000,
+    objectPosition: "50% 18%",
   },
   /** Caramel one-shoulder jumpsuit — expansion, femininity,
       Hollywood pose. The Despierta visual centerpiece. */
@@ -348,19 +348,19 @@ export const SPEAKING_GALLERY: ReadonlyArray<MediaAsset> = [
 ];
 
 export const RECOGNITION_PRIMARY: MediaAsset = {
-  src: "/media/portrait-crown-smile.jpg",
-  alt: "Dr. Gissele Donovan — crowned, smiling, holding flowers",
-  width: 5012,
-  height: 6662,
-  objectPosition: "50% 22%",
+  src: "/media/recognition-phd.jpg",
+  alt: "Dr. Gissele Donovan at her PhD doctoral ceremony",
+  width: 1600,
+  height: 1066,
+  objectPosition: "60% 35%",
 };
 
 export const MOVEMENT_MENTORSHIP: MediaAsset = {
-  src: "/media/portrait-expansion.jpg",
-  alt: "Dr. Gissele Donovan — expansion portrait, caramel jumpsuit",
-  width: 4820,
-  height: 6447,
-  objectPosition: "50% 25%",
+  src: "/media/movement-mentorship.jpg",
+  alt: "Dr. Gissele Donovan leading a Despierta Tu Poder Experience in a private boardroom",
+  width: 960,
+  height: 1280,
+  objectPosition: "50% 38%",
 };
 
 /* ─── HONOR PHOTOS ──────────────────────────────────────────────

@@ -4,7 +4,14 @@ import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { Newsletter } from "@/components/sections/newsletter";
 import { SITE } from "@/lib/site";
-import { HERO_PORTRAIT, LOGO_SEAL, LOGO_MONOGRAM_GOLD } from "@/lib/media";
+import {
+  HERO_PORTRAIT,
+  HERO_PORTRAIT_OPTIONS,
+  LOGO_SEAL,
+  LOGO_MONOGRAM_GOLD,
+} from "@/lib/media";
+
+const MENTOR_PORTRAIT = HERO_PORTRAIT_OPTIONS.mastermindLaugh;
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 
 type Params = Promise<{ locale: string }>;
@@ -733,11 +740,11 @@ export default async function DespiertaPage({ params }: { params: Params }) {
             <div className="relative">
               <div className="relative aspect-[3/4] overflow-hidden bg-beige/40">
                 <Image
-                  src={HERO_PORTRAIT.src}
-                  alt={HERO_PORTRAIT.alt}
+                  src={MENTOR_PORTRAIT.src}
+                  alt={MENTOR_PORTRAIT.alt}
                   fill
                   sizes="400px"
-                  style={{ objectPosition: HERO_PORTRAIT.objectPosition ?? "50% 30%" }}
+                  style={{ objectPosition: MENTOR_PORTRAIT.objectPosition ?? "50% 30%" }}
                   className="object-cover [filter:contrast(1.05)_saturate(0.96)]"
                 />
               </div>

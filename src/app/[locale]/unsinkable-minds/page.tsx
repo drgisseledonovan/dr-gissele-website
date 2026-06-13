@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Reveal } from "@/components/reveal";
 import { CTA } from "@/components/cta";
 import { MOVEMENT_COMMUNITY, MOVEMENT_SOCIAL, SITE } from "@/lib/site";
-import { SPEAKING_PRIMARY } from "@/lib/media";
+import { SPEAKING_PRIMARY, COMMUNITY_GROUP } from "@/lib/media";
 import { Newsletter } from "@/components/sections/newsletter";
 import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 
@@ -70,11 +70,47 @@ export default async function UnsinkableMindsPage({ params }: { params: Params }
               </span>
             </h1>
           </Reveal>
-          <Reveal delay={0.1}>
-            <p className="mt-12 max-w-2xl text-lg lg:text-xl leading-relaxed text-black/70 font-light">
-              {t.lede}
-            </p>
-          </Reveal>
+          <div className="mt-12 grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-16 items-end">
+            <Reveal delay={0.1}>
+              <p className="max-w-2xl text-lg lg:text-xl leading-relaxed text-black/70 font-light">
+                {t.lede}
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <figure className="relative">
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                  <Image
+                    src={COMMUNITY_GROUP.src}
+                    alt={COMMUNITY_GROUP.alt}
+                    fill
+                    sizes="(min-width: 1024px) 640px, 100vw"
+                    style={{
+                      objectPosition:
+                        COMMUNITY_GROUP.objectPosition ?? "50% 35%",
+                    }}
+                    className="object-cover [filter:contrast(1.05)_saturate(1.02)]"
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute inset-3 border border-gold/45 pointer-events-none"
+                  />
+                  <div
+                    aria-hidden
+                    className="absolute -inset-px border border-black/10 pointer-events-none"
+                  />
+                </div>
+                <figcaption className="mt-4 flex items-center gap-3">
+                  <span aria-hidden className="block w-6 h-px bg-gold/70" />
+                  <span
+                    className="eyebrow text-black/55"
+                    style={{ fontSize: "10px", letterSpacing: "0.32em" }}
+                  >
+                    {t.communityCaption}
+                  </span>
+                </figcaption>
+              </figure>
+            </Reveal>
+          </div>
         </div>
       </section>
 

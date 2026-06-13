@@ -377,6 +377,7 @@ export type Dictionary = {
       titleSerif: string;
       titleScript: string;
       lede: string;
+      communityCaption: string;
       reachLabel: string;
       reach: ReadonlyArray<{ figure: string; label: string }>;
       chapterIOrigin: { title: string; body: ReadonlyArray<string> };

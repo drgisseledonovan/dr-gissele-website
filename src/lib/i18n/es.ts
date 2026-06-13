@@ -596,6 +596,7 @@ export const es: Dictionary = {
       titleScript: "Minds.",
       lede:
         "Un movimiento nacido de la transformación, la disciplina y la reconstrucción personal. Fundado por la Dra. Gissele Donovan y el empresario Wally Donovan, Unsinkable Minds fue creado para ayudar a las personas a fortalecer su mente, despertar su identidad y construir una vida con propósito desde el cuerpo, el espíritu y la visión. Es para quienes saben que nacieron para más y se rehúsan a vivir limitados por el miedo, las creencias antiguas o la versión más pequeña de sí mismos.",
+      communityCaption: "La Comunidad · Inner Circle",
       reachLabel: "Una Voz Global",
       reach: [
         { figure: "3", label: "Continentes" },
