@@ -266,6 +266,7 @@ export type Dictionary = {
       cta2: string;
       portraitCaption: string;
       portraitYear: string;
+      originPortraitCaption: string;
       chapterIPractice: { title: string; body: ReadonlyArray<string> };
       chapterIIOrigin: { title: string; body: ReadonlyArray<string> };
       chapterIIIBecoming: { title: string; body: ReadonlyArray<string> };

@@ -14,7 +14,7 @@ import { getDictionary, isLocale, type Locale } from "@/lib/i18n";
 
 type Params = Promise<{ locale: string }>;
 
-const PRESS_PORTRAIT = HERO_PORTRAIT_OPTIONS.authority;
+const PRESS_PORTRAIT = HERO_PORTRAIT_OPTIONS.becoming;
 
 const CREDENTIALS_LIST: Credential[] = [
   CREDENTIALS.phd,

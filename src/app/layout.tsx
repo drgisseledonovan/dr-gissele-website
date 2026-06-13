@@ -104,7 +104,7 @@ function buildPersonLd(locale: Locale) {
     "@type": "Person",
     name: SITE.name,
     url: SITE.url,
-    image: `${SITE.url}/media/portrait-hero.jpg`,
+    image: `${SITE.url}/media/portrait-leader.jpg`,
     jobTitle:
       "Dean of the School of Leadership and Business · Neuroscience-Based Coach · Co-founder, Unsinkable Minds Movement",
     description: dict.bios.oneLine,

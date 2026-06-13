@@ -4,7 +4,7 @@ import { Reveal } from "@/components/reveal";
 import { HERO_PORTRAIT_OPTIONS } from "@/lib/media";
 import { localePath, type Dictionary, type Locale } from "@/lib/i18n";
 
-const PORTRAIT = HERO_PORTRAIT_OPTIONS.warm;
+const PORTRAIT = HERO_PORTRAIT_OPTIONS.practice;
 
 type IntroductionProps = {
   locale: Locale;

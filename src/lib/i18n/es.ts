@@ -367,6 +367,7 @@ export const es: Dictionary = {
       cta2: "Trabaja Con Ella",
       portraitCaption: "Retrato · Sesión Editorial",
       portraitYear: "MMXXVI",
+      originPortraitCaption: "Coronada por la fe, escrita por el propósito.",
       chapterIPractice: {
         title: "La Obra Interior",
         body: [

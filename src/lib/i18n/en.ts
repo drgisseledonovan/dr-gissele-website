@@ -354,6 +354,7 @@ export const en: Dictionary = {
       cta2: "Work With Her",
       portraitCaption: "Portrait · Editorial Sitting",
       portraitYear: "MMXXVI",
+      originPortraitCaption: "Crowned by faith, written by purpose.",
       chapterIPractice: {
         title: "The Inner Work",
         body: [

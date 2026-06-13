@@ -12,6 +12,8 @@ import {
   type Credential,
 } from "@/lib/site";
 import { HERO_PORTRAIT_OPTIONS, RECOGNITION_PRIMARY } from "@/lib/media";
+
+const ORIGIN_PORTRAIT = HERO_PORTRAIT_OPTIONS.crownReflection;
 import {
   getDictionary,
   isLocale,
@@ -19,7 +21,7 @@ import {
   type Locale,
 } from "@/lib/i18n";
 
-const LEAD_PORTRAIT = HERO_PORTRAIT_OPTIONS.authority;
+const LEAD_PORTRAIT = HERO_PORTRAIT_OPTIONS.becoming;
 
 type Params = Promise<{ locale: string }>;
 
@@ -166,6 +168,45 @@ export default async function AboutPage({ params }: { params: Params }) {
           <p key={i}>{p}</p>
         ))}
       </Chapter>
+
+      {/* Origin → Becoming editorial break: crown + Bible + reflection */}
+      <section className="bg-beige pb-20 lg:pb-28">
+        <div className="mx-auto max-w-[820px] px-6 lg:px-12">
+          <Reveal>
+            <figure className="relative">
+              <div className="relative aspect-[4/5] w-full overflow-hidden">
+                <Image
+                  src={ORIGIN_PORTRAIT.src}
+                  alt={ORIGIN_PORTRAIT.alt}
+                  fill
+                  sizes="(min-width: 1024px) 720px, 100vw"
+                  style={{
+                    objectPosition:
+                      ORIGIN_PORTRAIT.objectPosition ?? "50% 25%",
+                  }}
+                  className="object-cover [filter:contrast(1.05)_saturate(0.98)]"
+                />
+                <div
+                  aria-hidden
+                  className="absolute inset-3 border border-gold/45 pointer-events-none"
+                />
+                <div
+                  aria-hidden
+                  className="absolute -inset-px border border-black/10 pointer-events-none"
+                />
+              </div>
+              <figcaption className="mt-5 flex items-center gap-3">
+                <span aria-hidden className="block w-6 h-px bg-gold/70" />
+                <span
+                  className="font-serif italic text-black/65 text-sm leading-tight"
+                >
+                  {t.originPortraitCaption}
+                </span>
+              </figcaption>
+            </figure>
+          </Reveal>
+        </div>
+      </section>
 
       <Chapter numeral="III" title={t.chapterIIIBecoming.title}>
         {t.chapterIIIBecoming.body.map((p, i) => (

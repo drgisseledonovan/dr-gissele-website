@@ -55,16 +55,22 @@ export type PressAsset = {
 
 export const PRESS_ASSETS: PressAsset[] = [
   {
-    label: "Portrait  ·  Editorial (Authority)",
-    href: "/media/portrait-hero.jpg",
+    label: "Portrait  ·  Leader (June 2026)",
+    href: "/media/portrait-leader.jpg",
     kind: "Photograph",
-    note: "2000 × 3000 · JPG",
+    note: "3308 × 4962 · JPG · Editorial Hero",
   },
   {
-    label: "Portrait  ·  Warm",
-    href: "/media/portrait-warm.jpg",
+    label: "Portrait  ·  Becoming (June 2026)",
+    href: "/media/portrait-becoming.jpg",
     kind: "Photograph",
-    note: "2000 × 2855 · JPG",
+    note: "3265 × 4898 · JPG · Authority",
+  },
+  {
+    label: "Portrait  ·  Crown + Smile (June 2026)",
+    href: "/media/portrait-crown-smile.jpg",
+    kind: "Photograph",
+    note: "5012 × 6662 · JPG · Recognition",
   },
   {
     label: "On Stage  ·  Unsinkable Minds",

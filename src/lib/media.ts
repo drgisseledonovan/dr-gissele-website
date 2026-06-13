@@ -26,6 +26,8 @@ export type MediaAsset = {
    ─────────────────────────────────────────────────────────────── */
 
 export const HERO_PORTRAIT_OPTIONS = {
+  /* ── HISTORICAL OPTIONS (pre-June 2026) ───────────────────────── */
+
   /** On stage with award — global speaker + honoree in a single frame. */
   award: {
     src: "/media/portrait-award.jpg",
@@ -50,10 +52,137 @@ export const HERO_PORTRAIT_OPTIONS = {
     height: 2855,
     objectPosition: "50% 32%",
   },
+
+  /* ── JUNE 2026 EDITORIAL SHOOT ────────────────────────────────── */
+
+  /** White shirt + black tie standing — modern leader. The new Hero. */
+  leader: {
+    src: "/media/portrait-leader.jpg",
+    alt: "Dr. Gissele Donovan — editorial portrait, white shirt and tie",
+    width: 3308,
+    height: 4962,
+    objectPosition: "50% 22%",
+  },
+  /** Black blazer, arms crossed — intellectual feminine authority.
+      The About page lead + Press page portrait. */
+  becoming: {
+    src: "/media/portrait-becoming.jpg",
+    alt: "Dr. Gissele Donovan — black blazer, arms crossed",
+    width: 3265,
+    height: 4898,
+    objectPosition: "50% 22%",
+  },
+  /** Black blazer, contemplative pose — for the Introduction
+      section ("La obra interior"). */
+  practice: {
+    src: "/media/portrait-practice.jpg",
+    alt: "Dr. Gissele Donovan — contemplative editorial portrait",
+    width: 3748,
+    height: 5622,
+    objectPosition: "50% 22%",
+  },
+  /** Caramel one-shoulder jumpsuit — expansion, femininity,
+      Hollywood pose. The Despierta visual centerpiece. */
+  expansion: {
+    src: "/media/portrait-expansion.jpg",
+    alt: "Dr. Gissele Donovan — expansion portrait, caramel jumpsuit",
+    width: 4820,
+    height: 6447,
+    objectPosition: "50% 28%",
+  },
+  /** Crown + smile + flores — feminine queen archetype.
+      The Recognition section masthead. */
+  crownSmile: {
+    src: "/media/portrait-crown-smile.jpg",
+    alt: "Dr. Gissele Donovan — crowned, smiling, holding flowers",
+    width: 5012,
+    height: 6662,
+    objectPosition: "50% 25%",
+  },
+  /** Crown + Bible + gaze upward — faith and reflection. */
+  crownReflection: {
+    src: "/media/portrait-crown-reflection.jpg",
+    alt: "Dr. Gissele Donovan — crowned, in faithful reflection",
+    width: 4279,
+    height: 5646,
+    objectPosition: "50% 25%",
+  },
+  /** Crown + open Bible in hands — spiritual leadership. */
+  crownBible: {
+    src: "/media/portrait-crown-bible.jpg",
+    alt: "Dr. Gissele Donovan — crowned, with open Bible",
+    width: 3884,
+    height: 5826,
+    objectPosition: "50% 25%",
+  },
+  /** Open laugh with microphone — the Mastermind cover photo. */
+  mastermindLaugh: {
+    src: "/media/portrait-mastermind-laugh.jpg",
+    alt: "Dr. Gissele Donovan — joyful editorial portrait with microphone",
+    width: 2851,
+    height: 4276,
+    objectPosition: "50% 25%",
+  },
+  /** White shirt + tie + microphone — orator on the move. */
+  oratorTie: {
+    src: "/media/portrait-orator-tie.jpg",
+    alt: "Dr. Gissele Donovan — speaking, white shirt and tie",
+    width: 3841,
+    height: 5762,
+    objectPosition: "50% 22%",
+  },
+  /** Crown + white shirt + black skirt — sitting editorial moment. */
+  tiaraMic: {
+    src: "/media/portrait-tiara-mic.jpg",
+    alt: "Dr. Gissele Donovan — editorial portrait with tiara",
+    width: 3819,
+    height: 5728,
+    objectPosition: "50% 22%",
+  },
+  /** Open laugh with microphone — close-up of joy. */
+  joyMic: {
+    src: "/media/portrait-joy-mic.jpg",
+    alt: "Dr. Gissele Donovan — laughing on stage with microphone",
+    width: 3356,
+    height: 5034,
+    objectPosition: "50% 22%",
+  },
+  /** Finger on chin — contemplative thinker pose. */
+  thinker: {
+    src: "/media/portrait-thinker.jpg",
+    alt: "Dr. Gissele Donovan — thoughtful editorial portrait",
+    width: 3543,
+    height: 5314,
+    objectPosition: "50% 22%",
+  },
+  /** White suit standing — corporate authority. */
+  whiteSuitStanding: {
+    src: "/media/portrait-white-suit-standing.jpg",
+    alt: "Dr. Gissele Donovan — white suit, standing",
+    width: 3623,
+    height: 5435,
+    objectPosition: "50% 22%",
+  },
+  /** White suit sitting on stool — confident editorial pose. */
+  whiteSuitSitting: {
+    src: "/media/portrait-white-suit-sitting.jpg",
+    alt: "Dr. Gissele Donovan — white suit, seated editorial pose",
+    width: 5050,
+    height: 6305,
+    objectPosition: "50% 22%",
+  },
+  /** Sheer brown blouse + white blazer — feminine editorial. */
+  editorialSheer: {
+    src: "/media/portrait-editorial-sheer.jpg",
+    alt: "Dr. Gissele Donovan — feminine editorial portrait",
+    width: 4394,
+    height: 5858,
+    objectPosition: "50% 22%",
+  },
 } as const satisfies Record<string, MediaAsset>;
 
 /** ← Change this single line to swap the hero portrait site-wide. */
-export const HERO_PORTRAIT: MediaAsset = HERO_PORTRAIT_OPTIONS.award;
+export const HERO_PORTRAIT: MediaAsset = HERO_PORTRAIT_OPTIONS.leader;
 
 /* ─── LOGOS ──────────────────────────────────────────────────────
    The full wordmark stacks the crowned GD mark above
@@ -219,19 +348,19 @@ export const SPEAKING_GALLERY: ReadonlyArray<MediaAsset> = [
 ];
 
 export const RECOGNITION_PRIMARY: MediaAsset = {
-  src: "/media/recognition-phd.jpg",
-  alt: "Dr. Gissele Donovan at her PhD doctoral ceremony",
-  width: 1600,
-  height: 1066,
-  objectPosition: "60% 35%",
+  src: "/media/portrait-crown-smile.jpg",
+  alt: "Dr. Gissele Donovan — crowned, smiling, holding flowers",
+  width: 5012,
+  height: 6662,
+  objectPosition: "50% 22%",
 };
 
 export const MOVEMENT_MENTORSHIP: MediaAsset = {
-  src: "/media/movement-mentorship.jpg",
-  alt: "Dr. Gissele Donovan leading a Despierta Tu Poder Experience in a private boardroom",
-  width: 960,
-  height: 1280,
-  objectPosition: "50% 38%",
+  src: "/media/portrait-expansion.jpg",
+  alt: "Dr. Gissele Donovan — expansion portrait, caramel jumpsuit",
+  width: 4820,
+  height: 6447,
+  objectPosition: "50% 25%",
 };
 
 /* ─── HONOR PHOTOS ──────────────────────────────────────────────
