@@ -17,8 +17,9 @@ export const SITE = {
   tagline: "Transforming Minds · Elevating Destinies",
   /** Public contact email. */
   email: "contact@drgisseledonovan.com",
-  /** Press / media contact (can be the same as email). */
-  pressEmail: "press@drgisseledonovan.com",
+  /** Press / media contact — Dr. Gissele uses a single inbox for
+      both general and press inquiries (no separate press@ mailbox). */
+  pressEmail: "contact@drgisseledonovan.com",
 } as const;
 
 /* ─── BIOS ───────────────────────────────────────────────────

@@ -510,13 +510,13 @@ export default async function ProgramsPage({ params }: { params: Params }) {
         />
         <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-12 text-center">
           <Reveal>
-            <div className="flex justify-center mb-10">
-              <div className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px]">
+            <div className="flex justify-center mb-6">
+              <div className="relative w-[160px] h-[160px] sm:w-[200px] sm:h-[200px]">
                 <Image
                   src={LOGO_MONOGRAM_GOLD.src}
                   alt=""
                   fill
-                  sizes="240px"
+                  sizes="200px"
                   className="object-contain"
                 />
               </div>

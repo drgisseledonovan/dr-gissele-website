@@ -406,7 +406,7 @@ export default async function PressPage({ params }: { params: Params }) {
       </section>
 
       {/* Press contact */}
-      <section className="relative bg-black text-ivory py-14 lg:py-24 overflow-hidden">
+      <section className="relative bg-black text-ivory py-10 lg:py-16 overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0"
@@ -417,26 +417,26 @@ export default async function PressPage({ params }: { params: Params }) {
         />
         <div className="relative z-10 mx-auto max-w-3xl px-6 lg:px-12 text-center">
           <Reveal>
-            <div className="flex justify-center mb-10">
-              <div className="relative w-[200px] h-[200px] sm:w-[240px] sm:h-[240px]">
+            <div className="flex justify-center mb-6">
+              <div className="relative w-[160px] h-[160px] sm:w-[200px] sm:h-[200px]">
                 <Image
                   src={LOGO_MONOGRAM_GOLD.src}
                   alt=""
                   fill
-                  sizes="240px"
+                  sizes="200px"
                   className="object-contain"
                 />
               </div>
             </div>
           </Reveal>
           <Reveal>
-            <div className="eyebrow rules text-gold/80 mb-10 inline-flex">
+            <div className="eyebrow rules text-gold/80 mb-6 inline-flex">
               {t.pressEyebrow}
             </div>
           </Reveal>
           <Reveal delay={0.05}>
             <h2
-              className="text-[clamp(36px,5.5vw,72px)] font-light leading-[1.05] tracking-[-0.018em] mb-10"
+              className="text-[clamp(36px,5.5vw,72px)] font-light leading-[1.05] tracking-[-0.018em] mb-6"
               style={{ fontFamily: "var(--font-serif)" }}
             >
               {t.pressTitleLead}{" "}
@@ -446,7 +446,7 @@ export default async function PressPage({ params }: { params: Params }) {
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="font-serif italic text-lg md:text-xl text-ivory/70 leading-relaxed max-w-xl mx-auto mb-14">
+            <p className="font-serif italic text-lg md:text-xl text-ivory/70 leading-relaxed max-w-xl mx-auto mb-10">
               {t.pressBody}
             </p>
           </Reveal>
