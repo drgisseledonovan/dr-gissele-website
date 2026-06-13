@@ -72,14 +72,14 @@ export const HERO_PORTRAIT_OPTIONS = {
     height: 4898,
     objectPosition: "50% 22%",
   },
-  /** Smiling with microphone — for the Introduction section
-      ("La obra interior"). Joyful, present, warm authority. */
+  /** Smiling with microphone, editorial light — for the Introduction
+      section ("La obra interior"). Joyful, present, warm authority. */
   practice: {
-    src: "/media/portrait-joy-smile.jpg",
+    src: "/media/portrait-smile-mic.png",
     alt: "Dr. Gissele Donovan — smiling with microphone, editorial portrait",
-    width: 4000,
-    height: 6000,
-    objectPosition: "50% 18%",
+    width: 1023,
+    height: 1537,
+    objectPosition: "50% 22%",
   },
   /** Caramel one-shoulder jumpsuit — expansion, femininity,
       Hollywood pose. The Despierta visual centerpiece. */
