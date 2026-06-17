@@ -33,7 +33,6 @@ const HERO_PORTRAIT = HERO_PORTRAIT_OPTIONS.joyMic;
 
 const RENACER_FORM_ACTION = "/api/subscribe";
 const SKOOL_FREE_URL = MOVEMENT_COMMUNITY;
-const RENACER_PDF_URL = "/RENACER-Guia-Editorial.pdf";
 
 type LocalizedCopy = {
   eyebrow: string;
@@ -77,8 +76,8 @@ const COPY: Record<"es" | "en", LocalizedCopy> = {
     formSending: "Enviando…",
     formTrust: "Una guía editorial · Sin spam · Solo Renacer.",
     sentTitle: "Tu RENACER está en camino.",
-    sentSub: "Te llegará en los próximos minutos. Da el siguiente paso:",
-    sentDownload: "Descargar RENACER ahora",
+    sentSub: "Revisa tu correo en los próximos 5 minutos · viene de contact@drgisseledonovan.com. Mientras tanto, da el siguiente paso:",
+    sentDownload: "Chequea tu correo",
     sentCommunity: "Únete a la comunidad gratis",
     sentError: "Algo no salió bien. Inténtalo de nuevo en un momento.",
     bridgeEyebrow: "EL SIGUIENTE PASO",
@@ -116,8 +115,8 @@ const COPY: Record<"es" | "en", LocalizedCopy> = {
     formSending: "Sending…",
     formTrust: "An editorial guide · No spam · Just Renacer.",
     sentTitle: "Your RENACER is on the way.",
-    sentSub: "Check your inbox in the next few minutes. Take the next step:",
-    sentDownload: "Download RENACER now",
+    sentSub: "Check your inbox in the next 5 minutes · it comes from contact@drgisseledonovan.com. Meanwhile, take the next step:",
+    sentDownload: "Check your inbox",
     sentCommunity: "Join the free community",
     sentError: "Something went wrong. Please try again in a moment.",
     bridgeEyebrow: "THE NEXT STEP",
@@ -267,14 +266,10 @@ export default function MovimientoPage() {
                     {t.sentSub}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <a
-                      href={RENACER_PDF_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 bg-gold text-burgundy px-6 py-3 rounded-full font-medium uppercase text-[11px] tracking-[0.2em] hover:bg-gold/90 transition-colors"
-                    >
-                      {t.sentDownload} →
-                    </a>
+                    {/* Visual indicator · NO link · just tells them where the email is */}
+                    <div className="inline-flex items-center justify-center gap-2 bg-gold/90 text-burgundy px-6 py-3 rounded-full font-medium uppercase text-[11px] tracking-[0.2em] cursor-default select-none">
+                      <span aria-hidden>✉</span> {t.sentDownload}
+                    </div>
                     <a
                       href={SKOOL_FREE_URL}
                       target="_blank"
