@@ -5,11 +5,17 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import { motion } from "motion/react";
 import {
-  HERO_PORTRAIT,
+  HERO_PORTRAIT_OPTIONS,
   LOGO_MONOGRAM_GOLD,
   COMMUNITY_GROUP,
 } from "@/lib/media";
 import { MOVEMENT_COMMUNITY } from "@/lib/site";
+
+/* Para esta landing usamos el retrato sonriente con micrófono
+   (portrait-joy-mic) en vez del Hero principal del sitio, porque
+   la energía de un ad debe ser más cálida y acogedora que la
+   autoridad seria del Hero del homepage. */
+const HERO_PORTRAIT = HERO_PORTRAIT_OPTIONS.joyMic;
 
 /* ─── /movimiento ─────────────────────────────────────────────────
    Dedicated landing page funnel for Meta ads (Facebook / Instagram).
