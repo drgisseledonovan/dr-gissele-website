@@ -51,3 +51,6 @@ next-env.d.ts
 /*.pdf
 /*.docx
 /DrGisseleDonovan_Website_v3.html
+
+# Social media assets (covers + profile pics) — not part of the website
+SOCIAL-KIT/
