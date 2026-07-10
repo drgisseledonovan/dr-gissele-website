@@ -11,14 +11,18 @@ import { DEFAULT_LOCALE, LOCALES, isLocale } from "@/lib/i18n";
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip system paths
+  // Skip system paths and static files.
+  // The `.` check catches every asset in /public that isn't a page route:
+  // og-image.jpg, RENACER-Guia-Editorial.pdf, apple-touch-icon.png, etc.
+  // Page routes never contain a dot in the segment, so this is safe.
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname.startsWith("/media") ||
     pathname === "/favicon.ico" ||
     pathname === "/robots.txt" ||
-    pathname === "/sitemap.xml"
+    pathname === "/sitemap.xml" ||
+    pathname.includes(".")
   ) {
     return NextResponse.next();
   }
@@ -42,9 +46,12 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Match everything except static files and system paths
+  // Match everything except static files and system paths.
+  // The trailing `.*\\..*` excludes any path containing a dot (og-image.jpg,
+  // RENACER-Guia-Editorial.pdf, apple-touch-icon.png, etc.) so social-media
+  // link previews and PDF downloads bypass the locale redirect.
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|media/).*)",
+    "/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|media/|.*\\..*).*)",
   ],
 };
 
