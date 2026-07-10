@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Gissele Creations — Plantillas de Email para Marcas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F5F0E6; --ivory-pale:#FAF7F2; --ivory-deep:#E4DCCB;
+    --burgundy:#8A1538; --gold:#B8860B; --blush:#F2E8E4;
+    --charcoal:#1A1A1A; --grey:#6B6560; --grey-light:#9E9890;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{background:#8d8579;font-family:'Montserrat',sans-serif;font-weight:300;color:var(--charcoal);line-height:1.6}
+  .page{max-width:8.5in;margin:24px auto;background:var(--ivory-pale);padding:.75in .8in;box-shadow:0 8px 40px rgba(0,0,0,.3)}
+  @media print{ body{background:none} .page{margin:0;box-shadow:none;max-width:none} @page{size:letter;margin:.6in} }
+  .serif{font-family:'Cormorant Garamond',serif}
+  em.b{color:var(--burgundy);font-style:italic}
+
+  /* header */
+  .masthead{text-align:center;border-bottom:1px solid var(--ivory-deep);padding-bottom:.35in;margin-bottom:.4in}
+  .masthead .eyebrow{font-size:9px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--burgundy)}
+  .masthead h1{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--charcoal);margin:8px 0 2px;line-height:1.05}
+  .masthead .sub{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--grey-light);margin-top:8px}
+  .masthead .contact{font-size:10px;letter-spacing:1px;color:var(--grey);margin-top:12px}
+
+  .intro{background:var(--blush);border:.5px solid rgba(138,21,56,.12);padding:.24in .3in;margin-bottom:.5in;
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--charcoal);text-align:center;line-height:1.5}
+
+  /* template card */
+  .tmpl{margin-bottom:.55in;border:.5px solid var(--ivory-deep);background:#fff}
+  .tmpl-head{background:var(--burgundy);color:var(--ivory);padding:.14in .3in;display:flex;justify-content:space-between;align-items:center}
+  .tmpl-head .t{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;letter-spacing:.5px}
+  .tmpl-head .tag{font-size:8px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold)}
+  .tmpl-body{padding:.3in .34in}
+  .lbl{font-size:8.5px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin:.2in 0 6px}
+  .lbl:first-child{margin-top:0}
+  .field{font-size:12.5px;color:var(--charcoal);white-space:pre-wrap}
+  .field p{margin-bottom:10px}
+  .blank{color:var(--burgundy);font-style:italic;border-bottom:1px dotted var(--burgundy);padding:0 2px}
+  .divider{height:.5px;background:var(--ivory-deep);margin:.22in 0}
+  .pillbar{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--burgundy);margin:.15in 0}
+
+  /* packages table */
+  table{width:100%;border-collapse:collapse;margin:8px 0}
+  th{background:var(--charcoal);color:var(--ivory);font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:9px 12px;text-align:left}
+  td{border:.5px solid var(--ivory-deep);padding:9px 12px;font-size:12px}
+  td.pkg{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--charcoal)}
+  td.price{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--burgundy);font-weight:500;text-align:right}
+  tr.feat td{background:var(--blush)}
+
+  .sig{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--charcoal)}
+  .sig .name{font-family:'Dancing Script',cursive;font-style:normal;font-size:22px;color:var(--gold);display:block;margin:4px 0}
+  .sig .role{font-style:normal;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--grey);font-family:'Montserrat',sans-serif}
+
+  /* tips */
+  .tips{border-top:2px solid var(--burgundy);padding-top:.25in;margin-top:.3in}
+  .tips h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--charcoal);margin-bottom:.15in}
+  .tips ol{margin-left:18px}
+  .tips li{font-size:12px;color:var(--grey);margin-bottom:9px;line-height:1.55}
+  .tips li strong{color:var(--charcoal);font-weight:600}
+  .footer{text-align:center;margin-top:.5in;padding-top:.25in;border-top:.5px solid var(--ivory-deep);
+    font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--grey-light)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <div class="eyebrow">Kit de Outreach · Marcas de TikTok Shop</div>
+    <h1 class="serif">Gissele <em class="b">Creations</em></h1>
+    <div class="sub">Plantillas de Email · Bilingüe EN | ES</div>
+    <div class="contact">Gisselecollabs@gmail.com · @gisselecreations · drgisseledonovan.com</div>
+  </div>
+
+  <div class="intro">Copia, personaliza los espacios en <em>cursiva</em>, adjunta tu Media Kit y envía.<br>Cada palabra está pensada para que te vean como una Brand Partner, no como una influencer más.</div>
+
+  <!-- ===== TEMPLATE 1 · PRESENTACIÓN (ES) ===== -->
+  <div class="tmpl">
+    <div class="tmpl-head"><span class="t">1 · Email de Presentación</span><span class="tag">Español · en frío</span></div>
+    <div class="tmpl-body">
+      <div class="lbl">Asunto</div>
+      <div class="field">Colaboración | Gissele Creations × <span class="blank">[Marca]</span> | Creadora Bilingüe de TikTok Shop</div>
+
+      <div class="lbl">Saludo</div>
+      <div class="field">Hola equipo de <span class="blank">[Marca]</span>,</div>
+
+      <div class="lbl">Apertura personalizada</div>
+      <div class="field"><p>Hace tiempo sigo a <span class="blank">[Marca]</span> y hay algo en <span class="blank">[producto o valor que te inspire]</span> que conecta de verdad con lo que construyo cada día. Cuando descubrí <span class="blank">[producto]</span>, sentí una afinidad genuina: no solo con el producto, sino con lo que representa.</p><p>Por eso me tomo el momento de escribirte: creo que existe una alineación natural entre su marca y mi comunidad.</p></div>
+
+      <div class="lbl">Presentación</div>
+      <div class="field"><p>Soy la Dra. Gissele Donovan, creadora de <strong>Gissele Creations</strong>: contenido bilingüe (inglés y español) de belleza, bienestar y estilo de vida para mujeres de 25 a 45 años en Estados Unidos.</p><p>Mi contenido no parece publicidad. Parece la recomendación de una amiga que ya probó el producto, y por eso convierte. Pruebo cada producto en mi propia rutina, documento el proceso con honestidad y solo recomiendo lo que uso de verdad.</p></div>
+
+      <div class="pillbar">Beauty · Skincare · Hair Growth · Wellness · Self Care · Lifestyle</div>
+
+      <div class="field"><p>Como doctora y mentora, cada recomendación mía carga criterio y confianza, la credibilidad que su marca toma prestada desde el primer video. Y como creo contenido nativo en dos idiomas, llego al mercado general y al mercado hispano de EE. UU. (uno de los de mayor crecimiento y menos atendidos en TikTok Shop) con una sola alianza.</p></div>
+
+      <div class="lbl">Resultados (últimos 90 días · TikTok Shop)</div>
+      <div class="field">$60.2K en GMV generado · 956 productos vendidos · comunidad activa de 23.8K con más de 262K likes · videos orgánicos de +100K vistas.</div>
+
+      <div class="lbl">Paquetes</div>
+      <table>
+        <tr><th>Paquete</th><th>Entregables</th><th style="text-align:right">Inversión</th></tr>
+        <tr><td class="pkg">Starter</td><td>1 video de TikTok Shop</td><td class="price">$300</td></tr>
+        <tr class="feat"><td class="pkg">Momentum</td><td>5 videos de TikTok Shop</td><td class="price">$1,350</td></tr>
+        <tr><td class="pkg">Signature</td><td>10 videos de TikTok Shop</td><td class="price">$2,500</td></tr>
+      </table>
+      <div class="field" style="font-size:11px;color:var(--grey)">También disponible para paquetes mensuales, contenido UGC, colaboraciones a largo plazo y estructuras de base + comisión sobre ventas. Cuando su marca gana, yo gano.</div>
+
+      <div class="lbl">Cierre</div>
+      <div class="field"><p>Creo que las mejores colaboraciones nacen de una alineación real entre la marca, su mensaje y su audiencia. Si sienten que mi comunidad puede aportar valor a sus objetivos, me encantaría explorar una asociación.</p><p>Adjunto mi Media Kit para su revisión. Gracias por su tiempo.</p></div>
+
+      <div class="lbl">Firma</div>
+      <div class="sig">Con cariño,<span class="name">Dr. Gissele Donovan</span><span class="role">Gissele Creations · Creadora Bilingüe de TikTok Shop</span><div style="font-style:normal;font-size:11px;color:var(--grey);margin-top:6px;font-family:'Montserrat',sans-serif">Gisselecollabs@gmail.com · @gisselecreations</div></div>
+    </div>
+  </div>
+
+  <!-- ===== TEMPLATE 2 · PRESENTATION (EN) ===== -->
+  <div class="tmpl">
+    <div class="tmpl-head"><span class="t">2 · Presentation Email</span><span class="tag">English · cold</span></div>
+    <div class="tmpl-body">
+      <div class="lbl">Subject</div>
+      <div class="field">Partnership | Gissele Creations × <span class="blank">[Brand]</span> | Bilingual TikTok Shop Creator</div>
+
+      <div class="lbl">Greeting</div>
+      <div class="field">Hi <span class="blank">[Brand]</span> team,</div>
+
+      <div class="lbl">Personalized opening</div>
+      <div class="field"><p>I&rsquo;ve been following <span class="blank">[Brand]</span> for a while, and something about <span class="blank">[product or value that inspires you]</span> speaks directly to the work I build every day. When I discovered <span class="blank">[product]</span>, I felt a genuine connection, not just to the product, but to what it stands for.</p><p>That&rsquo;s why I&rsquo;m reaching out: I believe there&rsquo;s a natural alignment between your brand and my community.</p></div>
+
+      <div class="lbl">Presentation</div>
+      <div class="field"><p>I&rsquo;m Dr. Gissele Donovan, creator of <strong>Gissele Creations</strong>: bilingual (English &amp; Spanish) beauty, wellness and lifestyle content for women 25&ndash;45 in the United States.</p><p>My content doesn&rsquo;t look like an ad. It feels like a friend who already tried the product, and that&rsquo;s exactly why it converts. I test every product in my own routine, document the process honestly, and only recommend what I genuinely use.</p></div>
+
+      <div class="pillbar">Beauty · Skincare · Hair Growth · Wellness · Self Care · Lifestyle</div>
+
+      <div class="field"><p>As a doctor and mentor, every recommendation carries judgment and trust, credibility your brand borrows from the very first video. And because I create natively in two languages, I reach both the U.S. general market and the U.S. Hispanic market (one of the fastest-growing, least-served audiences on TikTok Shop) with a single partnership.</p></div>
+
+      <div class="lbl">Results (last 90 days · TikTok Shop)</div>
+      <div class="field">$60.2K in GMV generated · 956 items sold · an active community of 23.8K with 262K+ likes · organic videos over 100K views.</div>
+
+      <div class="lbl">Packages</div>
+      <table>
+        <tr><th>Package</th><th>Deliverables</th><th style="text-align:right">Investment</th></tr>
+        <tr><td class="pkg">Starter</td><td>1 TikTok Shop video</td><td class="price">$300</td></tr>
+        <tr class="feat"><td class="pkg">Momentum</td><td>5 TikTok Shop videos</td><td class="price">$1,350</td></tr>
+        <tr><td class="pkg">Signature</td><td>10 TikTok Shop videos</td><td class="price">$2,500</td></tr>
+      </table>
+      <div class="field" style="font-size:11px;color:var(--grey)">Also available for monthly packages, UGC content, long-term collaborations and base + commission structures. When your brand wins, I win.</div>
+
+      <div class="lbl">Close</div>
+      <div class="field"><p>I believe the strongest collaborations are built on genuine alignment between a brand, its message and its audience. If you feel my community can add value to your goals, I&rsquo;d love to explore a partnership.</p><p>I&rsquo;ve attached my Media Kit for your review. Thank you for your time.</p></div>
+
+      <div class="lbl">Signature</div>
+      <div class="sig">Warmly,<span class="name">Dr. Gissele Donovan</span><span class="role">Gissele Creations · Bilingual TikTok Shop Creator</span><div style="font-style:normal;font-size:11px;color:var(--grey);margin-top:6px;font-family:'Montserrat',sans-serif">Gisselecollabs@gmail.com · @gisselecreations</div></div>
+    </div>
+  </div>
+
+  <!-- ===== TEMPLATE 3 · SHORT / DM ===== -->
+  <div class="tmpl">
+    <div class="tmpl-head"><span class="t">3 · Mensaje Corto</span><span class="tag">TikTok One · DMs · Aplicaciones</span></div>
+    <div class="tmpl-body">
+      <div class="lbl">Español</div>
+      <div class="field">Hola equipo de <span class="blank">[Marca]</span>. Soy Gissele Donovan (@gisselecreations), creadora bilingüe de TikTok Shop en belleza y bienestar para mujeres de 25&ndash;45 en EE. UU. Mi contenido no parece anuncio: parece la recomendación de una amiga, y por eso convierte (mis videos top superan las 100K vistas orgánicas y generé $60K+ en GMV los últimos 90 días). Me encantaría integrar <span class="blank">[producto]</span> este mes. ¿Tienen 20 minutos esta semana para una llamada? Les comparto mi media kit.</div>
+      <div class="divider"></div>
+      <div class="lbl">English</div>
+      <div class="field">Hi <span class="blank">[Brand]</span> team. I&rsquo;m Gissele Donovan (@gisselecreations), a bilingual TikTok Shop creator in beauty &amp; wellness for women 25&ndash;45 in the US. My content doesn&rsquo;t look like an ad, it feels like a friend&rsquo;s recommendation, and that&rsquo;s why it converts (top videos over 100K organic views and $60K+ GMV in the last 90 days). I&rsquo;d love to feature <span class="blank">[product]</span> this month. Do you have 20 minutes this week for a quick call? Media kit attached.</div>
+    </div>
+  </div>
+
+  <!-- ===== TEMPLATE 4 · FOLLOW-UP ===== -->
+  <div class="tmpl">
+    <div class="tmpl-head"><span class="t">4 · Seguimiento</span><span class="tag">3&ndash;4 días después · sin respuesta</span></div>
+    <div class="tmpl-body">
+      <div class="lbl">Asunto</div>
+      <div class="field">Reenvío: Gissele Creations × <span class="blank">[Marca]</span></div>
+      <div class="lbl">Cuerpo (ES)</div>
+      <div class="field"><p>Hola de nuevo, equipo de <span class="blank">[Marca]</span>. Sé que reciben muchísimos mensajes, así que solo dejo esto arriba en su bandeja.</p><p>Sigo convencida de que <span class="blank">[producto]</span> conectaría de forma natural con mi comunidad. Si les hace sentido, con gusto les preparo una propuesta a la medida en 48 horas. Un abrazo, Gissele.</p></div>
+      <div class="divider"></div>
+      <div class="lbl">Body (EN)</div>
+      <div class="field"><p>Hi again, <span class="blank">[Brand]</span> team. I know your inbox is full, so I&rsquo;ll keep this short and float it back to the top.</p><p>I still believe <span class="blank">[product]</span> would connect naturally with my community. If it makes sense, I&rsquo;m happy to send a tailored proposal within 48 hours. Warmly, Gissele.</p></div>
+    </div>
+  </div>
+
+  <!-- ===== TEMPLATE 5 · REPLY TO RATES ===== -->
+  <div class="tmpl">
+    <div class="tmpl-head"><span class="t">5 · Respuesta a &ldquo;¿Cuánto cobras?&rdquo;</span><span class="tag">Sin quemar tu valor</span></div>
+    <div class="tmpl-body">
+      <div class="lbl">Español</div>
+      <div class="field">Depende de lo que su marca quiera lograr. Trabajo por paquetes de video (1 video $300, 5 videos $1,350, 10 videos $2,500) y también por planes mensuales para marcas que buscan presencia constante. Cuéntenme qué producto quieren impulsar y su objetivo para este trimestre, y les mando la opción exacta que más les conviene.</div>
+      <div class="divider"></div>
+      <div class="lbl">English</div>
+      <div class="field">It depends on what your brand wants to achieve. I work in video packages (1 video $300, 5 videos $1,350, 10 videos $2,500) and monthly plans for brands wanting consistent presence. Tell me which product you&rsquo;d like to push and your goal for this quarter, and I&rsquo;ll send the exact option that fits best.</div>
+    </div>
+  </div>
+
+  <!-- ===== TIPS ===== -->
+  <div class="tips">
+    <h3 class="serif">Cómo usar estas plantillas</h3>
+    <ol>
+      <li><strong>Personaliza SIEMPRE la apertura.</strong> Las marcas notan un copy-paste genérico al instante. Menciona un producto real y algo específico que admires de la marca. Esa primera línea decide si siguen leyendo.</li>
+      <li><strong>Adjunta tu Media Kit</strong> en el email de presentación (plantilla 1 y 2). En mensajes cortos de TikTok One, dilo: &ldquo;les comparto mi media kit&rdquo;.</li>
+      <li><strong>Envía en el idioma de la marca.</strong> Marca de EE. UU. general → inglés. Marca latina → español. Tu ventaja bilingüe es un argumento de venta, menciónala.</li>
+      <li><strong>Un solo call to action.</strong> Pide la llamada de 20 minutos. No abras con precios ni con mil preguntas.</li>
+      <li><strong>Haz seguimiento una vez</strong> (plantilla 4) a los 3&ndash;4 días. La mayoría de los cierres pasan en el segundo toque, no en el primero.</li>
+      <li><strong>Nunca regales tu trabajo.</strong> Con $60K de GMV comprobado, tu precio es justo. Si una marca pide gratis &ldquo;por exposición&rdquo;, responde con la plantilla 5 y ofrece el paquete Starter.</li>
+      <li><strong>Actualiza tus números cada trimestre.</strong> Cuando cierres campañas, convierte cada resultado en un dato nuevo (&ldquo;el mes pasado generé $XX en GMV para una marca de tu categoría&rdquo;). Esa frase cierra retainers.</li>
+    </ol>
+  </div>
+
+  <div class="footer">Gissele Creations · Helping Women Elevate Everyday Life · Gisselecollabs@gmail.com</div>
+
+</div>
+</body>
+</html>
